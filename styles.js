@@ -17,7 +17,7 @@ export default createGlobalStyle`
     background-color: #cce0d2;
   }
 
-  h1, h2 {
+  h1 {
     text-align: center;
   }
 

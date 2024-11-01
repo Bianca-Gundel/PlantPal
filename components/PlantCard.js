@@ -11,6 +11,12 @@ const Card = styled.article`
   overflow: hidden;
 `;
 
+const ImageWrapper = styled.div`
+  img {
+    object-fit: cover;
+  }
+`;
+
 const CardContent = styled.div`
   position: absolute;
   top: 0;
@@ -41,16 +47,16 @@ const CardBotanicalPlantName = styled.h4`
 export default function PlantCard({ plant }) {
   return (
     <Card>
-      <Image
-        alt={`Image of ${plant.name}`}
-        layout="fill"
-        style={{ objectFit: "cover" }}
-        src={
-          plant.imageUrl ||
-          "https://images.unsplash.com/photo-1564502983799-becfbf817b4f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        }
-      />
-
+      <ImageWrapper>
+        <Image
+          alt={`Image of ${plant.name}`}
+          layout="fill"
+          src={
+            plant.imageUrl ||
+            "https://images.unsplash.com/photo-1564502983799-becfbf817b4f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          }
+        />
+      </ImageWrapper>
       <CardContent>
         <CardPlantName>{plant.name}</CardPlantName>
         <CardBotanicalPlantName>{plant.botanicalName}</CardBotanicalPlantName>
