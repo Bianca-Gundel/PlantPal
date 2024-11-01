@@ -10,5 +10,17 @@ export default createGlobalStyle`
   body {
     margin: 0;
     font-family: system-ui;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #cce0d2;
   }
+
+  h1, h2 {
+    text-align: center;
+  }
+
+  
+
 `;
