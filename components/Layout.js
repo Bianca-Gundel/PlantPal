@@ -6,6 +6,9 @@ export default function Layout({ children }) {
       <Head>
         <title>Bloom Buddy</title>
       </Head>
+      <header>
+        <h1>Bloom Buddy</h1>
+      </header>
       <main>{children}</main>
     </>
   );
