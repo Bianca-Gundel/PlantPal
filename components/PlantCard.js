@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 
-const Card = styled.div`
+const Card = styled.article`
   position: relative;
   margin-top: 20px;
   height: 55vw;

@@ -9,7 +9,7 @@ const StyledPlantList = styled.ul`
 
 export default function HomePage() {
   return (
-    <div>
+    <>
       <h2>Discover Plants</h2>
       <StyledPlantList>
         {plants.map((plant) => {
@@ -20,6 +20,6 @@ export default function HomePage() {
           );
         })}
       </StyledPlantList>
-    </div>
+    </>
   );
 }
