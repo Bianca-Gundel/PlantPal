@@ -2,15 +2,42 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
+const StyledSeasonList = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
 export default function PlantDetails({ plants }) {
   const router = useRouter();
   const { id } = router.query;
-  console.log(plants);
 
   const plantData = plants ? plants.find((plant) => plant.id === id) : null;
 
   if (!plantData) return <div>No data available</div>;
-  console.log(plantData);
+
+  let waterIconSrc = "";
+
+  const waterNeed = plantData.waterNeed;
+  if (waterNeed === "High") {
+    waterIconSrc = "/icons/drop-full.svg";
+  } else if (waterNeed === "Medium") {
+    waterIconSrc = "/icons/drop-half.svg";
+  } else if (waterNeed === "Low") {
+    waterIconSrc = "/icons/drop.svg";
+  }
+
+  let lightIconSrc = "";
+
+  const lightNeed = plantData.lightNeed;
+
+  if (lightNeed === "Full Sun") {
+    lightIconSrc = "/icons/sun.svg";
+  } else if (lightNeed === "Partial Shade") {
+    lightIconSrc = "/icons/sun-half.svg";
+  } else if (lightNeed === "Full Shade") {
+    lightIconSrc = "/icons/sun-full.svg";
+  }
+
   return (
     <>
       <h3>{plantData.name}</h3>
@@ -25,6 +52,38 @@ export default function PlantDetails({ plants }) {
         }
       />
       <p>{plantData.description}</p>
+      <Image
+        unoptimized
+        alt={"Icon of a drop"}
+        src={waterIconSrc}
+        width={30}
+        height={30}
+      />
+      <p>{plantData.waterNeed}</p>
+
+      <Image
+        unoptimized
+        alt={"Icon of a sun"}
+        src={lightIconSrc}
+        width={30}
+        height={30}
+      />
+      <p>{plantData.lightNeed}</p>
+
+      <Image
+        unoptimized
+        alt={"Icon of a sun"}
+        src={"/icons/fertilizer.svg"}
+        width={30}
+        height={30}
+      />
+      <StyledSeasonList>
+        {plantData.fertiliserSeason.map((season) => {
+          return <li key={season}>{season}</li>;
+        })}
+      </StyledSeasonList>
     </>
   );
 }
+
+//TODO: Image wrapper hinzufügen für abgerundete Ecken
