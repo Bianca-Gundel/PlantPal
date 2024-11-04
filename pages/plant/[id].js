@@ -119,5 +119,3 @@ export default function PlantDetails({ plants }) {
     </>
   );
 }
-
-//TODO: Image wrapper hinzufügen für abgerundete Ecken
