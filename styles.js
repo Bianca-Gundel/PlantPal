@@ -15,9 +15,6 @@ export default createGlobalStyle`
     align-items: center;
     justify-content: center;
     background-color: #cce0d2;
-  }
-
-  h1 {
     text-align: center;
   }
 

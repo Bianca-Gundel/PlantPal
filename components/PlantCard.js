@@ -36,6 +36,7 @@ const CardContent = styled.div`
 const CardPlantName = styled.h3`
   margin-bottom: 0;
   color: white;
+  text-align: left;
 `;
 
 const CardBotanicalPlantName = styled.h4`
@@ -43,6 +44,7 @@ const CardBotanicalPlantName = styled.h4`
   font-size: 14px;
   color: white;
   font-weight: 300;
+  text-align: left;
 `;
 
 export default function PlantCard({ plant }) {

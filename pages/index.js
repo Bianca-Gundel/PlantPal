@@ -1,6 +1,5 @@
 import PlantCard from "@/components/PlantCard";
 import styled from "styled-components";
-import { StyledContentHeadline } from "@/components/StyledContentHeadline";
 
 const StyledPlantList = styled.ul`
   list-style: none;
@@ -10,7 +9,7 @@ const StyledPlantList = styled.ul`
 export default function HomePage({ plants }) {
   return (
     <>
-      <StyledContentHeadline>Discover Plants</StyledContentHeadline>
+      <h2>Discover Plants</h2>
       <StyledPlantList>
         {plants.map((plant) => {
           return (

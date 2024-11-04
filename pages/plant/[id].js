@@ -1,10 +1,15 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const StyledSeasonList = styled.ul`
   list-style: none;
   padding: 0;
+`;
+
+const IconsContainer = styled.article`
+  display: flex;
 `;
 
 export default function PlantDetails({ plants }) {
@@ -52,36 +57,39 @@ export default function PlantDetails({ plants }) {
         }
       />
       <p>{plantData.description}</p>
-      <Image
-        unoptimized
-        alt={"Icon of a drop"}
-        src={waterIconSrc}
-        width={30}
-        height={30}
-      />
-      <p>{plantData.waterNeed}</p>
 
-      <Image
-        unoptimized
-        alt={"Icon of a sun"}
-        src={lightIconSrc}
-        width={30}
-        height={30}
-      />
-      <p>{plantData.lightNeed}</p>
+      <IconsContainer>
+        <Image
+          unoptimized
+          alt={"Icon of a drop"}
+          src={waterIconSrc}
+          width={30}
+          height={30}
+        />
+        <p>{plantData.waterNeed}</p>
 
-      <Image
-        unoptimized
-        alt={"Icon of a sun"}
-        src={"/icons/fertilizer.svg"}
-        width={30}
-        height={30}
-      />
-      <StyledSeasonList>
-        {plantData.fertiliserSeason.map((season) => {
-          return <li key={season}>{season}</li>;
-        })}
-      </StyledSeasonList>
+        <Image
+          unoptimized
+          alt={"Icon of a sun"}
+          src={lightIconSrc}
+          width={30}
+          height={30}
+        />
+        <p>{plantData.lightNeed}</p>
+
+        <Image
+          unoptimized
+          alt={"Icon of a sun"}
+          src={"/icons/fertilizer.svg"}
+          width={30}
+          height={30}
+        />
+        <StyledSeasonList>
+          {plantData.fertiliserSeason.map((season) => {
+            return <li key={season}>{season}</li>;
+          })}
+        </StyledSeasonList>
+      </IconsContainer>
     </>
   );
 }
