@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import BackLink from "@/components/BackLink";
 
 const StyledSeasonList = styled.ul`
   list-style: none;
@@ -10,6 +10,24 @@ const StyledSeasonList = styled.ul`
 
 const IconsContainer = styled.article`
   display: flex;
+  justify-content: space-around;
+`;
+
+const IconContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ImageBorder = styled.article`
+  position: relative;
+  margin-top: 20px;
+  height: 55vw;
+  width: 90vw;
+  border: 0px solid;
+  border-radius: 15px;
+  overflow: hidden;
+  margin: auto;
 `;
 
 export default function PlantDetails({ plants }) {
@@ -45,50 +63,58 @@ export default function PlantDetails({ plants }) {
 
   return (
     <>
+      <BackLink />
       <h3>{plantData.name}</h3>
       <h4>{plantData.botanicalName}</h4>
-      <Image
-        alt={`Image of ${plantData.name}`}
-        width={300}
-        height={200}
-        src={
-          plantData.imageUrl ||
-          "https://images.unsplash.com/photo-1564502983799-becfbf817b4f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        }
-      />
+      <ImageBorder>
+        <Image
+          alt={`Image of ${plantData.name}`}
+          fill
+          src={
+            plantData.imageUrl ||
+            "https://images.unsplash.com/photo-1564502983799-becfbf817b4f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          }
+        />
+      </ImageBorder>
       <p>{plantData.description}</p>
 
       <IconsContainer>
-        <Image
-          unoptimized
-          alt={"Icon of a drop"}
-          src={waterIconSrc}
-          width={30}
-          height={30}
-        />
-        <p>{plantData.waterNeed}</p>
+        <IconContainer>
+          <Image
+            unoptimized
+            alt={"Icon of a drop"}
+            src={waterIconSrc}
+            width={30}
+            height={30}
+          />
+          <p>{plantData.waterNeed}</p>
+        </IconContainer>
 
-        <Image
-          unoptimized
-          alt={"Icon of a sun"}
-          src={lightIconSrc}
-          width={30}
-          height={30}
-        />
-        <p>{plantData.lightNeed}</p>
+        <IconContainer>
+          <Image
+            unoptimized
+            alt={"Icon of a sun"}
+            src={lightIconSrc}
+            width={30}
+            height={30}
+          />
+          <p>{plantData.lightNeed}</p>
+        </IconContainer>
 
-        <Image
-          unoptimized
-          alt={"Icon of a sun"}
-          src={"/icons/fertilizer.svg"}
-          width={30}
-          height={30}
-        />
-        <StyledSeasonList>
-          {plantData.fertiliserSeason.map((season) => {
-            return <li key={season}>{season}</li>;
-          })}
-        </StyledSeasonList>
+        <IconContainer>
+          <Image
+            unoptimized
+            alt={"Icon of a sun"}
+            src={"/icons/fertilizer.svg"}
+            width={30}
+            height={30}
+          />
+          <StyledSeasonList>
+            {plantData.fertiliserSeason.map((season) => {
+              return <li key={season}>{season}</li>;
+            })}
+          </StyledSeasonList>
+        </IconContainer>
       </IconsContainer>
     </>
   );
