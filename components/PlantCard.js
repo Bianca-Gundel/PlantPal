@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import styled from "styled-components";
 
 const Card = styled.article`
@@ -46,21 +47,24 @@ const CardBotanicalPlantName = styled.h4`
 
 export default function PlantCard({ plant }) {
   return (
-    <Card>
-      <ImageWrapper>
-        <Image
-          alt={`Image of ${plant.name}`}
-          fill
-          src={
-            plant.imageUrl ||
-            "https://images.unsplash.com/photo-1564502983799-becfbf817b4f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          }
-        />
-      </ImageWrapper>
-      <CardContent>
-        <CardPlantName>{plant.name}</CardPlantName>
-        <CardBotanicalPlantName>{plant.botanicalName}</CardBotanicalPlantName>
-      </CardContent>
-    </Card>
+    <>
+      <Link href={`plant/${plant.id}`}>Details</Link>
+      <Card>
+        <ImageWrapper>
+          <Image
+            alt={`Image of ${plant.name}`}
+            fill
+            src={
+              plant.imageUrl ||
+              "https://images.unsplash.com/photo-1564502983799-becfbf817b4f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            }
+          />
+        </ImageWrapper>
+        <CardContent>
+          <CardPlantName>{plant.name}</CardPlantName>
+          <CardBotanicalPlantName>{plant.botanicalName}</CardBotanicalPlantName>
+        </CardContent>
+      </Card>
+    </>
   );
 }

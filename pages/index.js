@@ -1,5 +1,4 @@
 import PlantCard from "@/components/PlantCard";
-import plants from "@/assets/plants";
 import styled from "styled-components";
 import { StyledContentHeadline } from "@/components/StyledContentHeadline";
 
@@ -8,7 +7,7 @@ const StyledPlantList = styled.ul`
   padding: 0;
 `;
 
-export default function HomePage() {
+export default function HomePage({ plants }) {
   return (
     <>
       <StyledContentHeadline>Discover Plants</StyledContentHeadline>
