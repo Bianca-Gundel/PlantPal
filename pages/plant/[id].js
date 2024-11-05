@@ -24,7 +24,6 @@ const ImageBorder = styled.article`
   margin-top: 20px;
   height: 55vw;
   width: 90vw;
-  border: 0px solid;
   border-radius: 15px;
   overflow: hidden;
   margin: auto;
@@ -33,6 +32,8 @@ const ImageBorder = styled.article`
 export default function PlantDetails({ plants }) {
   const router = useRouter();
   const { id } = router.query;
+
+  if (!router.isReady) return <div>Loading...</div>;
 
   const plantData = plants ? plants.find((plant) => plant.id === id) : null;
 
@@ -64,8 +65,9 @@ export default function PlantDetails({ plants }) {
   return (
     <>
       <BackLink />
-      <h3>{plantData.name}</h3>
-      <h4>{plantData.botanicalName}</h4>
+
+      <h2>{plantData.name}</h2>
+      <h3>{plantData.botanicalName}</h3>
       <ImageBorder>
         <Image
           alt={`Image of ${plantData.name}`}
@@ -74,6 +76,7 @@ export default function PlantDetails({ plants }) {
             plantData.imageUrl ||
             "https://images.unsplash.com/photo-1564502983799-becfbf817b4f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           }
+          priority
         />
       </ImageBorder>
       <p>{plantData.description}</p>
@@ -104,8 +107,8 @@ export default function PlantDetails({ plants }) {
         <IconContainer>
           <Image
             unoptimized
-            alt={"Icon of a sun"}
-            src={"/icons/fertilizer.svg"}
+            alt={"Icon of a fertiliser"}
+            src={"/icons/fertiliser.svg"}
             width={30}
             height={30}
           />

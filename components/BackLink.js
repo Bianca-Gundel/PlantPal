@@ -6,15 +6,16 @@ const BackLinkWrapper = styled.div`
   position: fixed;
   top: 25px;
   left: 25px;
+  z-index: 10;
 `;
 
 export default function BackLink() {
   return (
     <BackLinkWrapper>
-      <Link href="/">
+      <Link href="/" aria-label="Link to the Homepage">
         <Image
           unoptimized
-          alt={"Icon of an arrow"}
+          alt={"Link to the Homepage"}
           src={"/icons/arrow.svg"}
           width={30}
           height={30}
