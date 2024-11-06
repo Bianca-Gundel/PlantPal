@@ -7,7 +7,6 @@ const Card = styled.article`
   margin-top: 20px;
   height: 55vw;
   width: 90vw;
-  border: 0 solid;
   border-radius: 15px;
   overflow: hidden;
 `;
