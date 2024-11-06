@@ -1,55 +1,56 @@
 import PlantCard from "@/components/PlantCard";
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 import { StyledContentHeadline } from "@/components/StyledContentHeadline";
 import PlantForm from "@/components/PlantForm";
 import { useState } from "react";
 import Image from "next/image";
+import { StyledButton } from "@/components/StyledButton";
 
 const StyledPlantList = styled.ul`
   list-style: none;
   padding: 0;
 `;
 
-const StyledButton = styled.button`
-cursor: pointer;
-`;
-
 const ArrowIcon = styled.span`
-display: inline-flex;
-transition: transform 0.3s ease-in-out;
+  display: inline-flex;
+  transition: transform 0.3s ease-in-out;
 
   ${(props) =>
     props.isRotated &&
     css`
       transform: rotate(180deg);
     `}
-
 `;
 
-export default function HomePage({onSubmitCreatePlant, plants}) {
+const FlexboxButton = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
-      const [isCreating, setIsCreating] = useState(false);
-    
+export default function HomePage({ onSubmitCreatePlant, plants }) {
+  const [isCreating, setIsCreating] = useState(false);
+
   function handleCreateState() {
-    setIsCreating(!isCreating)
-    console.log(isCreating)
+    setIsCreating(!isCreating);
   }
 
   return (
     <>
-      <StyledContentHeadline>Discover Plants</StyledContentHeadline>
-      <StyledButton onClick={handleCreateState} >Create New Plant
-        <ArrowIcon isRotated={isCreating} >
-      <Image 
-          src={"/icons/arrow-1.svg"}
-          alt={"arrow"}
-          width={20}
-          height={20}
-          />
-
-        </ArrowIcon>
-      </StyledButton>
+      <FlexboxButton>
+        <StyledButton onClick={handleCreateState}>
+          Create&nbsp;New&nbsp;Plant&nbsp;&nbsp;
+          <ArrowIcon isRotated={isCreating}>
+            <Image
+              src={"/icons/arrow-1.svg"}
+              alt={"arrow"}
+              width={20}
+              height={20}
+            />
+          </ArrowIcon>
+        </StyledButton>
+      </FlexboxButton>
       {isCreating && <PlantForm onSubmitCreatePlant={onSubmitCreatePlant} />}
+      <StyledContentHeadline>Discover Plants</StyledContentHeadline>
       <StyledPlantList>
         {plants.map((plant) => {
           return (

@@ -5,19 +5,24 @@ import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";
 
 export default function App({ Component, pageProps }) {
-
-  const [plants, setPlants] = useLocalStorageState("plants", {defaultValue: initialPlants})
+  const [plants, setPlants] = useLocalStorageState("plants", {
+    defaultValue: initialPlants,
+  });
 
   function handleCreatePlant(newPlant) {
-    const plantWithId = {id: uid(), ...newPlant};
+    const plantWithId = { id: uid(), ...newPlant };
     setPlants([plantWithId, ...plants]);
   }
 
-    return (
+  return (
     <>
       <GlobalStyle />
       <Layout>
-        <Component {...pageProps} plants={plants} onSubmitCreatePlant={handleCreatePlant} />
+        <Component
+          {...pageProps}
+          plants={plants}
+          onSubmitCreatePlant={handleCreatePlant}
+        />
       </Layout>
     </>
   );
