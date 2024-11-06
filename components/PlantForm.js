@@ -1,23 +1,33 @@
-export default function PlantForm() {
+export default function PlantForm({onSubmitCreatePlant}) {
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData);
+        data.fertiliserSeason = formData.getAll("fertiliserSeason");
+        onSubmitCreatePlant(data);
+        event.target.reset();
+      }
+
     return (
         <>
         
-        <form > 
+        <form onSubmit={handleSubmit}> 
             <div>
-                <label htmlFor="plantName">Plant Name: *</label><br></br>
-                <input type="text" id="plantName" name="plantName"  required />
+                <label htmlFor="name">Plant Name: *</label><br></br>
+                <input type="text" id="name" name="name" placeholder="Plant Name" required />
             </div>
             <div>
                 <label htmlFor="botanicalName">Botanical Name: *</label><br></br>
-                <input type="text" id="botanicalName" name="botanicalName"  required />
+                <input type="text" id="botanicalName" name="botanicalName" placeholder="Botanical Name" required />
             </div>
             <div>
                 <label htmlFor="description">Description:</label><br></br>
-                <textarea id="description" name="description" rows="10"></textarea>
+                <textarea id="description" name="description" rows="10" placeholder="Plant Description"></textarea>
             </div>
             <div>
                 <label htmlFor="lightNeed">Light Need: *</label>
-                <input type="radio" id="lightNeed1" name="lightNeed" value="full sun"/>
+                <input type="radio" id="lightNeed1" name="lightNeed" value="full sun" required/>
                 <label htmlFor="lightNeed1">Full Sun</label>
                 <input type="radio" id="lightNeed2" name="lightNeed" value="partial shade"/>
                 <label htmlFor="lightNeed2">Partial Shade</label>
@@ -35,7 +45,7 @@ export default function PlantForm() {
             </div>
             <div>
                 <label htmlFor="fertiliserSeason">Fertiliser Season:</label>
-                <input type="checkbox" id="fertiliserSeason1" name="spring" value="spring"/>
+                <input type="checkbox" id="fertiliserSeason1" name="fertiliserSeason" value="spring"/>
                 <label htmlFor="fertiliserSeason1">Spring</label>
                 <input type="checkbox" id="fertiliserSeason2" name="fertiliserSeason" value="summer"/>
                 <label htmlFor="fertiliserSeason2">Summer</label>
@@ -45,7 +55,7 @@ export default function PlantForm() {
                 <label htmlFor="fertiliserSeason3">Winter</label>            
             </div>
 
-        <button type="submit">Create</button>
+        <button type="submit" id="create" name="create" >Create</button>
         </form>
         
         </>

@@ -1,12 +1,23 @@
 import Layout from "@/components/Layout";
 import GlobalStyle from "../styles";
+import initialPlants from "@/assets/plants";
+import useLocalStorageState from "use-local-storage-state";
+import { uid } from "uid";
 
 export default function App({ Component, pageProps }) {
-  return (
+
+  const [plants, setPlants] = useLocalStorageState("plants", {defaultValue: initialPlants})
+
+  function handleCreatePlant(newPlant) {
+    const plantWithId = {id: uid(), ...newPlant};
+    setPlants([plantWithId, ...plants]);
+  }
+
+    return (
     <>
       <GlobalStyle />
       <Layout>
-        <Component {...pageProps} />
+        <Component {...pageProps} plants={plants} onSubmitCreatePlant={handleCreatePlant} />
       </Layout>
     </>
   );
