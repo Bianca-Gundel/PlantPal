@@ -22,7 +22,7 @@ const ArrowIcon = styled.span`
     `}
 `;
 
-const FlexboxButton = styled.div`
+const FlexboxWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
