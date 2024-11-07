@@ -132,7 +132,9 @@ export default function PlantDetails({ plants, onDeletePlant }) {
           </StyledSeasonList>
         </IconContainer>
       </IconsContainer>
-      {isDeleteOption && <button onClick={onDeletePlant}>Delete</button>}
+      {isDeleteOption && (
+        <button onClick={() => onDeletePlant(id)}>Delete</button>
+      )}
       <button onClick={toggleDeleteOption}>{toggleButtonName}</button>
     </>
   );
