@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }) {
         <Component
           {...pageProps}
           plants={plants}
-          onSubmitCreatePlant={handleCreatePlant}
+          onCreatePlant={handleCreatePlant}
         />
       </Layout>
     </>
