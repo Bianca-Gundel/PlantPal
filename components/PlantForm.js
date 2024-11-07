@@ -193,7 +193,7 @@ export default function PlantForm({ onCreatePlant }) {
               name="fertiliserSeason"
               value="winter"
             />
-            <label htmlFor="fertiliserSeason3">Winter</label>
+            <label htmlFor="fertiliserSeason4">Winter</label>
           </div>
         </section>
 
