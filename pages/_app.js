@@ -8,7 +8,6 @@ export default function App({ Component, pageProps }) {
   const [plants, setPlants] = useLocalStorageState("plants", {
     defaultValue: initialPlants,
   });
-  console.log(plants);
 
   function handleCreatePlant(newPlant) {
     const plantWithId = { id: uid(), ...newPlant };
