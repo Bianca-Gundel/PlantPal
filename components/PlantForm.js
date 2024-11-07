@@ -44,6 +44,25 @@ const StyledFormWrapper = styled.form`
   `}
 `;
 
+const lightOptions = [
+  { id: "lightNeed1", value: "full sun", label: "Full Sun" },
+  { id: "lightNeed2", value: "partial shade", label: "Partial Shade" },
+  { id: "lightNeed3", value: "full shade", label: "Full Shade" },
+];
+
+const waterOptions = [
+  { id: "waterNeed1", value: "low", label: "Low" },
+  { id: "waterNeed2", value: "medium", label: "Medium" },
+  { id: "waterNeed3", value: "high", label: "High" },
+];
+
+const fertiliserOptions = [
+  { id: "fertiliserSeason1", value: "summer", label: "Summer" },
+  { id: "fertiliserSeason2", value: "spring", label: "Spring" },
+  { id: "fertiliserSeason3", value: "autumn", label: "Autumn" },
+  { id: "fertiliserSeason4", value: "winter", label: "Winter" },
+];
+
 export default function PlantForm({ onCreatePlant }) {
   function handleSubmit(event) {
     event.preventDefault();
@@ -63,25 +82,6 @@ export default function PlantForm({ onCreatePlant }) {
 
     event.target.reset();
   }
-
-  const lightOptions = [
-    { id: "lightNeed1", value: "full sun", label: "Full Sun" },
-    { id: "lightNeed2", value: "partial shade", label: "Partial Shade" },
-    { id: "lightNeed3", value: "full shade", label: "Full Shade" },
-  ];
-
-  const waterOptions = [
-    { id: "waterNeed1", value: "low", label: "Low" },
-    { id: "waterNeed2", value: "medium", label: "Medium" },
-    { id: "waterNeed3", value: "high", label: "High" },
-  ];
-
-  const fertiliserOptions = [
-    { id: "fertiliserSeason1", value: "summer", label: "Summer" },
-    { id: "fertiliserSeason2", value: "spring", label: "Spring" },
-    { id: "fertiliserSeason3", value: "autumn", label: "Autumn" },
-    { id: "fertiliserSeason4", value: "winter", label: "Winter" },
-  ];
 
   return (
     <>
