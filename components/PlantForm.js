@@ -44,7 +44,7 @@ const StyledFormWrapper = styled.form`
   `}
 `;
 
-export default function PlantForm({ onSubmitCreatePlant }) {
+export default function PlantForm({ onCreatePlant }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
