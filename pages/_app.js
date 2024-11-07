@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const [plants, setPlants] = useLocalStorageState("plants", {
-    defaultValue: null,
+    defaultValue: initialPlants,
   });
 
   function handleDeletePlant(plantId) {

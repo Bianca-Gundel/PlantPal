@@ -30,6 +30,13 @@ const ImageBorder = styled.article`
   margin: auto;
 `;
 
+const DeleteButton = styled.button`
+  margin: 25px 15px;
+  padding: 10px 35px 10px 35px;
+  border-style: none;
+  border-radius: 5px;
+`;
+
 export default function PlantDetails({ plants, onDeletePlant }) {
   const [isDeleteOption, setIsDeleteOption] = useState(false);
   const [toggleButtonName, setToggleButtonName] = useState("Delete");
@@ -132,10 +139,13 @@ export default function PlantDetails({ plants, onDeletePlant }) {
           </StyledSeasonList>
         </IconContainer>
       </IconsContainer>
+      {/* Styling folgt nach Merge*/}
       {isDeleteOption && (
-        <button onClick={() => onDeletePlant(id)}>Delete</button>
+        <DeleteButton onClick={() => onDeletePlant(id)}>Delete</DeleteButton>
       )}
-      <button onClick={toggleDeleteOption}>{toggleButtonName}</button>
+      <DeleteButton onClick={toggleDeleteOption}>
+        {toggleButtonName}
+      </DeleteButton>
     </>
   );
 }
