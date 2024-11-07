@@ -27,7 +27,7 @@ const FlexboxButton = styled.div`
   justify-content: center;
 `;
 
-export default function HomePage({ onSubmitCreatePlant, plants }) {
+export default function HomePage({ onCreatePlant, plants }) {
   const [isCreating, setIsCreating] = useState(false);
 
   function handleCreateState() {
