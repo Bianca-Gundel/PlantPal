@@ -10,15 +10,18 @@ export default function HomePage({ plants }) {
   return (
     <>
       <h2>Discover Plants</h2>
-      <StyledPlantList>
-        {plants.map((plant) => {
-          return (
+
+      {plants && plants.length > 0 ? (
+        <StyledPlantList>
+          {plants.map((plant) => (
             <li key={plant.id}>
               <PlantCard plant={plant} />
             </li>
-          );
-        })}
-      </StyledPlantList>
+          ))}
+        </StyledPlantList>
+      ) : (
+        <p>Unfortunately, you have not yet added any plants.</p>
+      )}
     </>
   );
 }
