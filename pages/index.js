@@ -1,6 +1,5 @@
 import PlantCard from "@/components/PlantCard";
 import styled, { css } from "styled-components";
-import { StyledContentHeadline } from "@/components/StyledContentHeadline";
 import PlantForm from "@/components/PlantForm";
 import { useState } from "react";
 import Image from "next/image";
@@ -28,11 +27,11 @@ const FlexboxWrapper = styled.div`
 `;
 
 export default function HomePage({ onCreatePlant, plants }) {
-const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
-function toggleFormVisibility() {
-  setIsFormVisible((prevState) => !prevState);
-}
+  function toggleFormVisibility() {
+    setIsFormVisible((prevState) => !prevState);
+  }
 
   return (
     <>
@@ -50,7 +49,7 @@ function toggleFormVisibility() {
         </StyledButton>
       </FlexboxWrapper>
       {isFormVisible && <PlantForm onCreatePlant={onCreatePlant} />}
-      <StyledContentHeadline>Discover Plants</StyledContentHeadline>
+      <h2>Discover Plants</h2>
       <StyledPlantList>
         {plants.map((plant) => {
           return (
