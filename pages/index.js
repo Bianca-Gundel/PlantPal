@@ -36,10 +36,10 @@ function toggleFormVisibility() {
 
   return (
     <>
-      <FlexboxButton>
-        <StyledButton onClick={handleCreateState}>
+      <FlexboxWrapper>
+        <StyledButton onClick={toggleFormVisibility}>
           Create&nbsp;New&nbsp;Plant&nbsp;&nbsp;
-          <ArrowIcon isRotated={isCreating}>
+          <ArrowIcon isRotated={isFormVisible}>
             <Image
               src="/icons/arrow-1.svg"
               alt="arrow"
@@ -48,7 +48,7 @@ function toggleFormVisibility() {
             />
           </ArrowIcon>
         </StyledButton>
-      </FlexboxButton>
+      </FlexboxWrapper>
       {isFormVisible && <PlantForm onCreatePlant={onCreatePlant} />}
       <StyledContentHeadline>Discover Plants</StyledContentHeadline>
       <StyledPlantList>

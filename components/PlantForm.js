@@ -28,7 +28,7 @@ const StyledFormWrapper = styled.form`
       justify-content: start;
     }
     label {
-      /* genaue Anpassung in einer späteren User-Story (nach Wahl der Schriftart, Größe, etc.) */
+      /* FYI: genaue Anpassung in einer späteren User-Story (nach Wahl der Schriftart, Größe, etc.) */
       margin-right: 15px;
     }
 
@@ -47,12 +47,41 @@ const StyledFormWrapper = styled.form`
 export default function PlantForm({ onCreatePlant }) {
   function handleSubmit(event) {
     event.preventDefault();
+
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    data.fertiliserSeason = formData.getAll("fertiliserSeason");
-    onSubmitCreatePlant(data);
+
+    const selectedSeasons = formData.getAll("fertiliserSeason");
+
+    if (selectedSeasons.length === 0) {
+      // FYI: Hinzufügen einer universellen Error-Message für alle Pflichtfelder folgt
+      alert("Please select at least one season.");
+      return;
+    }
+    data.fertiliserSeason = selectedSeasons;
+    onCreatePlant(data);
+
     event.target.reset();
   }
+
+  const lightOptions = [
+    { id: "lightNeed1", value: "full sun", label: "Full Sun" },
+    { id: "lightNeed2", value: "partial shade", label: "Partial Shade" },
+    { id: "lightNeed3", value: "full shade", label: "Full Shade" },
+  ];
+
+  const waterOptions = [
+    { id: "waterNeed1", value: "low", label: "Low" },
+    { id: "waterNeed2", value: "medium", label: "Medium" },
+    { id: "waterNeed3", value: "high", label: "High" },
+  ];
+
+  const fertiliserOptions = [
+    { id: "fertiliserSeason1", value: "summer", label: "Summer" },
+    { id: "fertiliserSeason2", value: "spring", label: "Spring" },
+    { id: "fertiliserSeason3", value: "autumn", label: "Autumn" },
+    { id: "fertiliserSeason4", value: "winter", label: "Winter" },
+  ];
 
   return (
     <>
@@ -94,34 +123,18 @@ export default function PlantForm({ onCreatePlant }) {
         </label>
 
         <section>
-          <div>
-            <input
-              type="radio"
-              id="lightNeed1"
-              name="lightNeed"
-              value="full sun"
-              required
-            />
-            <label htmlFor="lightNeed1">Full Sun</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="lightNeed2"
-              name="lightNeed"
-              value="partial shade"
-            />
-            <label htmlFor="lightNeed2">Partial Shade</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="lightNeed3"
-              name="lightNeed"
-              value="full shade"
-            />
-            <label htmlFor="lightNeed3">Full Shade</label>
-          </div>
+          {lightOptions.map((option) => (
+            <div key={option.id}>
+              <input
+                type="radio"
+                id={option.id}
+                name="lightNeed"
+                value={option.value}
+                required={option.id === "lightNeed1"}
+              />
+              <label htmlFor={option.id}>{option.label}</label>
+            </div>
+          ))}
         </section>
 
         <label htmlFor="waterNeed">
@@ -129,72 +142,36 @@ export default function PlantForm({ onCreatePlant }) {
         </label>
 
         <section>
-          <div>
-            <input
-              type="radio"
-              id="waterNeed1"
-              name="waterNeed"
-              value="low"
-              required
-            />
-            <label htmlFor="waterNeed1">Low</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="waterNeed2"
-              name="waterNeed"
-              value="medium"
-            />
-            <label htmlFor="waterNeed2">Medium</label>
-          </div>
-          <div>
-            <input type="radio" id="waterNeed3" name="waterNeed" value="high" />
-            <label htmlFor="waterNeed3">High</label>
-          </div>
+          {waterOptions.map((option) => (
+            <div key={option.id}>
+              <input
+                type="radio"
+                id={option.id}
+                name="waterNeed"
+                value={option.value}
+                required={option.id === "waterNeed1"}
+              />
+              <label htmlFor={option.id}>{option.label}</label>
+            </div>
+          ))}
         </section>
 
         <label htmlFor="fertiliserSeason">
-          <h3>Fertiliser Season:</h3>
+          <h3>Fertiliser Season: *</h3>
         </label>
 
         <section>
-          <div>
-            <input
-              type="checkbox"
-              id="fertiliserSeason1"
-              name="fertiliserSeason"
-              value="spring"
-            />
-            <label htmlFor="fertiliserSeason1">Spring</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="fertiliserSeason2"
-              name="fertiliserSeason"
-              value="summer"
-            />
-            <label htmlFor="fertiliserSeason2">Summer</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="fertiliserSeason3"
-              name="fertiliserSeason"
-              value="autumn"
-            />
-            <label htmlFor="fertiliserSeason3">Autumn</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="fertiliserSeason4"
-              name="fertiliserSeason"
-              value="winter"
-            />
-            <label htmlFor="fertiliserSeason4">Winter</label>
-          </div>
+          {fertiliserOptions.map((option) => (
+            <div key={option.id}>
+              <input
+                type="checkbox"
+                id={option.id}
+                name="fertiliserSeason"
+                value={option.value}
+              />
+              <label htmlFor={option.id}>{option.label}</label>
+            </div>
+          ))}
         </section>
 
         <div className="button">
