@@ -28,11 +28,11 @@ const FlexboxWrapper = styled.div`
 `;
 
 export default function HomePage({ onCreatePlant, plants }) {
-  const [isCreating, setIsCreating] = useState(false);
+const [isFormVisible, setIsFormVisible] = useState(false);
 
-  function handleCreateState() {
-    setIsCreating(!isCreating);
-  }
+function toggleFormVisibility() {
+  setIsFormVisible((prevState) => !prevState);
+}
 
   return (
     <>
