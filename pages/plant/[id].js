@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import BackLink from "@/components/BackLink";
+import { useState } from "react";
 
 const StyledSeasonList = styled.ul`
   list-style: none;
@@ -29,7 +30,17 @@ const ImageBorder = styled.article`
   margin: auto;
 `;
 
-export default function PlantDetails({ plants }) {
+const DeleteButton = styled.button`
+  margin: 25px 15px;
+  padding: 10px 35px 10px 35px;
+  border-style: none;
+  border-radius: 5px;
+`;
+
+export default function PlantDetails({ plants, onDeletePlant }) {
+  const [isDeleteOption, setIsDeleteOption] = useState(false);
+  const [toggleButtonName, setToggleButtonName] = useState("Delete");
+
   const router = useRouter();
   const { id } = router.query;
 
@@ -60,6 +71,16 @@ export default function PlantDetails({ plants }) {
     lightIconSrc = "/icons/sun-half.svg";
   } else if (lightNeed === "Full Shade") {
     lightIconSrc = "/icons/sun-full.svg";
+  }
+
+  function toggleDeleteOption() {
+    setIsDeleteOption((prevState) => !prevState);
+
+    if (toggleButtonName === "Delete") {
+      setToggleButtonName("Cancel");
+    } else {
+      setToggleButtonName("Delete");
+    }
   }
 
   return (
@@ -118,6 +139,13 @@ export default function PlantDetails({ plants }) {
           </StyledSeasonList>
         </IconContainer>
       </IconsContainer>
+      {/* Styling folgt nach Merge*/}
+      {isDeleteOption && (
+        <DeleteButton onClick={() => onDeletePlant(id)}>Delete</DeleteButton>
+      )}
+      <DeleteButton onClick={toggleDeleteOption}>
+        {toggleButtonName}
+      </DeleteButton>
     </>
   );
 }
