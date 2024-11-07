@@ -49,7 +49,7 @@ function toggleFormVisibility() {
           </ArrowIcon>
         </StyledButton>
       </FlexboxButton>
-      {isCreating && <PlantForm onSubmitCreatePlant={onSubmitCreatePlant} />}
+      {isFormVisible && <PlantForm onCreatePlant={onCreatePlant} />}
       <StyledContentHeadline>Discover Plants</StyledContentHeadline>
       <StyledPlantList>
         {plants.map((plant) => {
