@@ -30,7 +30,7 @@ const ImageBorder = styled.article`
   margin: auto;
 `;
 
-export default function PlantDetails({ plants }) {
+export default function PlantDetails({ plants, onDeletePlant }) {
   const [isDeleteOption, setIsDeleteOption] = useState(false);
   const [toggleButtonName, setToggleButtonName] = useState("Delete");
 
@@ -132,7 +132,7 @@ export default function PlantDetails({ plants }) {
           </StyledSeasonList>
         </IconContainer>
       </IconsContainer>
-      {isDeleteOption && <button>Delete</button>}
+      {isDeleteOption && <button onClick={onDeletePlant}>Delete</button>}
       <button onClick={toggleDeleteOption}>{toggleButtonName}</button>
     </>
   );
