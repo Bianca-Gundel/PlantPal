@@ -41,8 +41,8 @@ function toggleFormVisibility() {
           Create&nbsp;New&nbsp;Plant&nbsp;&nbsp;
           <ArrowIcon isRotated={isCreating}>
             <Image
-              src={"/icons/arrow-1.svg"}
-              alt={"arrow"}
+              src="/icons/arrow-1.svg"
+              alt="arrow"
               width={20}
               height={20}
             />
