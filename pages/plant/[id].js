@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import BackLink from "@/components/BackLink";
+import { useState } from "react";
+import { StyledButton } from "@/components/StyledButton";
 
 const StyledSeasonList = styled.ul`
   list-style: none;
@@ -29,7 +31,26 @@ const ImageBorder = styled.article`
   margin: auto;
 `;
 
-export default function PlantDetails({ plants }) {
+const StyledButtonContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  ${css`
+    p {
+      width: 100%;
+    }
+
+    button {
+      margin: 10px;
+    }
+  `}
+`;
+
+export default function PlantDetails({ plants, onDeletePlant }) {
+  const [isDeleteOption, setIsDeleteOption] = useState(false);
+  const [toggleButtonName, setToggleButtonName] = useState("Delete");
+
   const router = useRouter();
   const { id } = router.query;
 
@@ -60,6 +81,16 @@ export default function PlantDetails({ plants }) {
     lightIconSrc = "/icons/sun-half.svg";
   } else if (lightNeed === "Full Shade") {
     lightIconSrc = "/icons/sun-full.svg";
+  }
+
+  function toggleDeleteOption() {
+    setIsDeleteOption((prevState) => !prevState);
+
+    if (toggleButtonName === "Delete") {
+      setToggleButtonName("Cancel");
+    } else {
+      setToggleButtonName("Delete");
+    }
   }
 
   return (
@@ -118,6 +149,20 @@ export default function PlantDetails({ plants }) {
           </StyledSeasonList>
         </IconContainer>
       </IconsContainer>
+      {/* Styling folgt nach Merge*/}
+      <StyledButtonContainer>
+        {isDeleteOption && (
+          <>
+            <p>Do you really want to delete the plant?</p>
+            <StyledButton $variant="delete" onClick={() => onDeletePlant(id)}>
+              Delete
+            </StyledButton>
+          </>
+        )}
+        <StyledButton onClick={toggleDeleteOption}>
+          {toggleButtonName}
+        </StyledButton>
+      </StyledButtonContainer>
     </>
   );
 }
