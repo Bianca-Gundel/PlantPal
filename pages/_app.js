@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
     setPlants(
       plants.map((plantData) =>
         plantData.id === plantId
-          ? { ...plantData, isFavorite: !plantData.isFavorite }
+          ? { ...plantData, isBookmarked: !plantData.isBookmarked }
           : plantData
       )
     );

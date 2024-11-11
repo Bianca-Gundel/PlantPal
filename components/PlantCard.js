@@ -80,6 +80,7 @@ export default function PlantCard({ plant, onToggleBookmark }) {
         <BookmarkButton
           onToggleBookmark={onToggleBookmark}
           plantId={plant.id}
+          isBookmarked={plant.isBookmarked}
         />
         <div>
           <CardPlantName>{plant.name}</CardPlantName>
