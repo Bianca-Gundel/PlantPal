@@ -154,7 +154,7 @@ export default function PlantDetails({ plants, onDeletePlant }) {
         {isDeleteOption && (
           <>
             <p>Do you really want to delete the plant?</p>
-            <StyledButton variant="delete" onClick={() => onDeletePlant(id)}>
+            <StyledButton $variant="delete" onClick={() => onDeletePlant(id)}>
               Delete
             </StyledButton>
           </>

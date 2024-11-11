@@ -14,8 +14,8 @@ export const StyledButton = styled.button`
   border-style: none;
   border-radius: 8px;
 
-  ${({ variant }) =>
-    variant === "delete" &&
+  ${({ $variant }) =>
+    $variant === "delete" &&
     css`
       background-color: firebrick;
       color: white;
