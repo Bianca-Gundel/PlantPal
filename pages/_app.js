@@ -10,15 +10,15 @@ export default function App({ Component, pageProps }) {
   const [plants, setPlants] = useLocalStorageState("plants", {
     defaultValue: initialPlants,
   });
-  
+
   function handleCreatePlant(newPlant) {
     const plantWithId = { id: uid(), ...newPlant };
     setPlants([plantWithId, ...plants]);
-    
+  }
+
   function handleDeletePlant(plantId) {
     setPlants(plants.filter((plant) => plant.id !== plantId));
     router.push("/");
-
   }
 
   return (
@@ -35,4 +35,5 @@ export default function App({ Component, pageProps }) {
     </>
   );
 }
-}
+
+
