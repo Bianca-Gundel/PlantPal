@@ -14,6 +14,16 @@ export default function App({ Component, pageProps }) {
     setPlants([plantWithId, ...plants]);
   }
 
+  function handleToggleBookmark(plantId) {
+    setPlants(
+      plants.map((plantData) =>
+        plantData.id === plantId
+          ? { ...plantData, isFavorite: !plantData.isFavorite }
+          : plantData
+      )
+    );
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -22,6 +32,7 @@ export default function App({ Component, pageProps }) {
           {...pageProps}
           plants={plants}
           onCreatePlant={handleCreatePlant}
+          onToggleBookmark={handleToggleBookmark}
         />
       </Layout>
     </>

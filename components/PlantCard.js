@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
+import BookmarkButton from "./BookmarkButton";
 
 const Card = styled.article`
   position: relative;
@@ -61,7 +62,7 @@ const DetailsLink = styled(Link)`
   color: white;
 `;
 
-export default function PlantCard({ plant }) {
+export default function PlantCard({ plant, onToggleBookmark }) {
   return (
     <Card>
       <ImageWrapper>
@@ -76,6 +77,10 @@ export default function PlantCard({ plant }) {
       </ImageWrapper>
 
       <CardText>
+        <BookmarkButton
+          onToggleBookmark={onToggleBookmark}
+          plantId={plant.id}
+        />
         <div>
           <CardPlantName>{plant.name}</CardPlantName>
           <CardBotanicalPlantName>{plant.botanicalName}</CardBotanicalPlantName>

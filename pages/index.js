@@ -26,7 +26,7 @@ const FlexboxWrapper = styled.div`
   justify-content: center;
 `;
 
-export default function HomePage({ onCreatePlant, plants }) {
+export default function HomePage({ onCreatePlant, plants, onToggleBookmark }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   function toggleFormVisibility() {
@@ -54,7 +54,7 @@ export default function HomePage({ onCreatePlant, plants }) {
         {plants.map((plant) => {
           return (
             <li key={plant.id}>
-              <PlantCard plant={plant} />
+              <PlantCard plant={plant} onToggleBookmark={onToggleBookmark} />
             </li>
           );
         })}
