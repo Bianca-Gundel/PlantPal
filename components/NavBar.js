@@ -19,7 +19,7 @@ const StyledNav = styled.nav`
 export default function NavBar() {
   return (
     <StyledNav>
-      <Link href={"#"}>
+      <Link href="/myplants">
         <Image
           src={"/icons/bookmark-full.svg"}
           alt="Icon of a rose"

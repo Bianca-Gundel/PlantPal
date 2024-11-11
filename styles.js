@@ -17,6 +17,7 @@ export default createGlobalStyle`
     background-color: #cce0d2;
     text-align: center;
     padding: 0 10px;
+    margin-bottom: 60px;
   }
 
   
