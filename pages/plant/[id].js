@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import BackLink from "@/components/BackLink";
 import { useState } from "react";
+import { StyledButton } from "@/components/StyledButton";
 
 const StyledSeasonList = styled.ul`
   list-style: none;
@@ -30,11 +31,20 @@ const ImageBorder = styled.article`
   margin: auto;
 `;
 
-const DeleteButton = styled.button`
-  margin: 25px 15px;
-  padding: 10px 35px 10px 35px;
-  border-style: none;
-  border-radius: 5px;
+const StyledButtonContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  ${css`
+    p {
+      width: 100%;
+    }
+
+    button {
+      margin: 10px;
+    }
+  `}
 `;
 
 export default function PlantDetails({ plants, onDeletePlant }) {
@@ -140,15 +150,19 @@ export default function PlantDetails({ plants, onDeletePlant }) {
         </IconContainer>
       </IconsContainer>
       {/* Styling folgt nach Merge*/}
-      {isDeleteOption && (
-        <>
-          <p>Do you really want to delete the plant?</p>
-          <DeleteButton onClick={() => onDeletePlant(id)}>Delete</DeleteButton>
-        </>
-      )}
-      <DeleteButton onClick={toggleDeleteOption}>
-        {toggleButtonName}
-      </DeleteButton>
+      <StyledButtonContainer>
+        {isDeleteOption && (
+          <>
+            <p>Do you really want to delete the plant?</p>
+            <StyledButton variant="delete" onClick={() => onDeletePlant(id)}>
+              Delete
+            </StyledButton>
+          </>
+        )}
+        <StyledButton onClick={toggleDeleteOption}>
+          {toggleButtonName}
+        </StyledButton>
+      </StyledButtonContainer>
     </>
   );
 }
