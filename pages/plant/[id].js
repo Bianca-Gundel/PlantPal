@@ -141,7 +141,10 @@ export default function PlantDetails({ plants, onDeletePlant }) {
       </IconsContainer>
       {/* Styling folgt nach Merge*/}
       {isDeleteOption && (
-        <DeleteButton onClick={() => onDeletePlant(id)}>Delete</DeleteButton>
+        <>
+          <p>Do you really want to delete the plant?</p>
+          <DeleteButton onClick={() => onDeletePlant(id)}>Delete</DeleteButton>
+        </>
       )}
       <DeleteButton onClick={toggleDeleteOption}>
         {toggleButtonName}
