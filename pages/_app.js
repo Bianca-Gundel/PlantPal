@@ -16,6 +16,16 @@ export default function App({ Component, pageProps }) {
     setPlants([plantWithId, ...plants]);
   }
 
+  function handleToggleBookmark(plantId) {
+    setPlants(
+      plants.map((plantData) =>
+        plantData.id === plantId
+          ? { ...plantData, isBookmarked: !plantData.isBookmarked }
+          : plantData
+      )
+    );
+  }
+
   function handleDeletePlant(plantId) {
     setPlants(plants.filter((plant) => plant.id !== plantId));
     router.push("/");
@@ -29,6 +39,7 @@ export default function App({ Component, pageProps }) {
           {...pageProps}
           plants={plants}
           onCreatePlant={handleCreatePlant}
+          onToggleBookmark={handleToggleBookmark}
           onDeletePlant={handleDeletePlant}
         />
       </Layout>

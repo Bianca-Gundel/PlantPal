@@ -23,7 +23,7 @@ const ArrowIcon = styled.span`
   transition: transform 0.3s ease-in-out;
 
   ${(props) =>
-    props.isRotated &&
+    props.$isRotated &&
     css`
       transform: rotate(180deg);
     `}
@@ -34,7 +34,7 @@ const FlexboxWrapper = styled.div`
   justify-content: center;
 `;
 
-export default function HomePage({ onCreatePlant, plants }) {
+export default function HomePage({ onCreatePlant, plants, onToggleBookmark }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   function toggleFormVisibility() {
@@ -46,7 +46,7 @@ export default function HomePage({ onCreatePlant, plants }) {
       <FlexboxWrapper>
         <StyledButton onClick={toggleFormVisibility}>
           Create&nbsp;New&nbsp;Plant&nbsp;&nbsp;
-          <ArrowIcon isRotated={isFormVisible}>
+          <ArrowIcon $isRotated={isFormVisible}>
             <Image
               src="/icons/arrow-1.svg"
               alt="arrow"
@@ -63,7 +63,7 @@ export default function HomePage({ onCreatePlant, plants }) {
         <StyledPlantList>
           {plants.map((plant) => (
             <li key={plant.id}>
-              <PlantCard plant={plant} />
+              <PlantCard plant={plant} onToggleBookmark={onToggleBookmark} />
             </li>
           ))}
         </StyledPlantList>
