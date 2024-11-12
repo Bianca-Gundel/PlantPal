@@ -36,9 +36,14 @@ const FlexboxWrapper = styled.div`
 
 export default function HomePage({ onCreatePlant, plants, onToggleBookmark }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
 
   function toggleFormVisibility() {
     setIsFormVisible((prevState) => !prevState);
+  }
+
+  function toggleFilterVisibility() {
+    setIsFilterVisible((prevState) => !prevState);
   }
 
   return (
@@ -55,8 +60,20 @@ export default function HomePage({ onCreatePlant, plants, onToggleBookmark }) {
             />
           </ArrowIcon>
         </StyledButton>
+        <StyledButton onClick={toggleFilterVisibility}>
+          Filter
+          <ArrowIcon $isRotated={isFilterVisible}>
+            <Image
+              src="/icons/arrow-1.svg"
+              alt="arrow"
+              width={20}
+              height={20}
+            />
+          </ArrowIcon>
+        </StyledButton>
       </FlexboxWrapper>
       {isFormVisible && <PlantForm onCreatePlant={onCreatePlant} />}
+      {isFilterVisible && <p>Filter</p>}
       <h2>Discover Plants</h2>
 
       {plants && plants.length > 0 ? (
