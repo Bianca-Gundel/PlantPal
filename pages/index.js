@@ -4,6 +4,7 @@ import Image from "next/image";
 import PlantForm from "@/components/PlantForm";
 import { useState } from "react";
 import { StyledButton } from "@/components/StyledButton";
+import FilterPlants from "@/components/FilterPlants";
 
 const StyledPlantList = styled.ul`
   list-style: none;
@@ -73,7 +74,7 @@ export default function HomePage({ onCreatePlant, plants, onToggleBookmark }) {
         </StyledButton>
       </FlexboxWrapper>
       {isFormVisible && <PlantForm onCreatePlant={onCreatePlant} />}
-      {isFilterVisible && <p>Filter</p>}
+      {isFilterVisible && <FilterPlants />}
       <h2>Discover Plants</h2>
 
       {plants && plants.length > 0 ? (
