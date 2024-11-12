@@ -24,6 +24,7 @@ export default function App({ Component, pageProps }) {
           : plantData
       )
     );
+  }
 
   function handleDeletePlant(plantId) {
     setPlants(plants.filter((plant) => plant.id !== plantId));
