@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import { styled, css } from "styled-components";
 import { StyledButton } from "./StyledButton";
 
 const StyledFormWrapper = styled.form`

@@ -35,9 +35,16 @@ const FlexboxWrapper = styled.div`
   justify-content: center;
 `;
 
-export default function HomePage({ onCreatePlant, plants, onToggleBookmark }) {
+export default function HomePage({
+  onCreatePlant,
+  plants,
+  filterPlants,
+  onToggleBookmark,
+  onFilterPlants,
+}) {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [filterValue, setFilterValue] = useState("");
 
   function toggleFormVisibility() {
     setIsFormVisible((prevState) => !prevState);
@@ -45,6 +52,16 @@ export default function HomePage({ onCreatePlant, plants, onToggleBookmark }) {
 
   function toggleFilterVisibility() {
     setIsFilterVisible((prevState) => !prevState);
+  }
+
+  function handleFilterPlants(newFilter) {
+    console.log(newFilter.target.value);
+    setFilterValue(newFilter.target.value);
+  }
+
+  function handleResetFilter() {
+    setFilterValue("");
+    setIsFilterVisible(false);
   }
 
   return (
@@ -74,17 +91,37 @@ export default function HomePage({ onCreatePlant, plants, onToggleBookmark }) {
         </StyledButton>
       </FlexboxWrapper>
       {isFormVisible && <PlantForm onCreatePlant={onCreatePlant} />}
-      {isFilterVisible && <FilterPlants />}
+      {isFilterVisible && (
+        <FilterPlants
+          onFilterPlants={handleFilterPlants}
+          onResetFilter={handleResetFilter}
+        />
+      )}
       <h2>Discover Plants</h2>
 
       {plants && plants.length > 0 ? (
-        <StyledPlantList>
-          {plants.map((plant) => (
-            <li key={plant.id}>
-              <PlantCard plant={plant} onToggleBookmark={onToggleBookmark} />
-            </li>
-          ))}
-        </StyledPlantList>
+        filterValue && filterValue.length > 0 ? (
+          <StyledPlantList>
+            {plants
+              .filter((plant) => plant.lightNeed === filterValue)
+              .map((plant) => (
+                <li key={plant.id}>
+                  <PlantCard
+                    plant={plant}
+                    onToggleBookmark={onToggleBookmark}
+                  />
+                </li>
+              ))}
+          </StyledPlantList>
+        ) : (
+          <StyledPlantList>
+            {plants.map((plant) => (
+              <li key={plant.id}>
+                <PlantCard plant={plant} onToggleBookmark={onToggleBookmark} />
+              </li>
+            ))}
+          </StyledPlantList>
+        )
       ) : (
         <StyledErrorMessageWrapper>
           <Image
