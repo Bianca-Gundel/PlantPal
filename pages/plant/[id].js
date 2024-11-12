@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import BackLink from "@/components/BackLink";
 import { useState } from "react";
 import { StyledButton } from "@/components/StyledButton";
+import PlantForm from "@/components/PlantForm";
 
 const StyledSeasonList = styled.ul`
   list-style: none;
@@ -47,10 +48,14 @@ const StyledButtonContainer = styled.div`
   `}
 `;
 
-export default function PlantDetails({ plants, onDeletePlant }) {
+export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onEditPlant }) {
   const [isDeleteOption, setIsDeleteOption] = useState(false);
   const [toggleButtonName, setToggleButtonName] = useState("Delete");
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
+  function toggleFormVisibility() {
+    setIsFormVisible((prevState) => !prevState);
+  }
   const router = useRouter();
   const { id } = router.query;
 
@@ -92,10 +97,16 @@ export default function PlantDetails({ plants, onDeletePlant }) {
       setToggleButtonName("Delete");
     }
   }
-
+  
+  function handleEdit(updatedPlant) {
+    onEditPlant(plantData.id, updatedPlant);
+  }
   return (
     <>
       <BackLink />
+
+      <button onClick={toggleFormVisibility}>Edit</button>
+      {isFormVisible && <PlantForm onCreatePlant={onCreatePlant} onEditPlant={handleEdit} isEditMode={true} initialData={plantData}/>}
 
       <h2>{plantData.name}</h2>
       <h3>{plantData.botanicalName}</h3>
