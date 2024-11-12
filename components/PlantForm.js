@@ -45,6 +45,10 @@ const StyledFormWrapper = styled.form`
         margin: 10px 10px 0 10px;
       }
     }
+
+    .save {
+      background-color: rgba(164, 211, 110, 1);
+    }
   `}
 `;
 
@@ -199,7 +203,7 @@ export default function PlantForm({
         </section>
 
         <div className="button">
-          <StyledButton type="submit">{isEditMode ? "Save"  : "Create"}</StyledButton>
+          <StyledButton type="submit" className={isEditMode ? "save" : ""}>{isEditMode ? "Save"  : "Create"}</StyledButton>
           {isEditMode ? <StyledButton type="button" onClick={onCancel}>Cancel</StyledButton> : null}
         </div>
       </StyledFormWrapper>
