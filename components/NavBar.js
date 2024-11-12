@@ -21,7 +21,7 @@ export default function NavBar() {
     <StyledNav>
       <Link href="/myplants">
         <Image
-          src={"/icons/bookmark-full.svg"}
+          src="/icons/bookmark-full.svg"
           alt="Icon of a rose"
           width={22}
           height={22}
