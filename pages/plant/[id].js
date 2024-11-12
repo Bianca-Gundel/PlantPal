@@ -58,7 +58,7 @@ const StyledEditButton = styled.button`
   justify-content: center;
   position: absolute;
   right: 40px;
-  /* top: 100px; */
+  top: 70px;
 `;
 
 
@@ -67,9 +67,6 @@ export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onE
   const [toggleButtonName, setToggleButtonName] = useState("Delete");
   const [isFormVisible, setIsFormVisible] = useState(false);
 
-  function toggleFormVisibility() {
-    setIsFormVisible((prevState) => !prevState);
-  }
   const router = useRouter();
   const { id } = router.query;
 
@@ -102,6 +99,10 @@ export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onE
     lightIconSrc = "/icons/sun-full.svg";
   }
 
+  function toggleFormVisibility() {
+    setIsFormVisible((prevState) => !prevState);
+  }
+
   function toggleDeleteOption() {
     setIsDeleteOption((prevState) => !prevState);
 
@@ -115,6 +116,11 @@ export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onE
   function handleEdit(updatedPlant) {
     onEditPlant(plantData.id, updatedPlant);
   }
+
+  function handleCancel() {
+    setIsFormVisible(false);
+  }
+
   return (
     <>
       <BackLink />
@@ -130,7 +136,13 @@ export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onE
             />
       </StyledEditButton>
       {isFormVisible && <>
-      <PlantForm onCreatePlant={onCreatePlant} onEditPlant={handleEdit} isEditMode={true} initialData={plantData}/>
+      <PlantForm 
+        onCreatePlant={onCreatePlant} 
+        onEditPlant={handleEdit} 
+        onCancel={handleCancel}
+        isFormVisible={isFormVisible}
+        isEditMode={true} 
+        initialData={plantData}/>
       </>
       }
       

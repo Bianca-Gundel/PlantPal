@@ -71,8 +71,11 @@ export default function PlantForm({
     onCreatePlant,
     onEditPlant,
     isEditMode = false,
-    initialData = {}
+    initialData = {},
+    onCancel
  }) {
+
+  // const [isFormVisible, setIsFormVisible] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -98,13 +101,8 @@ export default function PlantForm({
     event.target.reset();
   }
 
-  function handleCancel() {
-    window.location.reload();
-  }
-
   return (
     <>
-      
       <StyledFormWrapper onSubmit={handleSubmit}>
         <label htmlFor="name">
           <h3>Plant Name: *</h3>
@@ -202,7 +200,7 @@ export default function PlantForm({
 
         <div className="button">
           <StyledButton type="submit">{isEditMode ? "Save"  : "Create"}</StyledButton>
-          <StyledButton onClick={handleCancel}>Cancel</StyledButton>
+          {isEditMode ? <StyledButton type="button" onClick={onCancel}>Cancel</StyledButton> : null}
         </div>
       </StyledFormWrapper>
     </>
