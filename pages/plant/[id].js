@@ -48,6 +48,20 @@ const StyledButtonContainer = styled.div`
   `}
 `;
 
+const StyledEditButton = styled.button`
+  border-style: none;
+  border-radius: 50px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 40px;
+  /* top: 100px; */
+`;
+
+
 export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onEditPlant }) {
   const [isDeleteOption, setIsDeleteOption] = useState(false);
   const [toggleButtonName, setToggleButtonName] = useState("Delete");
@@ -105,9 +119,21 @@ export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onE
     <>
       <BackLink />
 
-      <button onClick={toggleFormVisibility}>Edit</button>
-      {isFormVisible && <PlantForm onCreatePlant={onCreatePlant} onEditPlant={handleEdit} isEditMode={true} initialData={plantData}/>}
-
+      
+      <StyledEditButton onClick={toggleFormVisibility}>
+        <Image
+              src={"/icons/pencil-solid.svg"}
+              width={25}
+              height={25}
+              alt="Icon of a dead plant"
+              unoptimized
+            />
+      </StyledEditButton>
+      {isFormVisible && <>
+      <PlantForm onCreatePlant={onCreatePlant} onEditPlant={handleEdit} isEditMode={true} initialData={plantData}/>
+      </>
+      }
+      
       <h2>{plantData.name}</h2>
       <h3>{plantData.botanicalName}</h3>
       <ImageBorder>
@@ -171,7 +197,7 @@ export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onE
           </>
         )}
         <StyledButton onClick={toggleDeleteOption}>
-          {toggleButtonName}
+          {toggleButtonName} 
         </StyledButton>
       </StyledButtonContainer>
     </>

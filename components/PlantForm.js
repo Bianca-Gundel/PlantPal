@@ -40,6 +40,10 @@ const StyledFormWrapper = styled.form`
       margin-top: 15px;
       display: flex;
       justify-content: center;
+      
+      button {
+        margin: 10px 10px 0 10px;
+      }
     }
   `}
 `;
@@ -63,19 +67,13 @@ const fertiliserOptions = [
   { id: "fertiliserSeason4", value: "Winter", label: "Winter" },
 ];
 
-export default function PlantForm({ 
+export default function PlantForm({
     onCreatePlant,
     onEditPlant,
     isEditMode = false,
-    initialData = {
-      // name: "",
-      // botanicalName: "",
-      // description: "",
-      // lightNeed: "",
-      // waterNeed: "",
-      // fertiliserSeason: []
-    }
+    initialData = {}
  }) {
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -100,8 +98,13 @@ export default function PlantForm({
     event.target.reset();
   }
 
+  function handleCancel() {
+    window.location.reload();
+  }
+
   return (
     <>
+      
       <StyledFormWrapper onSubmit={handleSubmit}>
         <label htmlFor="name">
           <h3>Plant Name: *</h3>
@@ -198,7 +201,8 @@ export default function PlantForm({
         </section>
 
         <div className="button">
-          <StyledButton type="submit">{isEditMode ? "Save" : "Create"}</StyledButton>
+          <StyledButton type="submit">{isEditMode ? "Save"  : "Create"}</StyledButton>
+          <StyledButton onClick={handleCancel}>Cancel</StyledButton>
         </div>
       </StyledFormWrapper>
     </>
