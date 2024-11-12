@@ -3,8 +3,10 @@ import GlobalStyle from "../styles";
 import initialPlants from "@/assets/plants";
 import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";
+import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
   const [plants, setPlants] = useLocalStorageState("plants", {
     defaultValue: initialPlants,
   });
@@ -22,6 +24,10 @@ export default function App({ Component, pageProps }) {
           : plantData
       )
     );
+
+  function handleDeletePlant(plantId) {
+    setPlants(plants.filter((plant) => plant.id !== plantId));
+    router.push("/");
   }
 
   return (
@@ -33,8 +39,11 @@ export default function App({ Component, pageProps }) {
           plants={plants}
           onCreatePlant={handleCreatePlant}
           onToggleBookmark={handleToggleBookmark}
+          onDeletePlant={handleDeletePlant}
         />
       </Layout>
     </>
   );
 }
+
+

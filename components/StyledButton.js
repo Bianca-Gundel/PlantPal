@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const StyledButton = styled.button`
   display: flex;
@@ -13,4 +13,11 @@ export const StyledButton = styled.button`
 
   border-style: none;
   border-radius: 8px;
+
+  ${({ $variant }) =>
+    $variant === "delete" &&
+    css`
+      background-color: firebrick;
+      color: white;
+    `}
 `;
