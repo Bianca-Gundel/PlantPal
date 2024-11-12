@@ -11,7 +11,7 @@ export default function Layout({ children }) {
         <h1>Bloom Buddy</h1>
       </header>
       <main>{children}</main>
-      <NavBar></NavBar>
+      <NavBar />
     </>
   );
 }
