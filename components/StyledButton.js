@@ -14,8 +14,8 @@ export const StyledButton = styled.button`
   border-style: none;
   border-radius: 8px;
 
-  ${({ $variant, isEditMode }) => {
-    if ($variant === "update" && isEditMode) {
+  ${({ $variant, $isEditMode }) => {
+    if ($variant === "update" && $isEditMode) {
       return css`
         background-color: rgba(164, 211, 110, 1);
         color: white;

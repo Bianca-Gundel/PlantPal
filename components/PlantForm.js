@@ -27,6 +27,7 @@ const StyledFormWrapper = styled.form`
       flex-direction: row;
       justify-content: start;
     }
+    
     label {
       /* FYI: genaue Anpassung in einer späteren User-Story (nach Wahl der Schriftart, Größe, etc.) */
       margin-right: 15px;
@@ -74,8 +75,6 @@ export default function PlantForm({
     initialData = {},
     onCancel
  }) {
-
-  // const [isFormVisible, setIsFormVisible] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -200,7 +199,7 @@ export default function PlantForm({
         </section>
 
         <div className="button">
-          <StyledButton type="submit" $variant={isEditMode ? "update" : "create"} isEditMode={isEditMode}>{isEditMode ? "Save"  : "Create"}</StyledButton>
+          <StyledButton type="submit" $variant={isEditMode ? "update" : "create"} $isEditMode={isEditMode}>{isEditMode ? "Save"  : "Create"}</StyledButton>
           {isEditMode ? <StyledButton type="button" onClick={onCancel}>Cancel</StyledButton> : null}
         </div>
       </StyledFormWrapper>
