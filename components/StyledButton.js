@@ -20,4 +20,11 @@ export const StyledButton = styled.button`
       background-color: firebrick;
       color: white;
     `}
+
+  ${({ $variant }) =>
+    $variant === "indexButton" &&
+    css`
+      padding: 5px;
+      margin: 0 2px;
+    `}
 `;

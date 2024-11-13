@@ -1,6 +1,6 @@
 import { styled, css } from "styled-components";
 import { StyledButton } from "./StyledButton";
-import { useRef } from "react";
+import React from "react";
 
 const StyledFormWrapper = styled.form`
   display: flex;
@@ -45,31 +45,36 @@ const lightOptions = [
   { id: "lightNeed3", value: "Full Shade", label: "Full Shade" },
 ];
 
-export default function FilterPlants({ onFilterPlants, onResetFilter }) {
-  return (
-    <StyledFormWrapper>
-      <label htmlFor="lightNeedFilter">
-        <h3>Light Need:</h3>
-      </label>
+export default function FilterPlants({
+  onFilterValue,
+  onResetFilter,
+  selectedFilter,
+}) {
+  console.log(selectedFilter);
 
-      <section onChange={onFilterPlants}>
+  return (
+    <>
+      <StyledFormWrapper>
+        <label>
+          <h3>Light Needs:</h3>
+        </label>
         {lightOptions.map((option) => (
-          <div key={option.id}>
+          <React.Fragment key={option.id}>
             <input
               type="radio"
               id={option.id}
               name="lightNeed"
               value={option.value}
+              checked={selectedFilter === option.value}
+              onChange={(event) => onFilterValue(event.target.value)}
             />
             <label htmlFor={option.id}>{option.label}</label>
-          </div>
+          </React.Fragment>
         ))}
-      </section>
-      <div className="button">
-        <StyledButton type="button" onClick={onResetFilter}>
-          Reset
-        </StyledButton>
-      </div>
-    </StyledFormWrapper>
+      </StyledFormWrapper>
+      <button type="button" onClick={onResetFilter}>
+        Reset
+      </button>
+    </>
   );
 }

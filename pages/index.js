@@ -2,7 +2,7 @@ import PlantCard from "@/components/PlantCard";
 import styled, { css } from "styled-components";
 import Image from "next/image";
 import PlantForm from "@/components/PlantForm";
-import { useState } from "react";
+import React, { useState } from "react";
 import { StyledButton } from "@/components/StyledButton";
 import FilterPlants from "@/components/FilterPlants";
 
@@ -35,39 +35,29 @@ const FlexboxWrapper = styled.div`
   justify-content: center;
 `;
 
+const lightOptions = [
+  { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
+  { id: "lightNeed2", value: "Partial Shade", label: "Partial Shade" },
+  { id: "lightNeed3", value: "Full Shade", label: "Full Shade" },
+];
+
 export default function HomePage({
   onCreatePlant,
   plants,
-  filterPlants,
   onToggleBookmark,
-  onFilterPlants,
+  onResetFilter,
+  onToggleFilter,
+  onToggleForm,
+  isFilterVisible,
+  isFormVisible,
+  onFilterValue,
+  selectedFilter,
+  filterCount,
 }) {
-  const [isFormVisible, setIsFormVisible] = useState(false);
-  const [isFilterVisible, setIsFilterVisible] = useState(false);
-  const [filterValue, setFilterValue] = useState("");
-
-  function toggleFormVisibility() {
-    setIsFormVisible((prevState) => !prevState);
-  }
-
-  function toggleFilterVisibility() {
-    setIsFilterVisible((prevState) => !prevState);
-  }
-
-  function handleFilterPlants(newFilter) {
-    console.log(newFilter.target.value);
-    setFilterValue(newFilter.target.value);
-  }
-
-  function handleResetFilter() {
-    setFilterValue("");
-    setIsFilterVisible(false);
-  }
-
   return (
     <>
       <FlexboxWrapper>
-        <StyledButton onClick={toggleFormVisibility}>
+        <StyledButton $variant="indexButton" onClick={onToggleForm}>
           Create&nbsp;New&nbsp;Plant&nbsp;&nbsp;
           <ArrowIcon $isRotated={isFormVisible}>
             <Image
@@ -78,8 +68,8 @@ export default function HomePage({
             />
           </ArrowIcon>
         </StyledButton>
-        <StyledButton onClick={toggleFilterVisibility}>
-          Filter
+        <StyledButton $variant="indexButton" onClick={onToggleFilter}>
+          Filter&nbsp;Plants ({filterCount})
           <ArrowIcon $isRotated={isFilterVisible}>
             <Image
               src="/icons/arrow-1.svg"
@@ -90,38 +80,23 @@ export default function HomePage({
           </ArrowIcon>
         </StyledButton>
       </FlexboxWrapper>
-      {isFormVisible && <PlantForm onCreatePlant={onCreatePlant} />}
       {isFilterVisible && (
         <FilterPlants
-          onFilterPlants={handleFilterPlants}
-          onResetFilter={handleResetFilter}
+          onFilterValue={onFilterValue}
+          onResetFilter={onResetFilter}
+          selectedFilter={selectedFilter}
         />
       )}
+      {isFormVisible && <PlantForm onCreatePlant={onCreatePlant} />}
       <h2>Discover Plants</h2>
-
-      {plants && plants.length > 0 ? (
-        filterValue && filterValue.length > 0 ? (
-          <StyledPlantList>
-            {plants
-              .filter((plant) => plant.lightNeed === filterValue)
-              .map((plant) => (
-                <li key={plant.id}>
-                  <PlantCard
-                    plant={plant}
-                    onToggleBookmark={onToggleBookmark}
-                  />
-                </li>
-              ))}
-          </StyledPlantList>
-        ) : (
-          <StyledPlantList>
-            {plants.map((plant) => (
-              <li key={plant.id}>
-                <PlantCard plant={plant} onToggleBookmark={onToggleBookmark} />
-              </li>
-            ))}
-          </StyledPlantList>
-        )
+      {plants.length > 0 ? (
+        <StyledPlantList>
+          {plants.map((plant) => (
+            <li key={plant.id}>
+              <PlantCard plant={plant} onToggleBookmark={onToggleBookmark} />
+            </li>
+          ))}
+        </StyledPlantList>
       ) : (
         <StyledErrorMessageWrapper>
           <Image
@@ -131,7 +106,11 @@ export default function HomePage({
             alt="Icon of a dead plant"
             unoptimized
           />
-          <p>Unfortunately, you have not yet added any plants.</p>
+          <p>
+            {filterCount > 0
+              ? "No plants match the selected filter criteria."
+              : "Unfortunately, you have not yet added any plants."}
+          </p>
         </StyledErrorMessageWrapper>
       )}
     </>
