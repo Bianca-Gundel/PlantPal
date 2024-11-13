@@ -36,7 +36,7 @@ const FlexboxWrapper = styled.div`
 
 export default function HomePage({ onCreatePlant, plants, onToggleBookmark }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
-  console.log(isFormVisible)
+
   function toggleFormVisibility() {
     setIsFormVisible((prevState) => !prevState);
   }

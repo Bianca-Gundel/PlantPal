@@ -14,10 +14,17 @@ export const StyledButton = styled.button`
   border-style: none;
   border-radius: 8px;
 
-  ${({ $variant }) =>
-    $variant === "delete" &&
-    css`
-      background-color: firebrick;
-      color: white;
-    `}
+  ${({ $variant, isEditMode }) => {
+    if ($variant === "update" && isEditMode) {
+      return css`
+        background-color: rgba(164, 211, 110, 1);
+        color: white;
+      `;
+    } else if ($variant === "delete") {
+      return css`
+        background-color: firebrick;
+        color: white;
+      `;
+    }
+  }}
 `;
