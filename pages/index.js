@@ -56,7 +56,7 @@ export default function HomePage({ onCreatePlant, plants, onToggleBookmark }) {
           </ArrowIcon>
         </StyledButton>
       </FlexboxWrapper>
-      {isFormVisible && <PlantForm onCreatePlant={onCreatePlant} />}
+      {isFormVisible && <PlantForm onCreatePlant={onCreatePlant}/>}
       <h2>Discover Plants</h2>
 
       {plants && plants.length > 0 ? (

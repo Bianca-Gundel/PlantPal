@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import BackLink from "@/components/BackLink";
 import { useState } from "react";
 import { StyledButton } from "@/components/StyledButton";
+import PlantForm from "@/components/PlantForm";
 
 const StyledSeasonList = styled.ul`
   list-style: none;
@@ -47,9 +48,24 @@ const StyledButtonContainer = styled.div`
   `}
 `;
 
-export default function PlantDetails({ plants, onDeletePlant }) {
+const StyledEditButton = styled.button`
+  border-style: none;
+  border-radius: 50px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 40px;
+  top: 70px;
+`;
+
+
+export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onEditPlant }) {
   const [isDeleteOption, setIsDeleteOption] = useState(false);
   const [toggleButtonName, setToggleButtonName] = useState("Delete");
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   const router = useRouter();
   const { id } = router.query;
@@ -83,6 +99,10 @@ export default function PlantDetails({ plants, onDeletePlant }) {
     lightIconSrc = "/icons/sun-full.svg";
   }
 
+  function toggleFormVisibility() {
+    setIsFormVisible((prevState) => !prevState);
+  }
+
   function toggleDeleteOption() {
     setIsDeleteOption((prevState) => !prevState);
 
@@ -92,11 +112,40 @@ export default function PlantDetails({ plants, onDeletePlant }) {
       setToggleButtonName("Delete");
     }
   }
+  
+  function handleEdit(updatedPlant) {
+    onEditPlant(plantData.id, updatedPlant);
+  }
+
+  function handleCancel() {
+    setIsFormVisible(false);
+  }
 
   return (
     <>
       <BackLink />
 
+      
+      <StyledEditButton onClick={toggleFormVisibility}>
+        <Image
+              src={"/icons/pencil-solid.svg"}
+              width={25}
+              height={25}
+              alt="Icon of a dead plant"
+              unoptimized
+            />
+      </StyledEditButton>
+      {isFormVisible && <>
+      <PlantForm 
+        onCreatePlant={onCreatePlant} 
+        onEditPlant={handleEdit} 
+        onCancel={handleCancel}
+        isFormVisible={isFormVisible}
+        isEditMode={true} 
+        initialData={plantData}/>
+      </>
+      }
+      
       <h2>{plantData.name}</h2>
       <h3>{plantData.botanicalName}</h3>
       <ImageBorder>
@@ -160,7 +209,7 @@ export default function PlantDetails({ plants, onDeletePlant }) {
           </>
         )}
         <StyledButton onClick={toggleDeleteOption}>
-          {toggleButtonName}
+          {toggleButtonName} 
         </StyledButton>
       </StyledButtonContainer>
     </>

@@ -31,6 +31,14 @@ export default function App({ Component, pageProps }) {
     router.push("/");
   }
 
+  function handleEditPlant(plantId, updatedPlant) {
+    setPlants((prevPlants) =>
+      prevPlants.map((plant) =>
+        plant.id === plantId ? { ...plant, ...updatedPlant } : plant
+      )
+    );
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -41,6 +49,7 @@ export default function App({ Component, pageProps }) {
           onCreatePlant={handleCreatePlant}
           onToggleBookmark={handleToggleBookmark}
           onDeletePlant={handleDeletePlant}
+          onEditPlant={handleEditPlant}
         />
       </Layout>
     </>

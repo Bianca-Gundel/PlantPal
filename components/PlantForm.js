@@ -40,6 +40,10 @@ const StyledFormWrapper = styled.form`
       margin-top: 15px;
       display: flex;
       justify-content: center;
+      
+      button {
+        margin: 10px 10px 0 10px;
+      }
     }
   `}
 `;
@@ -63,7 +67,16 @@ const fertiliserOptions = [
   { id: "fertiliserSeason4", value: "Winter", label: "Winter" },
 ];
 
-export default function PlantForm({ onCreatePlant }) {
+export default function PlantForm({
+    onCreatePlant,
+    onEditPlant,
+    isEditMode = false,
+    initialData = {},
+    onCancel
+ }) {
+
+  // const [isFormVisible, setIsFormVisible] = useState(false);
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -71,14 +84,20 @@ export default function PlantForm({ onCreatePlant }) {
     const data = Object.fromEntries(formData);
 
     const selectedSeasons = formData.getAll("fertiliserSeason");
+    data.fertiliserSeason = selectedSeasons;
 
     if (selectedSeasons.length === 0) {
       // FYI: Hinzufügen einer universellen Error-Message für alle Pflichtfelder folgt
       alert("Please select at least one season.");
       return;
     }
-    data.fertiliserSeason = selectedSeasons;
-    onCreatePlant(data);
+
+    if(isEditMode) {
+      onEditPlant({ ...initialData, ...data });
+      onCancel();
+    } else {
+      onCreatePlant({ ...initialData, ...data });
+    }
 
     event.target.reset();
   }
@@ -94,6 +113,7 @@ export default function PlantForm({ onCreatePlant }) {
           id="name"
           name="name"
           placeholder="Plant Name"
+          defaultValue={initialData?.name || ""}
           required
         />
 
@@ -105,6 +125,7 @@ export default function PlantForm({ onCreatePlant }) {
           id="botanicalName"
           name="botanicalName"
           placeholder="Botanical Name"
+          defaultValue={initialData?.botanicalName || ""}
           required
         />
 
@@ -116,6 +137,7 @@ export default function PlantForm({ onCreatePlant }) {
           name="description"
           rows="5"
           placeholder="Plant Description"
+          defaultValue={initialData?.description || ""}
         ></textarea>
 
         <label htmlFor="lightNeed">
@@ -131,6 +153,7 @@ export default function PlantForm({ onCreatePlant }) {
                 name="lightNeed"
                 value={option.value}
                 required={option.id === "lightNeed1"}
+                defaultChecked={initialData?.lightNeed === option.value}
               />
               <label htmlFor={option.id}>{option.label}</label>
             </div>
@@ -150,6 +173,7 @@ export default function PlantForm({ onCreatePlant }) {
                 name="waterNeed"
                 value={option.value}
                 required={option.id === "waterNeed1"}
+                defaultChecked={initialData?.waterNeed === option.value}
               />
               <label htmlFor={option.id}>{option.label}</label>
             </div>
@@ -168,6 +192,7 @@ export default function PlantForm({ onCreatePlant }) {
                 id={option.id}
                 name="fertiliserSeason"
                 value={option.value}
+                defaultChecked={isEditMode ? initialData?.fertiliserSeason.includes(option.value) : null}
               />
               <label htmlFor={option.id}>{option.label}</label>
             </div>
@@ -175,7 +200,8 @@ export default function PlantForm({ onCreatePlant }) {
         </section>
 
         <div className="button">
-          <StyledButton type="submit">Create</StyledButton>
+          <StyledButton type="submit" $variant={isEditMode ? "update" : "create"} isEditMode={isEditMode}>{isEditMode ? "Save"  : "Create"}</StyledButton>
+          {isEditMode ? <StyledButton type="button" onClick={onCancel}>Cancel</StyledButton> : null}
         </div>
       </StyledFormWrapper>
     </>
