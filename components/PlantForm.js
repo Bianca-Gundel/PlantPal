@@ -1,5 +1,6 @@
 import { styled, css } from "styled-components";
 import { StyledButton } from "./StyledButton";
+import { StyledHeadline } from "./StyledHeadline";
 
 const StyledFormWrapper = styled.form`
   display: flex;
@@ -86,6 +87,7 @@ export default function PlantForm({ onCreatePlant }) {
   return (
     <>
       <StyledFormWrapper onSubmit={handleSubmit}>
+        <StyledHeadline>Create new Plant</StyledHeadline>
         <label htmlFor="name">
           <h3>Plant Name: *</h3>
         </label>

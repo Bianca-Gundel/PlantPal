@@ -1,19 +1,13 @@
 import { styled, css } from "styled-components";
 import { StyledButton } from "./StyledButton";
 import React from "react";
+import { StyledHeadline } from "./StyledHeadline";
 
 const StyledFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
 
   ${css`
-    input[type="text"] {
-      width: 100%;
-      padding: 15px;
-      border-style: none;
-      border-radius: 10px;
-    }
-
     h3 {
       margin-bottom: 10px;
     }
@@ -31,7 +25,7 @@ const StyledFormWrapper = styled.form`
       margin: 0 5px 0 0;
     }
 
-    div.button {
+    div {
       margin-top: 15px;
       display: flex;
       justify-content: center;
@@ -50,14 +44,13 @@ export default function FilterPlants({
   onResetFilter,
   selectedFilter,
 }) {
-  console.log(selectedFilter);
-
   return (
-    <>
-      <StyledFormWrapper>
-        <label>
-          <h3>Light Needs:</h3>
-        </label>
+    <StyledFormWrapper>
+      <StyledHeadline>Filter</StyledHeadline>
+      <label>
+        <h3>Light Needs:</h3>
+      </label>
+      <section>
         {lightOptions.map((option) => (
           <React.Fragment key={option.id}>
             <input
@@ -71,10 +64,18 @@ export default function FilterPlants({
             <label htmlFor={option.id}>{option.label}</label>
           </React.Fragment>
         ))}
-      </StyledFormWrapper>
-      <button type="button" onClick={onResetFilter}>
-        Reset
-      </button>
-    </>
+      </section>
+
+      {/* FYI: div is needed for design - we will fix this later in another US */}
+      <div>
+        <StyledButton
+          type="button"
+          $variant="resetButton"
+          onClick={onResetFilter}
+        >
+          Reset
+        </StyledButton>
+      </div>
+    </StyledFormWrapper>
   );
 }

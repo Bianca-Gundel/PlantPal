@@ -58,7 +58,7 @@ export default function HomePage({
     <>
       <FlexboxWrapper>
         <StyledButton $variant="indexButton" onClick={onToggleForm}>
-          Create&nbsp;New&nbsp;Plant&nbsp;&nbsp;
+          Create
           <ArrowIcon $isRotated={isFormVisible}>
             <Image
               src="/icons/arrow-1.svg"
@@ -69,7 +69,7 @@ export default function HomePage({
           </ArrowIcon>
         </StyledButton>
         <StyledButton $variant="indexButton" onClick={onToggleFilter}>
-          Filter&nbsp;Plants ({filterCount})
+          Filter ({filterCount})
           <ArrowIcon $isRotated={isFilterVisible}>
             <Image
               src="/icons/arrow-1.svg"

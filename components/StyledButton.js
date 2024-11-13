@@ -27,4 +27,12 @@ export const StyledButton = styled.button`
       padding: 5px;
       margin: 0 2px;
     `}
+
+    ${({ $variant }) =>
+    $variant === "resetButton" &&
+    css`
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+    `}
 `;

@@ -51,6 +51,8 @@ export default function App({ Component, pageProps }) {
     setFilterCount("0");
   }
 
+  // FYI: For better usability, we deviate from our user story and leave only one form expanded at a time
+
   function handleToggleFilter() {
     setIsFilterVisible(!isFilterVisible);
     if (isFormVisible) {
@@ -89,18 +91,3 @@ export default function App({ Component, pageProps }) {
     </>
   );
 }
-
-/*
- ** Think About / Todo List:
- ** Form and Filter Open Simultaneously:
- **    - Issue: Both form and filter can be open at the same time.
- **    - It can confuse users about which action (create or filter) they’re performing.
- **    - Suggested Solution: Close the form when the filter is opened and vice versa.
- **    - 💡 Hint: This requires moving the `isFormVisible` state to the App componet, so both the form and filter visibility states can be managed together.
- **
- ** Filter State on Returning to Home Page - may not be needed or in a further iteration:
- **    - The Filter remains active when returning from a detail page.
- **    - Pros: Consistent view for users.
- **    - Cons: Users might expect filter to reset to show all plants.
- **    - 💡 Hint: Use `useEffect` to reset filter on Home page load if needed.
- */
