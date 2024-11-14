@@ -80,13 +80,15 @@ export default function HomePage({
           </ArrowIcon>
         </StyledButton>
       </FlexboxWrapper>
-      {isFilterVisible && (
-        <FilterPlants
-          onFilterValue={onFilterValue}
-          onResetFilter={onResetFilter}
-          selectedFilter={selectedFilter}
-        />
-      )}
+      <FlexboxWrapper>
+        {isFilterVisible && (
+          <FilterPlants
+            onFilterValue={onFilterValue}
+            onResetFilter={onResetFilter}
+            selectedFilter={selectedFilter}
+          />
+        )}
+      </FlexboxWrapper>
       {isFormVisible && <PlantForm onCreatePlant={onCreatePlant} />}
       <h2>Discover Plants</h2>
       {plants.length > 0 ? (

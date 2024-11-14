@@ -1,49 +1,6 @@
-import { styled, css } from "styled-components";
 import { StyledButton } from "./StyledButton";
 import { StyledHeadline } from "./StyledHeadline";
-
-const StyledFormWrapper = styled.form`
-  display: flex;
-  flex-direction: column;
-
-  ${css`
-    input[type="text"] {
-      width: 100%;
-      padding: 15px;
-      border-style: none;
-      border-radius: 10px;
-    }
-    textarea {
-      width: 100%;
-      padding: 15px;
-      border-style: none;
-      border-radius: 10px;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-    h3 {
-      margin-bottom: 10px;
-    }
-    section {
-      display: flex;
-      flex-direction: row;
-      justify-content: start;
-    }
-    label {
-      /* FYI: genaue Anpassung in einer späteren User-Story (nach Wahl der Schriftart, Größe, etc.) */
-      margin-right: 15px;
-    }
-
-    input {
-      margin: 0 5px 0 0;
-    }
-
-    div.button {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
-    }
-  `}
-`;
+import { StyledFormWrapper } from "./StyledFormWrapper";
 
 const lightOptions = [
   { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
