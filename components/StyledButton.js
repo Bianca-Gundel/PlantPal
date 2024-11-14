@@ -15,13 +15,6 @@ export const StyledButton = styled.button`
   border-radius: 8px;
 
   ${({ $variant }) =>
-    $variant === "delete" &&
-    css`
-      background-color: firebrick;
-      color: white;
-    `}
-
-  ${({ $variant }) =>
     $variant === "indexButton" &&
     css`
       padding: 5px;
@@ -35,4 +28,21 @@ export const StyledButton = styled.button`
       display: flex;
       justify-content: center;
     `}
+    
+      ${({ $variant, $isEditMode }) => {
+    if ($variant === "update" && $isEditMode) {
+      return css`
+        background-color: rgba(164, 211, 110, 1);
+        color: white;
+      `;
+    } else if ($variant === "delete") {
+      return css`
+        background-color: firebrick;
+        color: white;
+      `;
+    }
+  }}
 `;
+
+
+

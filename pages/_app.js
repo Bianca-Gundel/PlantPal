@@ -40,6 +40,7 @@ export default function App({ Component, pageProps }) {
     router.push("/");
   }
 
+
   function handleFilterValue(value) {
     setFilter(value);
     setFilterCount("1");
@@ -67,6 +68,14 @@ export default function App({ Component, pageProps }) {
     }
   }
 
+  function handleEditPlant(plantId, updatedPlant) {
+    setPlants((prevPlants) =>
+      prevPlants.map((plant) =>
+        plant.id === plantId ? { ...plant, ...updatedPlant } : plant
+      )
+    );
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -86,6 +95,7 @@ export default function App({ Component, pageProps }) {
           onCreatePlant={handleCreatePlant}
           onToggleBookmark={handleToggleBookmark}
           onDeletePlant={handleDeletePlant}
+          onEditPlant={handleEditPlant}
         />
       </Layout>
     </>

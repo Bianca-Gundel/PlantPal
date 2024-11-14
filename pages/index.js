@@ -89,7 +89,7 @@ export default function HomePage({
           />
         )}
       </FlexboxWrapper>
-      {isFormVisible && <PlantForm onCreatePlant={onCreatePlant} />}
+      {isFormVisible && <PlantForm onCreatePlant={onCreatePlant}/>}
       <h2>Discover Plants</h2>
       {plants.length > 0 ? (
         <StyledPlantList>
