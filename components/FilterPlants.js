@@ -23,7 +23,7 @@ export default function FilterPlants({
       </label>
       <section>
         {lightOptions.map((option) => (
-          <React.Fragment key={option.id}>
+          <div key={option.id}>
             <input
               type="radio"
               id={option.id}
@@ -33,7 +33,7 @@ export default function FilterPlants({
               onChange={(event) => onFilterValue(event.target.value)}
             />
             <label htmlFor={option.id}>{option.label}</label>
-          </React.Fragment>
+          </div>
         ))}
       </section>
 
