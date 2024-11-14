@@ -20,6 +20,4 @@ export default createGlobalStyle`
     margin-bottom: 60px;
   }
 
-  
-
 `;

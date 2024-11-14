@@ -7,9 +7,7 @@ const StyledPlantList = styled.ul`
   padding: 0;
 `;
 
-export default function MyPlants({ plants, onToggleBookmark }) {
-  const bookmarkedPlants = plants.filter((plant) => plant.isBookmarked);
-
+export default function MyPlants({ bookmarkedPlants, onToggleBookmark }) {
   return (
     <>
       <BackLink />

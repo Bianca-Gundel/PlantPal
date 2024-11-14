@@ -2,8 +2,9 @@ import PlantCard from "@/components/PlantCard";
 import styled, { css } from "styled-components";
 import Image from "next/image";
 import PlantForm from "@/components/PlantForm";
-import { useState } from "react";
+import React, { useState } from "react";
 import { StyledButton } from "@/components/StyledButton";
+import FilterPlants from "@/components/FilterPlants";
 
 const StyledPlantList = styled.ul`
   list-style: none;
@@ -34,18 +35,30 @@ const FlexboxWrapper = styled.div`
   justify-content: center;
 `;
 
-export default function HomePage({ onCreatePlant, plants, onToggleBookmark }) {
-  const [isFormVisible, setIsFormVisible] = useState(false);
+const lightOptions = [
+  { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
+  { id: "lightNeed2", value: "Partial Shade", label: "Partial Shade" },
+  { id: "lightNeed3", value: "Full Shade", label: "Full Shade" },
+];
 
-  function toggleFormVisibility() {
-    setIsFormVisible((prevState) => !prevState);
-  }
-
+export default function HomePage({
+  onCreatePlant,
+  plants,
+  onToggleBookmark,
+  onResetFilter,
+  onToggleFilter,
+  onToggleForm,
+  isFilterVisible,
+  isFormVisible,
+  onFilterValue,
+  selectedFilter,
+  filterCount,
+}) {
   return (
     <>
       <FlexboxWrapper>
-        <StyledButton onClick={toggleFormVisibility}>
-          Create&nbsp;New&nbsp;Plant&nbsp;&nbsp;
+        <StyledButton $variant="indexButton" onClick={onToggleForm}>
+          Create
           <ArrowIcon $isRotated={isFormVisible}>
             <Image
               src="/icons/arrow-1.svg"
@@ -55,11 +68,30 @@ export default function HomePage({ onCreatePlant, plants, onToggleBookmark }) {
             />
           </ArrowIcon>
         </StyledButton>
+        <StyledButton $variant="indexButton" onClick={onToggleFilter}>
+          Filter ({filterCount})
+          <ArrowIcon $isRotated={isFilterVisible}>
+            <Image
+              src="/icons/arrow-1.svg"
+              alt="arrow"
+              width={20}
+              height={20}
+            />
+          </ArrowIcon>
+        </StyledButton>
+      </FlexboxWrapper>
+      <FlexboxWrapper>
+        {isFilterVisible && (
+          <FilterPlants
+            onFilterValue={onFilterValue}
+            onResetFilter={onResetFilter}
+            selectedFilter={selectedFilter}
+          />
+        )}
       </FlexboxWrapper>
       {isFormVisible && <PlantForm onCreatePlant={onCreatePlant}/>}
       <h2>Discover Plants</h2>
-
-      {plants && plants.length > 0 ? (
+      {plants.length > 0 ? (
         <StyledPlantList>
           {plants.map((plant) => (
             <li key={plant.id}>
@@ -76,7 +108,11 @@ export default function HomePage({ onCreatePlant, plants, onToggleBookmark }) {
             alt="Icon of a dead plant"
             unoptimized
           />
-          <p>Unfortunately, you have not yet added any plants.</p>
+          <p>
+            {filterCount > 0
+              ? "No plants match the selected filter criteria."
+              : "Unfortunately, you have not yet added any plants."}
+          </p>
         </StyledErrorMessageWrapper>
       )}
     </>
