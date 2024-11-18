@@ -1,45 +1,14 @@
-import PlantCard from "@/components/PlantCard";
-import styled, { css } from "styled-components";
+import PlantCard from "@/components/PlantCard/PlantCard";
+import {
+  StyledErrorMessageWrapper,
+  ArrowIcon,
+  FlexboxWrapper,
+} from "@/components/styled/StyledIndex";
 import Image from "next/image";
-import PlantForm from "@/components/PlantForm";
-import React, { useState } from "react";
-import { StyledButton } from "@/components/StyledButton";
-import FilterPlants from "@/components/FilterPlants";
-
-const StyledPlantList = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const StyledErrorMessageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 60vh;
-`;
-
-const ArrowIcon = styled.span`
-  display: inline-flex;
-  transition: transform 0.3s ease-in-out;
-
-  ${(props) =>
-    props.$isRotated &&
-    css`
-      transform: rotate(180deg);
-    `}
-`;
-
-const FlexboxWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const lightOptions = [
-  { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
-  { id: "lightNeed2", value: "Partial Shade", label: "Partial Shade" },
-  { id: "lightNeed3", value: "Full Shade", label: "Full Shade" },
-];
+import PlantForm from "@/components/PlantForm/PlantForm";
+import { StyledButton } from "@/components/styled/StyledButton";
+import FilterPlants from "@/components/FilterPlants/FilterPlants";
+import { StyledList } from "@/components/styled/StyledList";
 
 export default function HomePage({
   onCreatePlant,
@@ -89,16 +58,16 @@ export default function HomePage({
           />
         )}
       </FlexboxWrapper>
-      {isFormVisible && <PlantForm onCreatePlant={onCreatePlant}/>}
+      {isFormVisible && <PlantForm onCreatePlant={onCreatePlant} />}
       <h2>Discover Plants</h2>
       {plants.length > 0 ? (
-        <StyledPlantList>
+        <StyledList>
           {plants.map((plant) => (
             <li key={plant.id}>
               <PlantCard plant={plant} onToggleBookmark={onToggleBookmark} />
             </li>
           ))}
-        </StyledPlantList>
+        </StyledList>
       ) : (
         <StyledErrorMessageWrapper>
           <Image

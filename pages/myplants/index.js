@@ -1,11 +1,6 @@
-import styled from "styled-components";
-import PlantCard from "@/components/PlantCard";
-import BackLink from "@/components/BackLink";
-
-const StyledPlantList = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
+import PlantCard from "@/components/PlantCard/PlantCard";
+import BackLink from "@/components/BackLink/BackLink";
+import { StyledList } from "@/components/styled/StyledList";
 
 export default function MyPlants({ bookmarkedPlants, onToggleBookmark }) {
   return (
@@ -16,7 +11,7 @@ export default function MyPlants({ bookmarkedPlants, onToggleBookmark }) {
         <p>Unfortunately, you have not yet added any plants as favourites.</p>
       )}
       {/* FYI: Icon for error message follows after merge */}
-      <StyledPlantList>
+      <StyledList>
         {bookmarkedPlants.map((plant) => {
           return (
             <li key={plant.id}>
@@ -24,7 +19,7 @@ export default function MyPlants({ bookmarkedPlants, onToggleBookmark }) {
             </li>
           );
         })}
-      </StyledPlantList>
+      </StyledList>
     </>
   );
 }

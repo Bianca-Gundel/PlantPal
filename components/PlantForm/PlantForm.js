@@ -1,7 +1,6 @@
-import { StyledButton } from "./StyledButton";
-import { StyledHeadline } from "./StyledHeadline";
-import { StyledFormWrapper } from "./StyledFormWrapper";
-
+import { StyledButton } from "../styled/StyledButton";
+import { StyledHeadline } from "../styled/StyledHeadline";
+import { StyledFormWrapper } from "../styled/StyledFormWrapper";
 
 const lightOptions = [
   { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
@@ -23,13 +22,12 @@ const fertiliserOptions = [
 ];
 
 export default function PlantForm({
-    onCreatePlant,
-    onEditPlant,
-    isEditMode = false,
-    initialData = {},
-    onCancel
- }) {
-
+  onCreatePlant,
+  onEditPlant,
+  isEditMode = false,
+  initialData = {},
+  onCancel,
+}) {
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -45,7 +43,7 @@ export default function PlantForm({
       return;
     }
 
-    if(isEditMode) {
+    if (isEditMode) {
       onEditPlant({ ...initialData, ...data });
       onCancel();
     } else {
@@ -58,7 +56,9 @@ export default function PlantForm({
   return (
     <>
       <StyledFormWrapper onSubmit={handleSubmit}>
-        <StyledHeadline>Create new Plant</StyledHeadline>
+        <StyledHeadline>
+          {isEditMode ? "Update Plant" : "Create New Plant"}
+        </StyledHeadline>
         <label htmlFor="name">
           <h3>Plant Name: *</h3>
         </label>
@@ -146,7 +146,11 @@ export default function PlantForm({
                 id={option.id}
                 name="fertiliserSeason"
                 value={option.value}
-                defaultChecked={isEditMode ? initialData?.fertiliserSeason.includes(option.value) : null}
+                defaultChecked={
+                  isEditMode
+                    ? initialData?.fertiliserSeason.includes(option.value)
+                    : null
+                }
               />
               <label htmlFor={option.id}>{option.label}</label>
             </div>
@@ -154,8 +158,18 @@ export default function PlantForm({
         </section>
 
         <div className="button">
-          <StyledButton type="submit" $variant={isEditMode ? "update" : "create"} $isEditMode={isEditMode}>{isEditMode ? "Save"  : "Create"}</StyledButton>
-          {isEditMode ? <StyledButton type="button" onClick={onCancel}>Cancel</StyledButton> : null}
+          <StyledButton
+            type="submit"
+            $variant={isEditMode ? "update" : "create"}
+            $isEditMode={isEditMode}
+          >
+            {isEditMode ? "Save" : "Create"}
+          </StyledButton>
+          {isEditMode ? (
+            <StyledButton type="button" onClick={onCancel}>
+              Cancel
+            </StyledButton>
+          ) : null}
         </div>
       </StyledFormWrapper>
     </>

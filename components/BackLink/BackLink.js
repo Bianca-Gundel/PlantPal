@@ -1,13 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import styled from "styled-components";
-
-const BackLinkWrapper = styled.div`
-  position: fixed;
-  top: 25px;
-  left: 25px;
-  z-index: 10;
-`;
+import { BackLinkWrapper } from "./styles";
 
 export default function BackLink() {
   return (
