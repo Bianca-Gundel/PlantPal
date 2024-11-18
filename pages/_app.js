@@ -17,11 +17,17 @@ export default function App({ Component, pageProps }) {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [filter, setFilter] = useState("");
 
+  const [imageUrl, setImageUrl] = useState("");
+
   const filteredPlants = plants.filter((plant) => plant.lightNeed === filter);
   const bookmarkedPlants = plants.filter((plant) => plant.isBookmarked);
 
+  function handleUploadImage(imageUrl) {
+    setImageUrl(imageUrl);
+  }
+
   function handleCreatePlant(newPlant) {
-    const plantWithId = { id: uid(), ...newPlant };
+    const plantWithId = { id: uid(), ...newPlant, imageUrl: imageUrl };
     setPlants([plantWithId, ...plants]);
   }
 
@@ -68,9 +74,10 @@ export default function App({ Component, pageProps }) {
   }
 
   function handleEditPlant(plantId, updatedPlant) {
+    const editedPlant = { ...updatedPlant, imageUrl };
     setPlants((prevPlants) =>
       prevPlants.map((plant) =>
-        plant.id === plantId ? { ...plant, ...updatedPlant } : plant
+        plant.id === plantId ? { ...plant, ...editedPlant } : plant
       )
     );
   }
@@ -87,11 +94,13 @@ export default function App({ Component, pageProps }) {
           filterCount={filterCount}
           isFilterVisible={isFilterVisible}
           isFormVisible={isFormVisible}
+          imageUrl={imageUrl}
           onToggleFilter={handleToggleFilter}
           onToggleForm={handleToggleForm}
           onFilterValue={handleFilterValue}
           onResetFilter={handleResetFilter}
           onCreatePlant={handleCreatePlant}
+          onUploadImage={handleUploadImage}
           onToggleBookmark={handleToggleBookmark}
           onDeletePlant={handleDeletePlant}
           onEditPlant={handleEditPlant}

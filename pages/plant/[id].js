@@ -18,6 +18,8 @@ export default function PlantDetails({
   plants,
   onDeletePlant,
   onCreatePlant,
+  onIsImageLoading,
+  onUploadImage,
   onEditPlant,
 }) {
   const [isDeleteOption, setIsDeleteOption] = useState(false);
@@ -90,6 +92,7 @@ export default function PlantDetails({
         <>
           <PlantForm
             onCreatePlant={onCreatePlant}
+            onUploadImage={onUploadImage}
             onEditPlant={handleEdit}
             onCancel={handleCancel}
             isFormVisible={isFormVisible}
