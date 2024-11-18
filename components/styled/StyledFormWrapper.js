@@ -14,6 +14,7 @@ export const StyledFormWrapper = styled.form`
     textarea {
       width: 100%;
       padding: 15px;
+      resize: vertical;
       border-style: none;
       border-radius: 10px;
       font-family: Arial, Helvetica, sans-serif;

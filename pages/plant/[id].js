@@ -1,68 +1,25 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import styled, { css } from "styled-components";
-import BackLink from "@/components/BackLink";
+import {
+  IconsContainer,
+  IconContainer,
+  ImageBorder,
+  StyledButtonContainer,
+  StyledEditButton,
+  StyledPlantDescription,
+} from "@/components/styled/StyledDetailsPage";
+import BackLink from "@/components/BackLink/BackLink";
 import { useState } from "react";
-import { StyledButton } from "@/components/StyledButton";
-import PlantForm from "@/components/PlantForm";
+import { StyledButton } from "@/components/styled/StyledButton";
+import PlantForm from "@/components/PlantForm/PlantForm";
+import { StyledList } from "@/components/styled/StyledList";
 
-const StyledSeasonList = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const IconsContainer = styled.article`
-  display: flex;
-  justify-content: space-around;
-`;
-
-const IconContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const ImageBorder = styled.article`
-  position: relative;
-  margin-top: 20px;
-  height: 55vw;
-  width: 90vw;
-  border-radius: 15px;
-  overflow: hidden;
-  margin: auto;
-`;
-
-const StyledButtonContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  ${css`
-    p {
-      width: 100%;
-    }
-
-    button {
-      margin: 10px;
-    }
-  `}
-`;
-
-const StyledEditButton = styled.button`
-  border-style: none;
-  border-radius: 50px;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  right: 40px;
-  top: 70px;
-`;
-
-
-export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onEditPlant }) {
+export default function PlantDetails({
+  plants,
+  onDeletePlant,
+  onCreatePlant,
+  onEditPlant,
+}) {
   const [isDeleteOption, setIsDeleteOption] = useState(false);
   const [toggleButtonName, setToggleButtonName] = useState("Delete");
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -76,28 +33,23 @@ export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onE
 
   if (!plantData) return <div>No data available</div>;
 
-  let waterIconSrc = "";
+  const Icon = ({ src, alt }) => (
+    <Image unoptimized alt={alt} src={src} width={30} height={30} />
+  );
 
-  const waterNeed = plantData.waterNeed;
-  if (waterNeed === "High") {
-    waterIconSrc = "/icons/drop-full.svg";
-  } else if (waterNeed === "Medium") {
-    waterIconSrc = "/icons/drop-half.svg";
-  } else if (waterNeed === "Low") {
-    waterIconSrc = "/icons/drop.svg";
-  }
+  const waterIconSrc =
+    {
+      High: "/icons/drop-full.svg",
+      Medium: "/icons/drop-half.svg",
+      Low: "/icons/drop.svg",
+    }[plantData.waterNeed] || "";
 
-  let lightIconSrc = "";
-
-  const lightNeed = plantData.lightNeed;
-
-  if (lightNeed === "Full Sun") {
-    lightIconSrc = "/icons/sun.svg";
-  } else if (lightNeed === "Partial Shade") {
-    lightIconSrc = "/icons/sun-half.svg";
-  } else if (lightNeed === "Full Shade") {
-    lightIconSrc = "/icons/sun-full.svg";
-  }
+  const lightIconSrc =
+    {
+      "Full Sun": "/icons/sun.svg",
+      "Partial Shade": "/icons/sun-half.svg",
+      "Full Shade": "/icons/sun-full.svg",
+    }[plantData.lightNeed] || "";
 
   function toggleFormVisibility() {
     setIsFormVisible((prevState) => !prevState);
@@ -112,7 +64,7 @@ export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onE
       setToggleButtonName("Delete");
     }
   }
-  
+
   function handleEdit(updatedPlant) {
     onEditPlant(plantData.id, updatedPlant);
   }
@@ -125,27 +77,28 @@ export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onE
     <>
       <BackLink />
 
-      
       <StyledEditButton onClick={toggleFormVisibility}>
         <Image
-              src={"/icons/pencil-solid.svg"}
-              width={25}
-              height={25}
-              alt="Icon of a dead plant"
-              unoptimized
-            />
+          src={"/icons/pencil-solid.svg"}
+          width={25}
+          height={25}
+          alt="Icon of a dead plant"
+          unoptimized
+        />
       </StyledEditButton>
-      {isFormVisible && <>
-      <PlantForm 
-        onCreatePlant={onCreatePlant} 
-        onEditPlant={handleEdit} 
-        onCancel={handleCancel}
-        isFormVisible={isFormVisible}
-        isEditMode={true} 
-        initialData={plantData}/>
-      </>
-      }
-      
+      {isFormVisible && (
+        <>
+          <PlantForm
+            onCreatePlant={onCreatePlant}
+            onEditPlant={handleEdit}
+            onCancel={handleCancel}
+            isFormVisible={isFormVisible}
+            isEditMode={true}
+            initialData={plantData}
+          />
+        </>
+      )}
+
       <h2>{plantData.name}</h2>
       <h3>{plantData.botanicalName}</h3>
       <ImageBorder>
@@ -158,44 +111,26 @@ export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onE
           }
         />
       </ImageBorder>
-      <p>{plantData.description}</p>
+      <StyledPlantDescription>{plantData.description}</StyledPlantDescription>
 
       <IconsContainer>
         <IconContainer>
-          <Image
-            unoptimized
-            alt={"Icon of a drop"}
-            src={waterIconSrc}
-            width={30}
-            height={30}
-          />
+          <Icon src={waterIconSrc} alt="Icon of a water drop" />
           <p>{plantData.waterNeed}</p>
         </IconContainer>
 
         <IconContainer>
-          <Image
-            unoptimized
-            alt={"Icon of a sun"}
-            src={lightIconSrc}
-            width={30}
-            height={30}
-          />
+          <Icon src={lightIconSrc} alt="Icon of a sun" />
           <p>{plantData.lightNeed}</p>
         </IconContainer>
 
         <IconContainer>
-          <Image
-            unoptimized
-            alt={"Icon of a fertiliser"}
-            src={"/icons/fertiliser.svg"}
-            width={30}
-            height={30}
-          />
-          <StyledSeasonList>
+          <Icon src={"/icons/fertiliser.svg"} alt="Icon of a fertiliser" />
+          <StyledList>
             {plantData.fertiliserSeason.map((season) => {
               return <li key={season}>{season}</li>;
             })}
-          </StyledSeasonList>
+          </StyledList>
         </IconContainer>
       </IconsContainer>
       {/* Styling folgt nach Merge*/}
@@ -209,7 +144,7 @@ export default function PlantDetails({ plants, onDeletePlant, onCreatePlant, onE
           </>
         )}
         <StyledButton onClick={toggleDeleteOption}>
-          {toggleButtonName} 
+          {toggleButtonName}
         </StyledButton>
       </StyledButtonContainer>
     </>

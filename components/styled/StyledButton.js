@@ -5,6 +5,7 @@ export const StyledButton = styled.button`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin: 10px;
 
   background-color: white;
   cursor: pointer;
@@ -21,7 +22,7 @@ export const StyledButton = styled.button`
       margin: 0 2px;
     `}
 
-    ${({ $variant }) =>
+  ${({ $variant }) =>
     $variant === "resetButton" &&
     css`
       margin-top: 15px;
@@ -43,6 +44,3 @@ export const StyledButton = styled.button`
     }
   }}
 `;
-
-
-

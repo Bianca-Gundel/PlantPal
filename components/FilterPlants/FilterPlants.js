@@ -1,8 +1,7 @@
-import { styled, css } from "styled-components";
-import { StyledButton } from "./StyledButton";
+import { StyledButton } from "../styled/StyledButton";
 import React from "react";
-import { StyledHeadline } from "./StyledHeadline";
-import { StyledFormWrapper } from "./StyledFormWrapper";
+import { StyledHeadline } from "../styled/StyledHeadline";
+import { StyledFormWrapper } from "../styled/StyledFormWrapper";
 
 const lightOptions = [
   { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },

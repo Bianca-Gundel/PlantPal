@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/Layout/Layout";
 import GlobalStyle from "../styles";
 import initialPlants from "@/assets/plants";
 import useLocalStorageState from "use-local-storage-state";
@@ -39,7 +39,6 @@ export default function App({ Component, pageProps }) {
     setPlants(plants.filter((plant) => plant.id !== plantId));
     router.push("/");
   }
-
 
   function handleFilterValue(value) {
     setFilter(value);
