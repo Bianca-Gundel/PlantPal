@@ -13,6 +13,7 @@ import { useState } from "react";
 import { StyledButton } from "@/components/styled/StyledButton";
 import PlantForm from "@/components/PlantForm/PlantForm";
 import { StyledList } from "@/components/styled/StyledList";
+import BookmarkButton from "@/components/BookmarkButton/BookmarkButton";
 
 export default function PlantDetails({
   plants,
@@ -21,6 +22,7 @@ export default function PlantDetails({
   onIsImageLoading,
   onUploadImage,
   onEditPlant,
+  onToggleBookmark,
 }) {
   const [isDeleteOption, setIsDeleteOption] = useState(false);
   const [toggleButtonName, setToggleButtonName] = useState("Delete");
@@ -104,7 +106,14 @@ export default function PlantDetails({
 
       <h2>{plantData.name}</h2>
       <h3>{plantData.botanicalName}</h3>
+
       <ImageBorder>
+        <BookmarkButton
+          onToggleBookmark={() => onToggleBookmark(plantData.id)}
+          plantId={plantData.id}
+          isBookmarked={plantData.isBookmarked}
+        />
+
         <Image
           alt={`Image of ${plantData.name}`}
           fill
