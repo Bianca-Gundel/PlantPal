@@ -27,6 +27,21 @@ export default function FilterPlants({
   onResetFilter,
   selectedFilter,
 }) {
+  function handleCheckbox(event) {
+    const target = event.target;
+    const name = event.target.name;
+
+    if (selectedFilter[name] === target.value) {
+      target.checked = false;
+      onFilterValue({
+        name: target.name,
+        value: "",
+      });
+    } else {
+      onFilterValue(target);
+    }
+  }
+
   return (
     <StyledFormWrapper>
       <StyledHeadline>Filter</StyledHeadline>
@@ -37,12 +52,12 @@ export default function FilterPlants({
         {lightOptions.map((option) => (
           <div key={option.id}>
             <input
-              type="radio"
+              type="checkbox"
               id={option.id}
               name="lightNeed"
               value={option.value}
               checked={selectedFilter.lightNeed === option.value}
-              onChange={(event) => onFilterValue(event.target)}
+              onChange={handleCheckbox}
             />
             <label htmlFor={option.id}>{option.label}</label>
           </div>
@@ -56,12 +71,12 @@ export default function FilterPlants({
         {waterOptions.map((option) => (
           <div key={option.id}>
             <input
-              type="radio"
+              type="checkbox"
               id={option.id}
               name="waterNeed"
               value={option.value}
               checked={selectedFilter.waterNeed === option.value}
-              onChange={(event) => onFilterValue(event.target)}
+              onChange={handleCheckbox}
             />
             <label htmlFor={option.id}>{option.label}</label>
           </div>
