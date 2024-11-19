@@ -13,7 +13,28 @@ const nextConfig = {
 
     return config;
   },
-  images: { domains: ["images.unsplash.com", "images.pexels.com"] },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "res.cloudinary.com",
+        pathname: "/dutusk861/**",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/dutusk861/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

@@ -1,6 +1,8 @@
 import { StyledButton } from "../styled/StyledButton";
 import { StyledHeadline } from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
+import UploadImage from "../UploadImage/UploadImage";
+import { useState } from "react";
 
 const lightOptions = [
   { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
@@ -24,10 +26,14 @@ const fertiliserOptions = [
 export default function PlantForm({
   onCreatePlant,
   onEditPlant,
+  onUploadImage,
   isEditMode = false,
   initialData = {},
   onCancel,
+  imageUrl,
 }) {
+  const [isImageLoading, setIsImageLoading] = useState(false);
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -44,13 +50,36 @@ export default function PlantForm({
     }
 
     if (isEditMode) {
-      onEditPlant({ ...initialData, ...data });
+      onEditPlant({ imageUrl: imageUrl, ...initialData, ...data });
       onCancel();
     } else {
-      onCreatePlant({ ...initialData, ...data });
+      onCreatePlant({ imageUrl: imageUrl, ...initialData, ...data });
     }
 
     event.target.reset();
+  }
+
+  async function handleCreateUpload(event) {
+    setIsImageLoading(true);
+
+    event.preventDefault();
+
+    const formData = new FormData();
+    const image = event.target.files[0];
+
+    formData.append("image", image);
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const { url } = await response.json();
+
+    onUploadImage(url);
+
+    setIsImageLoading(false);
+
+    return;
   }
 
   return (
@@ -157,11 +186,18 @@ export default function PlantForm({
           ))}
         </section>
 
+        <UploadImage
+          name="image"
+          onChange={handleCreateUpload}
+          title="Image Upload:"
+        />
+
         <div className="button">
           <StyledButton
             type="submit"
             $variant={isEditMode ? "update" : "create"}
             $isEditMode={isEditMode}
+            disabled={isImageLoading}
           >
             {isEditMode ? "Save" : "Create"}
           </StyledButton>
