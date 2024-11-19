@@ -3,6 +3,8 @@ import { StyledHeadline } from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
 import UploadImage from "../UploadImage/UploadImage";
 import { useState } from "react";
+import ResetButton from "../ResetButton/ResetButton";
+import { useRef } from "react";
 
 const lightOptions = [
   { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
@@ -32,6 +34,7 @@ export default function PlantForm({
   onCancel,
   imageUrl,
 }) {
+  const formRef = useRef(null); // Referenz für das Formular
   const [isImageLoading, setIsImageLoading] = useState(false);
 
   function handleSubmit(event) {
@@ -84,10 +87,11 @@ export default function PlantForm({
 
   return (
     <>
-      <StyledFormWrapper onSubmit={handleSubmit}>
+      <StyledFormWrapper ref={formRef} onSubmit={handleSubmit}>
         <StyledHeadline>
           {isEditMode ? "Update Plant" : "Create New Plant"}
         </StyledHeadline>
+        <ResetButton formRef={formRef} isEditMode={isEditMode} />
         <label htmlFor="name">
           <h3>Plant Name: *</h3>
         </label>
