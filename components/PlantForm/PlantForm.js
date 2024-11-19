@@ -85,6 +85,8 @@ export default function PlantForm({
     return;
   }
 
+  // FYI: Hinzufügen eines Stylings für das Formular, (Hintergrund usw.) folgt noch!
+
   return (
     <>
       <StyledFormWrapper ref={formRef} onSubmit={handleSubmit}>
