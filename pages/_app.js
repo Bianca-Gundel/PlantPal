@@ -4,7 +4,7 @@ import initialPlants from "@/assets/plants";
 import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -15,11 +15,26 @@ export default function App({ Component, pageProps }) {
   const [filterCount, setFilterCount] = useState("0");
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
-  const [filter, setFilter] = useState("");
+  const [filters, setFilters] = useState({
+    lightNeed: null,
+    waterNeed: null,
+    fertiliserSeason: [],
+  });
 
   const [imageUrl, setImageUrl] = useState("");
 
-  const filteredPlants = plants.filter((plant) => plant.lightNeed === filter);
+  const filteredPlants = plants.filter((plant) => {
+    return (
+      (!filters.lightNeed || plant.lightNeed === filters.lightNeed) &&
+      (!filters.waterNeed || plant.waterNeed === filters.waterNeed) &&
+      (!filters.fertiliserSeason ||
+        !filters.fertiliserSeason.length ||
+        filters.fertiliserSeason.every((season) =>
+          plant.fertiliserSeason.includes(season)
+        ))
+    );
+  });
+
   const bookmarkedPlants = plants.filter((plant) => plant.isBookmarked);
 
   function handleUploadImage(imageUrl) {
@@ -46,13 +61,42 @@ export default function App({ Component, pageProps }) {
     router.push("/");
   }
 
-  function handleFilterValue(value) {
-    setFilter(value);
-    setFilterCount("1");
+  function handleFilterValue(event) {
+    if (event.name === "fertiliserSeason") {
+      console.log(filters);
+      setFilters((prevFilters) => {
+        const updatedFertiliserSeason = prevFilters.fertiliserSeason.includes(
+          event.value
+        )
+          ? prevFilters.fertiliserSeason.filter(
+              (season) => season !== event.value
+            )
+          : [...prevFilters.fertiliserSeason, event.value];
+        return {
+          ...prevFilters,
+          fertiliserSeason: updatedFertiliserSeason,
+        };
+      });
+    } else {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [event.name]: event.value,
+      }));
+      console.log(filters);
+    }
+  }
+
+  function handleEditPlant(plantId, updatedPlant) {
+    const editedPlant = { ...updatedPlant, imageUrl };
+    setPlants((prevPlants) =>
+      prevPlants.map((plant) =>
+        plant.id === plantId ? { ...plant, ...editedPlant } : plant
+      )
+    );
   }
 
   function handleResetFilter() {
-    setFilter("");
+    setFilters({ lightNeed: null, waterNeed: null, fertiliserSeason: [] });
     setIsFilterVisible(false);
     setFilterCount("0");
   }
@@ -82,15 +126,23 @@ export default function App({ Component, pageProps }) {
     );
   }
 
+  useEffect(() => {
+    const count =
+      filters.fertiliserSeason.length +
+      (filters.lightNeed ? 1 : 0) +
+      (filters.waterNeed ? 1 : 0);
+    setFilterCount(count);
+  }, [filters]);
+
   return (
     <>
       <GlobalStyle />
       <Layout onResetFilter={handleResetFilter}>
         <Component
           {...pageProps}
-          plants={filter ? filteredPlants : plants}
+          plants={filters ? filteredPlants : plants}
           bookmarkedPlants={bookmarkedPlants}
-          selectedFilter={filter}
+          selectedFilter={filters}
           filterCount={filterCount}
           isFilterVisible={isFilterVisible}
           isFormVisible={isFormVisible}

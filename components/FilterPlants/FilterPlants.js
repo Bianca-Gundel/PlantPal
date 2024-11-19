@@ -1,5 +1,5 @@
 import { StyledButton } from "../styled/StyledButton";
-import React from "react";
+import React, { useState } from "react";
 import { StyledHeadline } from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
 
@@ -41,8 +41,8 @@ export default function FilterPlants({
               id={option.id}
               name="lightNeed"
               value={option.value}
-              checked={selectedFilter === option.value}
-              onChange={(event) => onFilterValue(event.target.value)}
+              checked={selectedFilter.lightNeed === option.value}
+              onChange={(event) => onFilterValue(event.target)}
             />
             <label htmlFor={option.id}>{option.label}</label>
           </div>
@@ -60,8 +60,8 @@ export default function FilterPlants({
               id={option.id}
               name="waterNeed"
               value={option.value}
-              checked={selectedFilter === option.value}
-              onChange={(event) => onFilterValue(event.target.value)}
+              checked={selectedFilter.waterNeed === option.value}
+              onChange={(event) => onFilterValue(event.target)}
             />
             <label htmlFor={option.id}>{option.label}</label>
           </div>
@@ -80,6 +80,8 @@ export default function FilterPlants({
               id={option.id}
               name="fertiliserSeason"
               value={option.value}
+              checked={selectedFilter.fertiliserSeason.includes(option.value)}
+              onChange={(event) => onFilterValue(event.target)}
             />
             <label htmlFor={option.id}>{option.label}</label>
           </div>
