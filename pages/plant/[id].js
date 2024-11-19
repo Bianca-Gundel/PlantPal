@@ -109,7 +109,7 @@ export default function PlantDetails({
 
       <ImageBorder>
         <BookmarkButton
-          onToggleBookmark={() => onToggleBookmark(plantData.id)}
+          onToggleBookmark={onToggleBookmark}
           plantId={plantData.id}
           isBookmarked={plantData.isBookmarked}
         />
