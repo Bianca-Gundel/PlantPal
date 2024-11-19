@@ -1,5 +1,5 @@
 import { StyledButton } from "../styled/StyledButton";
-import React, { useState } from "react";
+import React from "react";
 import { StyledHeadline } from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
 
@@ -18,7 +18,7 @@ const waterOptions = [
 const fertiliserOptions = [
   { id: "fertiliserSeason1", value: "Summer", label: "Summer" },
   { id: "fertiliserSeason2", value: "Spring", label: "Spring" },
-  { id: "fertiliserSeason3", value: "Autumn", label: "Autumn" },
+  { id: "fertiliserSeason3", value: "Fall", label: "Fall" },
   { id: "fertiliserSeason4", value: "Winter", label: "Winter" },
 ];
 

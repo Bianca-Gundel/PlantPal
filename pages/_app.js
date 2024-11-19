@@ -63,7 +63,6 @@ export default function App({ Component, pageProps }) {
 
   function handleFilterValue(event) {
     if (event.name === "fertiliserSeason") {
-      console.log(filters);
       setFilters((prevFilters) => {
         const updatedFertiliserSeason = prevFilters.fertiliserSeason.includes(
           event.value
@@ -82,7 +81,6 @@ export default function App({ Component, pageProps }) {
         ...prevFilters,
         [event.name]: event.value,
       }));
-      console.log(filters);
     }
   }
 
@@ -98,7 +96,6 @@ export default function App({ Component, pageProps }) {
   function handleResetFilter() {
     setFilters({ lightNeed: null, waterNeed: null, fertiliserSeason: [] });
     setIsFilterVisible(false);
-    setFilterCount("0");
   }
 
   // FYI: For better usability, we deviate from our user story and leave only one form expanded at a time
