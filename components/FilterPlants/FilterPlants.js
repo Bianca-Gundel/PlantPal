@@ -9,6 +9,19 @@ const lightOptions = [
   { id: "lightNeed3", value: "Full Shade", label: "Full Shade" },
 ];
 
+const waterOptions = [
+  { id: "waterNeed1", value: "Low", label: "Low" },
+  { id: "waterNeed2", value: "Medium", label: "Medium" },
+  { id: "waterNeed3", value: "High", label: "High" },
+];
+
+const fertiliserOptions = [
+  { id: "fertiliserSeason1", value: "Summer", label: "Summer" },
+  { id: "fertiliserSeason2", value: "Spring", label: "Spring" },
+  { id: "fertiliserSeason3", value: "Autumn", label: "Autumn" },
+  { id: "fertiliserSeason4", value: "Winter", label: "Winter" },
+];
+
 export default function FilterPlants({
   onFilterValue,
   onResetFilter,
@@ -30,6 +43,43 @@ export default function FilterPlants({
               value={option.value}
               checked={selectedFilter === option.value}
               onChange={(event) => onFilterValue(event.target.value)}
+            />
+            <label htmlFor={option.id}>{option.label}</label>
+          </div>
+        ))}
+      </section>
+
+      <label>
+        <h3>Water Needs:</h3>
+      </label>
+      <section>
+        {waterOptions.map((option) => (
+          <div key={option.id}>
+            <input
+              type="radio"
+              id={option.id}
+              name="waterNeed"
+              value={option.value}
+              checked={selectedFilter === option.value}
+              onChange={(event) => onFilterValue(event.target.value)}
+            />
+            <label htmlFor={option.id}>{option.label}</label>
+          </div>
+        ))}
+      </section>
+
+      <label>
+        <h3>Fertiliser Season:</h3>
+      </label>
+
+      <section>
+        {fertiliserOptions.map((option) => (
+          <div key={option.id}>
+            <input
+              type="checkbox"
+              id={option.id}
+              name="fertiliserSeason"
+              value={option.value}
             />
             <label htmlFor={option.id}>{option.label}</label>
           </div>
