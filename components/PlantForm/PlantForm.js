@@ -1,8 +1,10 @@
 import { StyledButton } from "../styled/StyledButton";
-import { StyledHeadline } from "../styled/StyledHeadline";
+import { HeaderWrapper, StyledHeadline } from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
 import UploadImage from "../UploadImage/UploadImage";
 import { useState } from "react";
+import ResetButton from "../ResetButton/ResetButton";
+import { useRef } from "react";
 
 const lightOptions = [
   { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
@@ -19,7 +21,7 @@ const waterOptions = [
 const fertiliserOptions = [
   { id: "fertiliserSeason1", value: "Summer", label: "Summer" },
   { id: "fertiliserSeason2", value: "Spring", label: "Spring" },
-  { id: "fertiliserSeason3", value: "Autumn", label: "Autumn" },
+  { id: "fertiliserSeason3", value: "Fall", label: "Fall" },
   { id: "fertiliserSeason4", value: "Winter", label: "Winter" },
 ];
 
@@ -32,6 +34,7 @@ export default function PlantForm({
   onCancel,
   imageUrl,
 }) {
+  const formRef = useRef(null);
   const [isImageLoading, setIsImageLoading] = useState(false);
 
   function handleSubmit(event) {
@@ -82,12 +85,17 @@ export default function PlantForm({
     return;
   }
 
+  // FYI: Hinzufügen eines Stylings für das Formular, (Hintergrund usw.) folgt noch!
+
   return (
     <>
-      <StyledFormWrapper onSubmit={handleSubmit}>
-        <StyledHeadline>
-          {isEditMode ? "Update Plant" : "Create New Plant"}
-        </StyledHeadline>
+      <StyledFormWrapper ref={formRef} onSubmit={handleSubmit}>
+        <HeaderWrapper>
+          <ResetButton formRef={formRef} isEditMode={isEditMode} />
+          <StyledHeadline>
+            {isEditMode ? "Update Plant" : "Create New Plant"}
+          </StyledHeadline>
+        </HeaderWrapper>
         <label htmlFor="name">
           <h3>Plant Name: *</h3>
         </label>
