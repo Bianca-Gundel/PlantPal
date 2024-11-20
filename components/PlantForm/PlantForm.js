@@ -5,6 +5,7 @@ import UploadImage from "../UploadImage/UploadImage";
 import { useState } from "react";
 import ResetButton from "../ResetButton/ResetButton";
 import { useRef } from "react";
+import { StyledErrorMessage } from "../styled/StyledErrorMessage";
 
 const lightOptions = [
   { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
@@ -37,6 +38,8 @@ export default function PlantForm({
   const formRef = useRef(null);
   const [isImageLoading, setIsImageLoading] = useState(false);
 
+  const [errors, setErrors] = useState({});
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -44,13 +47,31 @@ export default function PlantForm({
     const data = Object.fromEntries(formData);
 
     const selectedSeasons = formData.getAll("fertiliserSeason");
-    data.fertiliserSeason = selectedSeasons;
+    const newErrors = {};
 
+    if (!data.name) {
+      newErrors.name = "Plant Name is required.";
+    }
+    if (!data.botanicalName) {
+      newErrors.botanicalName = "Botanical Name is required.";
+    }
+    if (!data.lightNeed) {
+      newErrors.lightNeed = "Please select a Light Need option.";
+    }
+    if (!data.waterNeed) {
+      newErrors.waterNeed = "Please select a Water Need option.";
+    }
     if (selectedSeasons.length === 0) {
-      // FYI: Hinzufügen einer universellen Error-Message für alle Pflichtfelder folgt
-      alert("Please select at least one season.");
+      newErrors.fertiliserSeason =
+        "Please select at least one fertiliser season.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
+
+    setErrors({});
 
     if (isEditMode) {
       onEditPlant({ imageUrl: imageUrl, ...initialData, ...data });
@@ -105,8 +126,8 @@ export default function PlantForm({
           name="name"
           placeholder="Plant Name"
           defaultValue={initialData?.name || ""}
-          required
         />
+        {errors.name && <StyledErrorMessage>{errors.name}</StyledErrorMessage>}
 
         <label htmlFor="botanicalName">
           <h3>Botanical Name: *</h3>
@@ -117,8 +138,10 @@ export default function PlantForm({
           name="botanicalName"
           placeholder="Botanical Name"
           defaultValue={initialData?.botanicalName || ""}
-          required
         />
+        {errors.botanicalName && (
+          <StyledErrorMessage>{errors.botanicalName}</StyledErrorMessage>
+        )}
 
         <label htmlFor="description">
           <h3>Description:</h3>
@@ -143,13 +166,16 @@ export default function PlantForm({
                 id={option.id}
                 name="lightNeed"
                 value={option.value}
-                required={option.id === "lightNeed1"}
+                // required={option.id === "lightNeed1"}
                 defaultChecked={initialData?.lightNeed === option.value}
               />
               <label htmlFor={option.id}>{option.label}</label>
             </div>
           ))}
         </section>
+        {errors.lightNeed && (
+          <StyledErrorMessage>{errors.lightNeed}</StyledErrorMessage>
+        )}
 
         <label htmlFor="waterNeed">
           <h3>Water Need: *</h3>
@@ -163,13 +189,16 @@ export default function PlantForm({
                 id={option.id}
                 name="waterNeed"
                 value={option.value}
-                required={option.id === "waterNeed1"}
+                // required={option.id === "waterNeed1"}
                 defaultChecked={initialData?.waterNeed === option.value}
               />
               <label htmlFor={option.id}>{option.label}</label>
             </div>
           ))}
         </section>
+        {errors.waterNeed && (
+          <StyledErrorMessage>{errors.waterNeed}</StyledErrorMessage>
+        )}
 
         <label htmlFor="fertiliserSeason">
           <h3>Fertiliser Season: *</h3>
@@ -193,6 +222,9 @@ export default function PlantForm({
             </div>
           ))}
         </section>
+        {errors.fertiliserSeason && (
+          <StyledErrorMessage>{errors.fertiliserSeason}</StyledErrorMessage>
+        )}
 
         <UploadImage
           name="image"
