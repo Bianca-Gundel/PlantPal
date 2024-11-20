@@ -11,6 +11,10 @@ const StyledFilterButton = styled.button`
   align-items: center;
   justify-content: center;
   min-width: 40px;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const FilterCount = styled.span`
@@ -30,7 +34,13 @@ const FilterCount = styled.span`
   display: ${(props) => (props.$count > 0 ? "flex" : "none")};
 `;
 
-export default function FilterButton({ onClick, isActive, filterCount }) {
+export default function FilterButton({
+  onClick,
+  isFilterVisible,
+  filterCount,
+}) {
+  const isActive = isFilterVisible || filterCount > 0;
+
   return (
     <StyledFilterButton onClick={onClick} aria-label="Toggle filter">
       <svg
