@@ -6,6 +6,7 @@ import { useState } from "react";
 import ResetButton from "../ResetButton/ResetButton";
 import { useRef } from "react";
 import { StyledErrorMessage } from "../styled/StyledErrorMessage";
+import Image from "next/image";
 
 const lightOptions = [
   { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
@@ -161,7 +162,17 @@ export default function PlantForm({
           defaultValue={initialData?.name || ""}
           onChange={handleInputChange}
         />
-        {errors.name && <StyledErrorMessage>{errors.name}</StyledErrorMessage>}
+        {errors.name && (
+          <StyledErrorMessage>
+            <Image
+              src={"/icons/error-sign.svg"}
+              width={12}
+              height={12}
+              alt="Icon of am error sign"
+            />
+            {errors.name}
+          </StyledErrorMessage>
+        )}
 
         <label htmlFor="botanicalName">
           <h3>Botanical Name: *</h3>

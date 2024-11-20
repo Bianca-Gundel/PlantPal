@@ -84,15 +84,6 @@ export default function App({ Component, pageProps }) {
     }
   }
 
-  function handleEditPlant(plantId, updatedPlant) {
-    const editedPlant = { ...updatedPlant, imageUrl };
-    setPlants((prevPlants) =>
-      prevPlants.map((plant) =>
-        plant.id === plantId ? { ...plant, ...editedPlant } : plant
-      )
-    );
-  }
-
   function handleResetFilter() {
     setFilters({ lightNeed: null, waterNeed: null, fertiliserSeason: [] });
     setIsFilterVisible(false);

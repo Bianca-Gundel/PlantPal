@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
-export const StyledErrorMessage = styled.p`
+export const StyledErrorMessage = styled.div`
+  display: flex;
+  align-items: center;
   color: red;
   font-size: 12px;
-  margin-top: 10px;
+  margin-top: 15px;
+
+  img {
+    margin-right: 5px;
+  }
 `;
