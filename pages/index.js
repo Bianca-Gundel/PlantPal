@@ -9,11 +9,10 @@ import PlantForm from "@/components/PlantForm/PlantForm";
 import { StyledButton } from "@/components/styled/StyledButton";
 import FilterPlants from "@/components/FilterPlants/FilterPlants";
 import { StyledList } from "@/components/styled/StyledList";
-import SearchBar, {
-  SearchFilterContainer,
-} from "@/components/SearchBar/SearchBar";
+import SearchBar from "@/components/SearchBar/SearchBar";
 import { useState } from "react";
 import FilterButton from "@/components/FilterButton.js/FilterButton";
+import { SearchFilterContainer } from "@/components/SearchBar/styles";
 
 export default function HomePage({
   onCreatePlant,
