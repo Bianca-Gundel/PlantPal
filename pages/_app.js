@@ -44,6 +44,7 @@ export default function App({ Component, pageProps }) {
   function handleCreatePlant(newPlant) {
     const plantWithId = { id: uid(), ...newPlant, imageUrl: imageUrl };
     setPlants([plantWithId, ...plants]);
+    router.push("/");
   }
 
   function handleToggleBookmark(plantId) {

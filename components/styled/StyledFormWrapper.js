@@ -3,6 +3,10 @@ import { styled, css } from "styled-components";
 export const StyledFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 
   ${css`
     input[type="text"] {
@@ -48,4 +52,12 @@ export const StyledFormWrapper = styled.form`
       justify-content: center;
     }
   `}
+  ${({ $variant }) =>
+    $variant === "createForm" &&
+    css`
+      background-color: transparent;
+      border-radius: 0;
+      padding-left: 0;
+      padding-right: 0;
+    `}
 `;
