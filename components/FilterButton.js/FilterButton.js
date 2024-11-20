@@ -21,7 +21,7 @@ const FilterCount = styled.span`
   position: absolute;
   top: -8px;
   right: -8px;
-  background: #4a90e2;
+  background: green;
   color: white;
   border-radius: 50%;
   width: 20px;
