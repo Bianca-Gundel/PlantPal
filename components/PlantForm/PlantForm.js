@@ -106,6 +106,39 @@ export default function PlantForm({
     return;
   }
 
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setErrors((prevErrors) => {
+      const newErrors = { ...prevErrors };
+      if (value) {
+        delete newErrors[name];
+      }
+      return newErrors;
+    });
+  }
+
+  function handleRadioChange(event) {
+    const { name, value } = event.target;
+    setErrors((prevErrors) => {
+      const newErrors = { ...prevErrors };
+      if (value) {
+        delete newErrors[name];
+      }
+      return newErrors;
+    });
+  }
+
+  function handleCheckboxChange(event) {
+    const { name } = event.target;
+    setErrors((prevErrors) => {
+      const newErrors = { ...prevErrors };
+      if (event.target.checked) {
+        delete newErrors[name];
+      }
+      return newErrors;
+    });
+  }
+
   // FYI: Hinzufügen eines Stylings für das Formular, (Hintergrund usw.) folgt noch!
 
   return (
@@ -126,6 +159,7 @@ export default function PlantForm({
           name="name"
           placeholder="Plant Name"
           defaultValue={initialData?.name || ""}
+          onChange={handleInputChange}
         />
         {errors.name && <StyledErrorMessage>{errors.name}</StyledErrorMessage>}
 
@@ -138,6 +172,7 @@ export default function PlantForm({
           name="botanicalName"
           placeholder="Botanical Name"
           defaultValue={initialData?.botanicalName || ""}
+          onChange={handleInputChange}
         />
         {errors.botanicalName && (
           <StyledErrorMessage>{errors.botanicalName}</StyledErrorMessage>
@@ -166,8 +201,8 @@ export default function PlantForm({
                 id={option.id}
                 name="lightNeed"
                 value={option.value}
-                // required={option.id === "lightNeed1"}
                 defaultChecked={initialData?.lightNeed === option.value}
+                onChange={handleRadioChange}
               />
               <label htmlFor={option.id}>{option.label}</label>
             </div>
@@ -189,8 +224,8 @@ export default function PlantForm({
                 id={option.id}
                 name="waterNeed"
                 value={option.value}
-                // required={option.id === "waterNeed1"}
                 defaultChecked={initialData?.waterNeed === option.value}
+                onChange={handleRadioChange}
               />
               <label htmlFor={option.id}>{option.label}</label>
             </div>
@@ -217,6 +252,7 @@ export default function PlantForm({
                     ? initialData?.fertiliserSeason.includes(option.value)
                     : null
                 }
+                onChange={handleCheckboxChange}
               />
               <label htmlFor={option.id}>{option.label}</label>
             </div>
