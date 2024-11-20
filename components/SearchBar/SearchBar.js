@@ -1,10 +1,17 @@
 import styled from "styled-components";
 import Image from "next/image";
 
-const StyledSearchWrapper = styled.div`
-  margin: 1rem 0;
-  position: relative;
+export const SearchFilterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
   width: 100%;
+  margin: 1rem 0;
+`;
+
+const StyledSearchWrapper = styled.div`
+  position: relative;
+  flex: 1;
 `;
 
 const StyledSearchBar = styled.input`
