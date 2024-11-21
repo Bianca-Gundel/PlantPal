@@ -1,12 +1,18 @@
 import { StyledButton } from "../styled/StyledButton";
-import { HeaderWrapper, StyledHeadline } from "../styled/StyledHeadline";
+import {
+  HeaderWrapper,
+  StyledHeadlineH2,
+  StyledHeadlineH3,
+} from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
 import UploadImage from "../UploadImage/UploadImage";
 import { useState } from "react";
 import ResetButton from "../ResetButton/ResetButton";
 import { useRef } from "react";
+import { useRouter } from "next/router";
 import { StyledErrorMessage } from "../styled/StyledErrorMessage";
 import Image from "next/image";
+
 
 const lightOptions = [
   { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
@@ -36,7 +42,9 @@ export default function PlantForm({
   onCancel,
   imageUrl,
 }) {
+  const router = useRouter();
   const formRef = useRef(null);
+  const [isCreatingMore, setIsCreatingMore] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(false);
 
   const [errors, setErrors] = useState({});
@@ -45,7 +53,7 @@ export default function PlantForm({
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
+    const { createMore, ...data } = Object.fromEntries(formData);
 
     const selectedSeasons = formData.getAll("fertiliserSeason");
     data.fertiliserSeason = selectedSeasons;
@@ -84,6 +92,10 @@ export default function PlantForm({
     }
 
     event.target.reset();
+
+    if (!createMore) {
+      router.push("/");
+    }
   }
 
   async function handleCreateUpload(event) {
@@ -149,12 +161,12 @@ export default function PlantForm({
       <StyledFormWrapper ref={formRef} onSubmit={handleSubmit}>
         <HeaderWrapper>
           <ResetButton formRef={formRef} isEditMode={isEditMode} />
-          <StyledHeadline>
+          <StyledHeadlineH2>
             {isEditMode ? "Update Plant" : "Create New Plant"}
-          </StyledHeadline>
+          </StyledHeadlineH2>
         </HeaderWrapper>
         <label htmlFor="name">
-          <h3>Plant Name: *</h3>
+          <StyledHeadlineH3>Plant Name: *</StyledHeadlineH3>
         </label>
         <input
           type="text"
@@ -177,7 +189,7 @@ export default function PlantForm({
         )}
 
         <label htmlFor="botanicalName">
-          <h3>Botanical Name: *</h3>
+          <StyledHeadlineH3>Botanical Name: *</StyledHeadlineH3>
         </label>
         <input
           type="text"
@@ -200,7 +212,7 @@ export default function PlantForm({
         )}
 
         <label htmlFor="description">
-          <h3>Description:</h3>
+          <StyledHeadlineH3>Description:</StyledHeadlineH3>
         </label>
         <textarea
           id="description"
@@ -211,7 +223,7 @@ export default function PlantForm({
         ></textarea>
 
         <label htmlFor="lightNeed">
-          <h3>Light Need: *</h3>
+          <StyledHeadlineH3>Light Need: *</StyledHeadlineH3>
         </label>
 
         <section>
@@ -242,7 +254,7 @@ export default function PlantForm({
         )}
 
         <label htmlFor="waterNeed">
-          <h3>Water Need: *</h3>
+          <StyledHeadlineH3>Water Need: *</StyledHeadlineH3>
         </label>
 
         <section>
@@ -273,7 +285,7 @@ export default function PlantForm({
         )}
 
         <label htmlFor="fertiliserSeason">
-          <h3>Fertiliser Season: *</h3>
+          <StyledHeadlineH3>Fertiliser Season: *</StyledHeadlineH3>
         </label>
 
         <section>
@@ -312,8 +324,22 @@ export default function PlantForm({
           onChange={handleCreateUpload}
           title="Image Upload:"
         />
+        {!isEditMode ? (
+          <>
+            <div>
+              <label htmlFor="createMore">Create more?</label>
+              <input
+                type="checkbox"
+                id="createMore"
+                name="createMore"
+                checked={isCreatingMore}
+                onClick={(event) => setIsCreatingMore(event.target.checked)}
+              />
+            </div>
+          </>
+        ) : null}
 
-        <div className="button">
+        <div>
           <StyledButton
             type="submit"
             $variant={isEditMode ? "update" : "create"}
@@ -322,11 +348,11 @@ export default function PlantForm({
           >
             {isEditMode ? "Save" : "Create"}
           </StyledButton>
-          {isEditMode ? (
+          {isEditMode && (
             <StyledButton type="button" onClick={onCancel}>
               Cancel
             </StyledButton>
-          ) : null}
+          )}
         </div>
       </StyledFormWrapper>
     </>

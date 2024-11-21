@@ -5,7 +5,6 @@ import {
   FlexboxWrapper,
 } from "@/components/styled/StyledIndex";
 import Image from "next/image";
-import PlantForm from "@/components/PlantForm/PlantForm";
 import { StyledButton } from "@/components/styled/StyledButton";
 import FilterPlants from "@/components/FilterPlants/FilterPlants";
 import { StyledList } from "@/components/styled/StyledList";
@@ -15,16 +14,12 @@ import FilterButton from "@/components/FilterButton.js/FilterButton";
 import { SearchFilterContainer } from "@/components/SearchBar/styles";
 
 export default function HomePage({
-  onCreatePlant,
   plants,
   onToggleBookmark,
   onResetFilter,
   onToggleFilter,
-  onToggleForm,
   isFilterVisible,
-  isFormVisible,
   onFilterValue,
-  onUploadImage,
   selectedFilter,
   filterCount,
 }) {
@@ -39,26 +34,6 @@ export default function HomePage({
   };
   return (
     <>
-      <FlexboxWrapper>
-        <StyledButton $variant="indexButton" onClick={onToggleForm}>
-          Create
-          <ArrowIcon $isRotated={isFormVisible}>
-            <Image
-              src="/icons/arrow-1.svg"
-              alt="arrow"
-              width={20}
-              height={20}
-            />
-          </ArrowIcon>
-        </StyledButton>
-      </FlexboxWrapper>
-
-      {isFormVisible && (
-        <PlantForm
-          onCreatePlant={onCreatePlant}
-          onUploadImage={onUploadImage}
-        />
-      )}
       <SearchFilterContainer>
         <SearchBar onSearch={handleSearch} />
         <FilterButton

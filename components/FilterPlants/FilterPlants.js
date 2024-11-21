@@ -1,6 +1,6 @@
 import { StyledButton } from "../styled/StyledButton";
 import React from "react";
-import { StyledHeadline } from "../styled/StyledHeadline";
+import { StyledHeadlineH3, StyledHeadlineH2 } from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
 
 const lightOptions = [
@@ -44,9 +44,9 @@ export default function FilterPlants({
 
   return (
     <StyledFormWrapper>
-      <StyledHeadline>Filter</StyledHeadline>
+      <StyledHeadlineH2>Filter</StyledHeadlineH2>
       <label>
-        <h3>Light Needs:</h3>
+        <StyledHeadlineH3>Light Needs:</StyledHeadlineH3>
       </label>
       <section>
         {lightOptions.map((option) => (
@@ -65,7 +65,7 @@ export default function FilterPlants({
       </section>
 
       <label>
-        <h3>Water Needs:</h3>
+        <StyledHeadlineH3>Water Needs:</StyledHeadlineH3>
       </label>
       <section>
         {waterOptions.map((option) => (
@@ -84,7 +84,7 @@ export default function FilterPlants({
       </section>
 
       <label>
-        <h3>Fertiliser Season:</h3>
+        <StyledHeadlineH3>Fertiliser Season:</StyledHeadlineH3>
       </label>
 
       <section>

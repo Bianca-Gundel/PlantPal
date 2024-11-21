@@ -134,7 +134,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <Layout onResetFilter={handleResetFilter}>
+      <Layout>
         <Component
           {...pageProps}
           plants={filters ? filteredPlants : plants}
