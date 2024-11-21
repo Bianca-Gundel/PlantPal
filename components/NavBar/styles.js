@@ -13,9 +13,3 @@ export const StyledNav = styled.nav`
   background-color: beige;
   z-index: 10;
 `;
-
-export const StyledNavButton = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-`;

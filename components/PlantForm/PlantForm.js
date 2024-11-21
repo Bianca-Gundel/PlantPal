@@ -9,6 +9,7 @@ import UploadImage from "../UploadImage/UploadImage";
 import { useState } from "react";
 import ResetButton from "../ResetButton/ResetButton";
 import { useRef } from "react";
+import { useRouter } from "next/router";
 
 const lightOptions = [
   { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
@@ -32,24 +33,22 @@ const fertiliserOptions = [
 export default function PlantForm({
   onCreatePlant,
   onEditPlant,
-  onCreateMore,
   onUploadImage,
-  creatingSuccessMessage,
-  isCreateMore,
-  isCreating,
   isEditMode = false,
   initialData = {},
   onCancel,
   imageUrl,
 }) {
+  const router = useRouter();
   const formRef = useRef(null);
+  const [isCreatingMore, setIsCreatingMore] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
+    const { createMore, ...data } = Object.fromEntries(formData);
 
     const selectedSeasons = formData.getAll("fertiliserSeason");
     data.fertiliserSeason = selectedSeasons;
@@ -68,6 +67,10 @@ export default function PlantForm({
     }
 
     event.target.reset();
+
+    if (!createMore) {
+      router.push("/");
+    }
   }
 
   async function handleCreateUpload(event) {
@@ -97,11 +100,7 @@ export default function PlantForm({
 
   return (
     <>
-      <StyledFormWrapper
-        $variant={isCreating ? "createForm" : ""}
-        ref={formRef}
-        onSubmit={handleSubmit}
-      >
+      <StyledFormWrapper ref={formRef} onSubmit={handleSubmit}>
         <HeaderWrapper>
           <ResetButton formRef={formRef} isEditMode={isEditMode} />
           <StyledHeadlineH2>
@@ -211,7 +210,7 @@ export default function PlantForm({
           onChange={handleCreateUpload}
           title="Image Upload:"
         />
-        {isCreating ? (
+        {!isEditMode ? (
           <>
             <div>
               <label htmlFor="createMore">Create more?</label>
@@ -219,13 +218,9 @@ export default function PlantForm({
                 type="checkbox"
                 id="createMore"
                 name="createMore"
-                value="createMore"
-                checked={isCreateMore}
-                onChange={(event) => onCreateMore(event.target.checked)}
+                checked={isCreatingMore}
+                onClick={(event) => setIsCreatingMore(event.target.checked)}
               />
-            </div>
-            <div>
-              {creatingSuccessMessage && <p>{creatingSuccessMessage}</p>}
             </div>
           </>
         ) : null}
@@ -239,11 +234,11 @@ export default function PlantForm({
           >
             {isEditMode ? "Save" : "Create"}
           </StyledButton>
-          {isEditMode ? (
+          {isEditMode && (
             <StyledButton type="button" onClick={onCancel}>
               Cancel
             </StyledButton>
-          ) : null}
+          )}
         </div>
       </StyledFormWrapper>
     </>

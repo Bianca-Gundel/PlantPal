@@ -1,7 +1,7 @@
 import Head from "next/head";
 import NavBar from "../NavBar/NavBar";
 
-export default function Layout({ children, onCreateMore }) {
+export default function Layout({ children }) {
   return (
     <>
       <Head>
@@ -11,7 +11,7 @@ export default function Layout({ children, onCreateMore }) {
         <h1>Bloom Buddy</h1>
       </header>
       <main>{children}</main>
-      <NavBar onCreateMore={onCreateMore} />
+      <NavBar />
     </>
   );
 }

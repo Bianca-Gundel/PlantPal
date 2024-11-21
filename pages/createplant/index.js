@@ -1,20 +1,7 @@
 import PlantForm from "@/components/PlantForm/PlantForm";
 
-export default function CreatePlant({
-  onCreatePlant,
-  isCreateMore,
-  creatingSuccessMessage,
-  onUploadImage,
-  onCreateMore,
-}) {
+export default function CreatePlant({ onCreatePlant, onUploadImage }) {
   return (
-    <PlantForm
-      onCreateMore={onCreateMore}
-      isCreateMore={isCreateMore}
-      isCreating={true}
-      onCreatePlant={onCreatePlant}
-      onUploadImage={onUploadImage}
-      creatingSuccessMessage={creatingSuccessMessage}
-    />
+    <PlantForm onCreatePlant={onCreatePlant} onUploadImage={onUploadImage} />
   );
 }

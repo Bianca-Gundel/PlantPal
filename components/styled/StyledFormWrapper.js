@@ -51,13 +51,4 @@ export const StyledFormWrapper = styled.form`
       font-weight: bold;
     }
   `}
-
-  ${({ $variant }) =>
-    $variant === "createForm" &&
-    css`
-      background-color: transparent;
-      border-radius: 0;
-      padding-left: 0;
-      padding-right: 0;
-    `}
 `;

@@ -1,24 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { StyledNav, StyledNavButton } from "./styles";
-import { useRouter } from "next/router";
+import { StyledNav } from "./styles";
 
-export default function NavBar({ onCreateMore }) {
-  const router = useRouter();
-
-  function handleHomeNav() {
-    onCreateMore(false);
-    router.push("/");
-  }
-
-  function handleBookmarkNav() {
-    onCreateMore(false);
-    router.push("/myplants");
-  }
-
+export default function NavBar() {
   return (
     <StyledNav>
-      <StyledNavButton onClick={handleHomeNav}>
+      <Link href="/">
         <Image
           src="/icons/home-icon.svg"
           alt="Icon of a home"
@@ -26,7 +13,7 @@ export default function NavBar({ onCreateMore }) {
           height={22}
           unoptimized
         />
-      </StyledNavButton>
+      </Link>
       <Link href="/createplant">
         <Image
           src="/icons/add-icon.svg"
@@ -37,7 +24,7 @@ export default function NavBar({ onCreateMore }) {
         />
       </Link>
 
-      <StyledNavButton onClick={handleBookmarkNav}>
+      <Link href="/myplants">
         <Image
           src="/icons/bookmark-full.svg"
           alt="Icon of a rose"
@@ -45,7 +32,7 @@ export default function NavBar({ onCreateMore }) {
           height={22}
           unoptimized
         />
-      </StyledNavButton>
+      </Link>
     </StyledNav>
   );
 }
