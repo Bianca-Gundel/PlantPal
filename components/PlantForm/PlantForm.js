@@ -5,6 +5,8 @@ import UploadImage from "../UploadImage/UploadImage";
 import { useState } from "react";
 import ResetButton from "../ResetButton/ResetButton";
 import { useRef } from "react";
+import { RadioOption } from "../Options/RadioOption";
+import { CheckboxOption } from "../Options/CheckboxOption";
 
 const lightOptions = [
   { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
@@ -47,7 +49,6 @@ export default function PlantForm({
     data.fertiliserSeason = selectedSeasons;
 
     if (selectedSeasons.length === 0) {
-      // FYI: Hinzufügen einer universellen Error-Message für alle Pflichtfelder folgt
       alert("Please select at least one season.");
       return;
     }
@@ -84,8 +85,6 @@ export default function PlantForm({
 
     return;
   }
-
-  // FYI: Hinzufügen eines Stylings für das Formular, (Hintergrund usw.) folgt noch!
 
   return (
     <>
@@ -134,65 +133,29 @@ export default function PlantForm({
         <label htmlFor="lightNeed">
           <h3>Light Need: *</h3>
         </label>
-
-        <section>
-          {lightOptions.map((option) => (
-            <div key={option.id}>
-              <input
-                type="radio"
-                id={option.id}
-                name="lightNeed"
-                value={option.value}
-                required={option.id === "lightNeed1"}
-                defaultChecked={initialData?.lightNeed === option.value}
-              />
-              <label htmlFor={option.id}>{option.label}</label>
-            </div>
-          ))}
-        </section>
+        <RadioOption
+          options={lightOptions}
+          name="lightNeed"
+          initialValue={initialData?.lightNeed}
+        />
 
         <label htmlFor="waterNeed">
           <h3>Water Need: *</h3>
         </label>
-
-        <section>
-          {waterOptions.map((option) => (
-            <div key={option.id}>
-              <input
-                type="radio"
-                id={option.id}
-                name="waterNeed"
-                value={option.value}
-                required={option.id === "waterNeed1"}
-                defaultChecked={initialData?.waterNeed === option.value}
-              />
-              <label htmlFor={option.id}>{option.label}</label>
-            </div>
-          ))}
-        </section>
+        <RadioOption
+          options={waterOptions}
+          name="waterNeed"
+          initialValue={initialData?.waterNeed}
+        />
 
         <label htmlFor="fertiliserSeason">
           <h3>Fertiliser Season: *</h3>
         </label>
-
-        <section>
-          {fertiliserOptions.map((option) => (
-            <div key={option.id}>
-              <input
-                type="checkbox"
-                id={option.id}
-                name="fertiliserSeason"
-                value={option.value}
-                defaultChecked={
-                  isEditMode
-                    ? initialData?.fertiliserSeason.includes(option.value)
-                    : null
-                }
-              />
-              <label htmlFor={option.id}>{option.label}</label>
-            </div>
-          ))}
-        </section>
+        <CheckboxOption
+          options={fertiliserOptions}
+          name="fertiliserSeason"
+          initialValues={initialData?.fertiliserSeason}
+        />
 
         <UploadImage
           name="image"
