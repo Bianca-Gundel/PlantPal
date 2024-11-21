@@ -47,13 +47,6 @@ export default function HomePage({
           </ArrowIcon>
         </StyledButton>
       </FlexboxWrapper>
-
-      {isFormVisible && (
-        <PlantForm
-          onCreatePlant={onCreatePlant}
-          onUploadImage={onUploadImage}
-        />
-      )}
       <SearchFilterContainer>
         <SearchBar onSearch={handleSearch} />
         <FilterButton
