@@ -28,7 +28,6 @@ export const StyledFormWrapper = styled.form`
       justify-content: start;
     }
     label {
-      /* FYI: genaue Anpassung in einer späteren User-Story (nach Wahl der Schriftart, Größe, etc.) */
       margin-right: 15px;
     }
 
@@ -37,9 +36,8 @@ export const StyledFormWrapper = styled.form`
     }
 
     div {
-      margin-top: 15px;
+      margin-top: 10px;
       display: flex;
-      justify-content: center;
     }
 
     div.button {

@@ -186,7 +186,15 @@ export default function PlantForm({
           onChange={handleInputChange}
         />
         {errors.botanicalName && (
-          <StyledErrorMessage>{errors.botanicalName}</StyledErrorMessage>
+          <StyledErrorMessage>
+            <Image
+              src={"/icons/error-sign.svg"}
+              width={12}
+              height={12}
+              alt="Icon of am error sign"
+            />
+            {errors.botanicalName}
+          </StyledErrorMessage>
         )}
 
         <label htmlFor="description">
@@ -220,7 +228,15 @@ export default function PlantForm({
           ))}
         </section>
         {errors.lightNeed && (
-          <StyledErrorMessage>{errors.lightNeed}</StyledErrorMessage>
+          <StyledErrorMessage>
+            <Image
+              src={"/icons/error-sign.svg"}
+              width={12}
+              height={12}
+              alt="Icon of am error sign"
+            />
+            {errors.lightNeed}
+          </StyledErrorMessage>
         )}
 
         <label htmlFor="waterNeed">
@@ -243,7 +259,15 @@ export default function PlantForm({
           ))}
         </section>
         {errors.waterNeed && (
-          <StyledErrorMessage>{errors.waterNeed}</StyledErrorMessage>
+          <StyledErrorMessage>
+            <Image
+              src={"/icons/error-sign.svg"}
+              width={12}
+              height={12}
+              alt="Icon of am error sign"
+            />
+            {errors.waterNeed}
+          </StyledErrorMessage>
         )}
 
         <label htmlFor="fertiliserSeason">
@@ -270,7 +294,15 @@ export default function PlantForm({
           ))}
         </section>
         {errors.fertiliserSeason && (
-          <StyledErrorMessage>{errors.fertiliserSeason}</StyledErrorMessage>
+          <StyledErrorMessage>
+            <Image
+              src={"/icons/error-sign.svg"}
+              width={12}
+              height={12}
+              alt="Icon of am error sign"
+            />
+            {errors.fertiliserSeason}
+          </StyledErrorMessage>
         )}
 
         <UploadImage

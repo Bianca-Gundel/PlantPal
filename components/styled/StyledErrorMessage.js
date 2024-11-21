@@ -5,7 +5,6 @@ export const StyledErrorMessage = styled.div`
   align-items: center;
   color: red;
   font-size: 12px;
-  margin-top: 15px;
 
   img {
     margin-right: 5px;
