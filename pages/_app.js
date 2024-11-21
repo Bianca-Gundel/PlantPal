@@ -12,9 +12,12 @@ export default function App({ Component, pageProps }) {
     defaultValue: initialPlants,
   });
 
+  const [creatingSuccessMessage, setCreatingSuccessMessage] = useState("");
+
   const [filterCount, setFilterCount] = useState("0");
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [isCreateMore, setIsCreateMore] = useState(false);
   const [filters, setFilters] = useState({
     lightNeed: null,
     waterNeed: null,
@@ -41,10 +44,18 @@ export default function App({ Component, pageProps }) {
     setImageUrl(imageUrl);
   }
 
+  function handleCreateMore(state) {
+    setIsCreateMore(state);
+  }
+
   function handleCreatePlant(newPlant) {
     const plantWithId = { id: uid(), ...newPlant, imageUrl: imageUrl };
     setPlants([plantWithId, ...plants]);
-    router.push("/");
+    if (isCreateMore) {
+      setCreatingSuccessMessage("Plant successfully created!");
+    } else {
+      router.push("/");
+    }
   }
 
   function handleToggleBookmark(plantId) {
@@ -85,15 +96,6 @@ export default function App({ Component, pageProps }) {
     }
   }
 
-  function handleEditPlant(plantId, updatedPlant) {
-    const editedPlant = { ...updatedPlant, imageUrl };
-    setPlants((prevPlants) =>
-      prevPlants.map((plant) =>
-        plant.id === plantId ? { ...plant, ...editedPlant } : plant
-      )
-    );
-  }
-
   function handleResetFilter() {
     setFilters({ lightNeed: null, waterNeed: null, fertiliserSeason: [] });
     setIsFilterVisible(false);
@@ -132,10 +134,18 @@ export default function App({ Component, pageProps }) {
     setFilterCount(count);
   }, [filters]);
 
+  // FYI: with the next merge we got toast message, this is just for this useEffect is just for this feature
+  useEffect(() => {
+    if (creatingSuccessMessage) {
+      const timeout = setTimeout(() => setCreatingSuccessMessage(""), 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [creatingSuccessMessage]);
+
   return (
     <>
       <GlobalStyle />
-      <Layout onResetFilter={handleResetFilter}>
+      <Layout onCreateMore={handleCreateMore}>
         <Component
           {...pageProps}
           plants={filters ? filteredPlants : plants}
@@ -145,6 +155,9 @@ export default function App({ Component, pageProps }) {
           isFilterVisible={isFilterVisible}
           isFormVisible={isFormVisible}
           imageUrl={imageUrl}
+          isCreateMore={isCreateMore}
+          creatingSuccessMessage={creatingSuccessMessage}
+          onCreateMore={handleCreateMore}
           onToggleFilter={handleToggleFilter}
           onToggleForm={handleToggleForm}
           onFilterValue={handleFilterValue}

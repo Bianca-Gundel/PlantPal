@@ -46,12 +46,12 @@ export const StyledFormWrapper = styled.form`
       justify-content: center;
     }
 
-    div.button {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
+    p {
+      color: green;
+      font-weight: bold;
     }
   `}
+
   ${({ $variant }) =>
     $variant === "createForm" &&
     css`

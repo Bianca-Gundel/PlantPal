@@ -32,9 +32,12 @@ const fertiliserOptions = [
 export default function PlantForm({
   onCreatePlant,
   onEditPlant,
+  onCreateMore,
   onUploadImage,
+  creatingSuccessMessage,
+  isCreateMore,
+  isCreating,
   isEditMode = false,
-  isCreateMode = false,
   initialData = {},
   onCancel,
   imageUrl,
@@ -95,7 +98,7 @@ export default function PlantForm({
   return (
     <>
       <StyledFormWrapper
-        $variant={isCreateMode ? "createForm" : ""}
+        $variant={isCreating ? "createForm" : ""}
         ref={formRef}
         onSubmit={handleSubmit}
       >
@@ -208,8 +211,26 @@ export default function PlantForm({
           onChange={handleCreateUpload}
           title="Image Upload:"
         />
+        {isCreating ? (
+          <>
+            <div>
+              <label htmlFor="createMore">Create more?</label>
+              <input
+                type="checkbox"
+                id="createMore"
+                name="createMore"
+                value="createMore"
+                checked={isCreateMore}
+                onChange={(event) => onCreateMore(event.target.checked)}
+              />
+            </div>
+            <div>
+              {creatingSuccessMessage && <p>{creatingSuccessMessage}</p>}
+            </div>
+          </>
+        ) : null}
 
-        <div className="button">
+        <div>
           <StyledButton
             type="submit"
             $variant={isEditMode ? "update" : "create"}
