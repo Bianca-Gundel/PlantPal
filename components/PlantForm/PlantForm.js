@@ -48,6 +48,8 @@ export default function PlantForm({
     const data = Object.fromEntries(formData);
 
     const selectedSeasons = formData.getAll("fertiliserSeason");
+    data.fertiliserSeason = selectedSeasons;
+    
     const newErrors = {};
 
     if (!data.name) {
