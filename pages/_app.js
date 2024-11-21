@@ -5,6 +5,8 @@ import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -44,6 +46,7 @@ export default function App({ Component, pageProps }) {
   function handleCreatePlant(newPlant) {
     const plantWithId = { id: uid(), ...newPlant, imageUrl: imageUrl };
     setPlants([plantWithId, ...plants]);
+    toast.success("Plant successfully created! 🌱");
   }
 
   function handleToggleBookmark(plantId) {
@@ -59,6 +62,7 @@ export default function App({ Component, pageProps }) {
   function handleDeletePlant(plantId) {
     setPlants(plants.filter((plant) => plant.id !== plantId));
     router.push("/");
+    toast.success("Plant successfully deleted! 🥀");
   }
 
   function handleFilterValue(event) {
@@ -112,8 +116,8 @@ export default function App({ Component, pageProps }) {
         plant.id === plantId ? { ...plant, ...editedPlant } : plant
       )
     );
+    toast.success("Plant successfully edited! ✍️");
   }
-
   useEffect(() => {
     const count =
       filters.fertiliserSeason.length +
@@ -146,6 +150,7 @@ export default function App({ Component, pageProps }) {
           onEditPlant={handleEditPlant}
         />
       </Layout>
+      <ToastContainer />
     </>
   );
 }

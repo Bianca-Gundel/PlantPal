@@ -8,6 +8,10 @@ import Image from "next/image";
 import { StyledButton } from "@/components/styled/StyledButton";
 import FilterPlants from "@/components/FilterPlants/FilterPlants";
 import { StyledList } from "@/components/styled/StyledList";
+import SearchBar from "@/components/SearchBar/SearchBar";
+import { useState } from "react";
+import FilterButton from "@/components/FilterButton.js/FilterButton";
+import { SearchFilterContainer } from "@/components/SearchBar/styles";
 
 export default function HomePage({
   plants,
@@ -19,21 +23,26 @@ export default function HomePage({
   selectedFilter,
   filterCount,
 }) {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredPlants = plants.filter((plant) =>
+    plant.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
   return (
     <>
-      <FlexboxWrapper>
-        <StyledButton $variant="indexButton" onClick={onToggleFilter}>
-          Filter ({filterCount})
-          <ArrowIcon $isRotated={isFilterVisible}>
-            <Image
-              src="/icons/arrow-1.svg"
-              alt="arrow"
-              width={20}
-              height={20}
-            />
-          </ArrowIcon>
-        </StyledButton>
-      </FlexboxWrapper>
+      <SearchFilterContainer>
+        <SearchBar onSearch={handleSearch} />
+        <FilterButton
+          onClick={onToggleFilter}
+          isActive={isFilterVisible}
+          filterCount={filterCount}
+        />
+      </SearchFilterContainer>
+
       <FlexboxWrapper>
         {isFilterVisible && (
           <FilterPlants
@@ -44,9 +53,10 @@ export default function HomePage({
         )}
       </FlexboxWrapper>
       <h2>Discover Plants</h2>
-      {plants.length > 0 ? (
+
+      {filteredPlants.length > 0 ? (
         <StyledList>
-          {plants.map((plant) => (
+          {filteredPlants.map((plant) => (
             <li key={plant.id}>
               <PlantCard plant={plant} onToggleBookmark={onToggleBookmark} />
             </li>
@@ -62,7 +72,9 @@ export default function HomePage({
             unoptimized
           />
           <p>
-            {filterCount > 0
+            {searchQuery
+              ? "No plants match your search query."
+              : filterCount > 0
               ? "No plants match the selected filter criteria."
               : "Unfortunately, you have not yet added any plants."}
           </p>
