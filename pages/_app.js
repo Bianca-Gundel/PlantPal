@@ -47,7 +47,7 @@ export default function App({ Component, pageProps }) {
     const plantWithId = { id: uid(), ...newPlant, imageUrl: imageUrl };
     setPlants([plantWithId, ...plants]);
     toast.success("Plant successfully created! 🌱");
-    setImageUrl(""); // Reset imageUrl after creating plant
+    setImageUrl("");
   }
 
   function handleToggleBookmark(plantId) {
@@ -94,6 +94,8 @@ export default function App({ Component, pageProps }) {
     setIsFilterVisible(false);
   }
 
+  // FYI: For better usability, we deviate from our user story and leave only one form expanded at a time
+
   function handleToggleFilter() {
     setIsFilterVisible(!isFilterVisible);
     if (isFormVisible) {
@@ -119,9 +121,8 @@ export default function App({ Component, pageProps }) {
       )
     );
     toast.success("Plant successfully edited! ✍️");
-    setImageUrl(""); // Reset imageUrl after editing
+    setImageUrl("");
   }
-
   useEffect(() => {
     const count =
       filters.fertiliserSeason.length +
