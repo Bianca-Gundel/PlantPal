@@ -90,8 +90,6 @@ export default function PlantForm({
       return;
     }
 
-    // Bearbeitung und Erstellung bestehender und neuer Pflanzen
-
     if (isEditMode) {
       onEditPlant({ imageUrl: imageUrl, ...initialData, ...data });
       onCancel();
@@ -101,8 +99,6 @@ export default function PlantForm({
 
     event.target.reset();
   }
-
-  // Image Upload
 
   async function handleCreateUpload(event) {
     setIsImageLoading(true);
@@ -170,46 +166,6 @@ export default function PlantForm({
           placeholder="Plant Description"
           defaultValue={initialData?.description || ""}
         ></textarea>
-
-        {/*    <label htmlFor="lightNeed">
-          <h3>Light Need: *</h3>
-        </label>
-
-        -So sah der Code vorher aus - das Mapping und die Labels sind jetzt 
-        in den RadioOption- und CheckboxOption-Komponenten ausgelagert
-
-        -Hier wird für jedes Element in lightOptions eine div mit einem input-Feld
-        vom Typ "radio" und einem label erzeugt
-
-        -Die id, value und defaultChecked werden dynamisch aus den lightOptions-
-        Daten gesetzt.
-
-        -Der Code wird für jede Option wiederholt
-
-        <section>
-          {lightOptions.map((option) => (
-            <div key={option.id}>
-              <input
-                type="radio"
-                id={option.id}
-                name="lightNeed"
-                value={option.value}
-                required={option.id === "lightNeed1"}
-                defaultChecked={initialData?.lightNeed === option.value}
-              />
-              <label htmlFor={option.id}>{option.label}</label>
-            </div>
-          ))}
-        </section> */}
-
-        {/* Neuer Code: 
-        
-        Komponenten-Auslagerung / Wiederverwendbarkeit
-        
-        Die Komponente RadioOption bekommt die notwendigen Daten
-        (options, name, initialValue) als Props übergeben
-
-        */}
 
         <label htmlFor="lightNeed">
           <h3>Light Need: *</h3>

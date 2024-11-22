@@ -103,7 +103,6 @@ export default function FilterPlants({
         ))}
       </section>
 
-      {/* FYI: div is needed for design - we will fix this later in another US */}
       <div>
         <StyledButton
           type="button"

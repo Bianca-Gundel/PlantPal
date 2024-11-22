@@ -16,7 +16,7 @@ export default createGlobalStyle`
     justify-content: center;
     background-color: #cce0d2;
     text-align: center;
-    padding: 0 10px;
+    padding: 0 20px;
     margin-bottom: 60px;
   }
 
