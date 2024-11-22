@@ -9,22 +9,57 @@ import { RadioOption } from "../Options/RadioOption";
 import { CheckboxOption } from "../Options/CheckboxOption";
 
 const lightOptions = [
-  { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
-  { id: "lightNeed2", value: "Partial Shade", label: "Partial Shade" },
-  { id: "lightNeed3", value: "Full Shade", label: "Full Shade" },
+  {
+    id: "lightNeed1",
+    value: "Full Sun",
+    label: "Full Sun",
+    icon: "sun.svg",
+  },
+  {
+    id: "lightNeed2",
+    value: "Partial Shade",
+    label: "Partial Shade",
+    icon: "sun-half.svg",
+  },
+  {
+    id: "lightNeed3",
+    value: "Full Shade",
+    label: "Full Shade",
+    icon: "sun-full.svg",
+  },
 ];
 
 const waterOptions = [
-  { id: "waterNeed1", value: "Low", label: "Low" },
-  { id: "waterNeed2", value: "Medium", label: "Medium" },
-  { id: "waterNeed3", value: "High", label: "High" },
+  { id: "waterNeed1", value: "Low", label: "Low", icon: "drop.svg" },
+  { id: "waterNeed2", value: "Medium", label: "Medium", icon: "drop-half.svg" },
+  { id: "waterNeed3", value: "High", label: "High", icon: "drop-full.svg" },
 ];
 
 const fertiliserOptions = [
-  { id: "fertiliserSeason1", value: "Summer", label: "Summer" },
-  { id: "fertiliserSeason2", value: "Spring", label: "Spring" },
-  { id: "fertiliserSeason3", value: "Fall", label: "Fall" },
-  { id: "fertiliserSeason4", value: "Winter", label: "Winter" },
+  {
+    id: "fertiliserSeason1",
+    value: "Summer",
+    label: "Summer",
+    icon: "sun-full.svg",
+  },
+  {
+    id: "fertiliserSeason2",
+    value: "Spring",
+    label: "Spring",
+    icon: "spring-icon.svg",
+  },
+  {
+    id: "fertiliserSeason3",
+    value: "Fall",
+    label: "Fall",
+    icon: "fall-icon.svg",
+  },
+  {
+    id: "fertiliserSeason4",
+    value: "Winter",
+    label: "Winter",
+    icon: "winter-icon.svg",
+  },
 ];
 
 export default function PlantForm({
@@ -45,6 +80,8 @@ export default function PlantForm({
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
+    // Fertiliser-Daten sammeln
+
     const selectedSeasons = formData.getAll("fertiliserSeason");
     data.fertiliserSeason = selectedSeasons;
 
@@ -52,6 +89,8 @@ export default function PlantForm({
       alert("Please select at least one season.");
       return;
     }
+
+    // Bearbeitung und Erstellung bestehender und neuer Pflanzen
 
     if (isEditMode) {
       onEditPlant({ imageUrl: imageUrl, ...initialData, ...data });
@@ -62,6 +101,8 @@ export default function PlantForm({
 
     event.target.reset();
   }
+
+  // Image Upload
 
   async function handleCreateUpload(event) {
     setIsImageLoading(true);
@@ -129,6 +170,46 @@ export default function PlantForm({
           placeholder="Plant Description"
           defaultValue={initialData?.description || ""}
         ></textarea>
+
+        {/*    <label htmlFor="lightNeed">
+          <h3>Light Need: *</h3>
+        </label>
+
+        -So sah der Code vorher aus - das Mapping und die Labels sind jetzt 
+        in den RadioOption- und CheckboxOption-Komponenten ausgelagert
+
+        -Hier wird für jedes Element in lightOptions eine div mit einem input-Feld
+        vom Typ "radio" und einem label erzeugt
+
+        -Die id, value und defaultChecked werden dynamisch aus den lightOptions-
+        Daten gesetzt.
+
+        -Der Code wird für jede Option wiederholt
+
+        <section>
+          {lightOptions.map((option) => (
+            <div key={option.id}>
+              <input
+                type="radio"
+                id={option.id}
+                name="lightNeed"
+                value={option.value}
+                required={option.id === "lightNeed1"}
+                defaultChecked={initialData?.lightNeed === option.value}
+              />
+              <label htmlFor={option.id}>{option.label}</label>
+            </div>
+          ))}
+        </section> */}
+
+        {/* Neuer Code: 
+        
+        Komponenten-Auslagerung / Wiederverwendbarkeit
+        
+        Die Komponente RadioOption bekommt die notwendigen Daten
+        (options, name, initialValue) als Props übergeben
+
+        */}
 
         <label htmlFor="lightNeed">
           <h3>Light Need: *</h3>
