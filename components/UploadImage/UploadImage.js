@@ -1,8 +1,10 @@
+import { StyledHeadlineH3 } from "../styled/StyledHeadline";
+
 export default function UploadImage({ name, onChange, title }) {
   return (
     <>
       <label htmlFor={name}>
-        <h3>{title}</h3>
+        <StyledHeadlineH3>{title}</StyledHeadlineH3>
       </label>
 
       <section>

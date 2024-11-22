@@ -3,6 +3,10 @@ import { styled, css } from "styled-components";
 export const StyledFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 
   ${css`
     input[type="text"] {
@@ -28,8 +32,10 @@ export const StyledFormWrapper = styled.form`
       justify-content: start;
     }
     label {
+
       /* FYI: genaue Anpassung in einer späteren User-Story (nach Wahl der Schriftart, Größe, etc.) */
       margin-right: 5px;
+
     }
 
     input {
@@ -37,15 +43,13 @@ export const StyledFormWrapper = styled.form`
     }
 
     div {
-      margin-top: 15px;
+      margin-top: 10px;
       display: flex;
-      justify-content: center;
     }
 
-    div.button {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
+    p {
+      color: green;
+      font-weight: bold;
     }
   `}
 `;

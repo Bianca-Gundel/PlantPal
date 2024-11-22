@@ -5,6 +5,8 @@ import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -44,6 +46,8 @@ export default function App({ Component, pageProps }) {
   function handleCreatePlant(newPlant) {
     const plantWithId = { id: uid(), ...newPlant, imageUrl: imageUrl };
     setPlants([plantWithId, ...plants]);
+    toast.success("Plant successfully created! 🌱");
+    setImageUrl("");
   }
 
   function handleToggleBookmark(plantId) {
@@ -59,6 +63,7 @@ export default function App({ Component, pageProps }) {
   function handleDeletePlant(plantId) {
     setPlants(plants.filter((plant) => plant.id !== plantId));
     router.push("/");
+    toast.success("Plant successfully deleted! 🥀");
   }
 
   function handleFilterValue(event) {
@@ -84,15 +89,6 @@ export default function App({ Component, pageProps }) {
     }
   }
 
-  function handleEditPlant(plantId, updatedPlant) {
-    const editedPlant = { ...updatedPlant, imageUrl };
-    setPlants((prevPlants) =>
-      prevPlants.map((plant) =>
-        plant.id === plantId ? { ...plant, ...editedPlant } : plant
-      )
-    );
-  }
-
   function handleResetFilter() {
     setFilters({ lightNeed: null, waterNeed: null, fertiliserSeason: [] });
     setIsFilterVisible(false);
@@ -115,14 +111,18 @@ export default function App({ Component, pageProps }) {
   }
 
   function handleEditPlant(plantId, updatedPlant) {
-    const editedPlant = { ...updatedPlant, imageUrl };
+    const editedPlant = {
+      ...updatedPlant,
+      imageUrl: imageUrl || updatedPlant.imageUrl,
+    };
     setPlants((prevPlants) =>
       prevPlants.map((plant) =>
         plant.id === plantId ? { ...plant, ...editedPlant } : plant
       )
     );
+    toast.success("Plant successfully edited! ✍️");
+    setImageUrl("");
   }
-
   useEffect(() => {
     const count =
       filters.fertiliserSeason.length +
@@ -134,7 +134,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <Layout onResetFilter={handleResetFilter}>
+      <Layout>
         <Component
           {...pageProps}
           plants={filters ? filteredPlants : plants}
@@ -155,6 +155,7 @@ export default function App({ Component, pageProps }) {
           onEditPlant={handleEditPlant}
         />
       </Layout>
+      <ToastContainer />
     </>
   );
 }

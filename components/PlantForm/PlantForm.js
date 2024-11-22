@@ -1,5 +1,9 @@
 import { StyledButton } from "../styled/StyledButton";
-import { HeaderWrapper, StyledHeadline } from "../styled/StyledHeadline";
+import {
+  HeaderWrapper,
+  StyledHeadlineH2,
+  StyledHeadlineH3,
+} from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
 import UploadImage from "../UploadImage/UploadImage";
 import { useState } from "react";
@@ -7,6 +11,9 @@ import ResetButton from "../ResetButton/ResetButton";
 import { useRef } from "react";
 import { RadioOption } from "../Options/RadioOption";
 import { CheckboxOption } from "../Options/CheckboxOption";
+import { useRouter } from "next/router";
+import { StyledErrorMessage } from "../styled/StyledErrorMessage";
+import Image from "next/image";
 
 const lightOptions = [
   {
@@ -71,24 +78,49 @@ export default function PlantForm({
   onCancel,
   imageUrl,
 }) {
+  const router = useRouter();
   const formRef = useRef(null);
+  const [isCreatingMore, setIsCreatingMore] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(false);
+
+  const [errors, setErrors] = useState({});
 
   function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
+    const { createMore, ...data } = Object.fromEntries(formData);
 
     // Fertiliser-Daten sammeln
 
     const selectedSeasons = formData.getAll("fertiliserSeason");
     data.fertiliserSeason = selectedSeasons;
+    
+    const newErrors = {};
 
+    if (!data.name) {
+      newErrors.name = "Plant Name is required.";
+    }
+    if (!data.botanicalName) {
+      newErrors.botanicalName = "Botanical Name is required.";
+    }
+    if (!data.lightNeed) {
+      newErrors.lightNeed = "Please select a Light Need option.";
+    }
+    if (!data.waterNeed) {
+      newErrors.waterNeed = "Please select a Water Need option.";
+    }
     if (selectedSeasons.length === 0) {
-      alert("Please select at least one season.");
+      newErrors.fertiliserSeason =
+        "Please select at least one fertiliser season.";
+    }
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+
       return;
     }
+
+    setErrors({});
 
     if (isEditMode) {
       onEditPlant({ imageUrl: imageUrl, ...initialData, ...data });
@@ -98,6 +130,10 @@ export default function PlantForm({
     }
 
     event.target.reset();
+
+    if (!createMore) {
+      router.push("/");
+    }
   }
 
   async function handleCreateUpload(event) {
@@ -128,12 +164,12 @@ export default function PlantForm({
       <StyledFormWrapper ref={formRef} onSubmit={handleSubmit}>
         <HeaderWrapper>
           <ResetButton formRef={formRef} isEditMode={isEditMode} />
-          <StyledHeadline>
+          <StyledHeadlineH2>
             {isEditMode ? "Update Plant" : "Create New Plant"}
-          </StyledHeadline>
+          </StyledHeadlineH2>
         </HeaderWrapper>
         <label htmlFor="name">
-          <h3>Plant Name: *</h3>
+          <StyledHeadlineH3>Plant Name: *</StyledHeadlineH3>
         </label>
         <input
           type="text"
@@ -141,11 +177,22 @@ export default function PlantForm({
           name="name"
           placeholder="Plant Name"
           defaultValue={initialData?.name || ""}
-          required
+          onChange={handleInputChange}
         />
+        {errors.name && (
+          <StyledErrorMessage>
+            <Image
+              src={"/icons/error-sign.svg"}
+              width={12}
+              height={12}
+              alt="Icon of am error sign"
+            />
+            {errors.name}
+          </StyledErrorMessage>
+        )}
 
         <label htmlFor="botanicalName">
-          <h3>Botanical Name: *</h3>
+          <StyledHeadlineH3>Botanical Name: *</StyledHeadlineH3>
         </label>
         <input
           type="text"
@@ -153,11 +200,22 @@ export default function PlantForm({
           name="botanicalName"
           placeholder="Botanical Name"
           defaultValue={initialData?.botanicalName || ""}
-          required
+          onChange={handleInputChange}
         />
+        {errors.botanicalName && (
+          <StyledErrorMessage>
+            <Image
+              src={"/icons/error-sign.svg"}
+              width={12}
+              height={12}
+              alt="Icon of am error sign"
+            />
+            {errors.botanicalName}
+          </StyledErrorMessage>
+        )}
 
         <label htmlFor="description">
-          <h3>Description:</h3>
+          <StyledHeadlineH3>Description:</StyledHeadlineH3>
         </label>
         <textarea
           id="description"
@@ -168,7 +226,7 @@ export default function PlantForm({
         ></textarea>
 
         <label htmlFor="lightNeed">
-          <h3>Light Need: *</h3>
+          <StyledHeadlineH3>Light Need: *</StyledHeadlineH3>
         </label>
 
         <RadioOption
@@ -178,8 +236,9 @@ export default function PlantForm({
         />
 
         <label htmlFor="waterNeed">
-          <h3>Water Need: *</h3>
+          <StyledHeadlineH3>Water Need: *</StyledHeadlineH3>
         </label>
+
         <RadioOption
           options={waterOptions}
           name="waterNeed"
@@ -187,8 +246,9 @@ export default function PlantForm({
         />
 
         <label htmlFor="fertiliserSeason">
-          <h3>Fertiliser Season: *</h3>
+          <StyledHeadlineH3>Fertiliser Season: *</StyledHeadlineH3>
         </label>
+
         <CheckboxOption
           options={fertiliserOptions}
           name="fertiliserSeason"
@@ -200,8 +260,22 @@ export default function PlantForm({
           onChange={handleCreateUpload}
           title="Image Upload:"
         />
+        {!isEditMode ? (
+          <>
+            <div>
+              <label htmlFor="createMore">Create more?</label>
+              <input
+                type="checkbox"
+                id="createMore"
+                name="createMore"
+                checked={isCreatingMore}
+                onClick={(event) => setIsCreatingMore(event.target.checked)}
+              />
+            </div>
+          </>
+        ) : null}
 
-        <div className="button">
+        <div>
           <StyledButton
             type="submit"
             $variant={isEditMode ? "update" : "create"}
@@ -210,11 +284,11 @@ export default function PlantForm({
           >
             {isEditMode ? "Save" : "Create"}
           </StyledButton>
-          {isEditMode ? (
+          {isEditMode && (
             <StyledButton type="button" onClick={onCancel}>
               Cancel
             </StyledButton>
-          ) : null}
+          )}
         </div>
       </StyledFormWrapper>
     </>
