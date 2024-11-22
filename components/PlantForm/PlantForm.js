@@ -177,7 +177,7 @@ export default function PlantForm({
           name="name"
           placeholder="Plant Name"
           defaultValue={initialData?.name || ""}
-          onChange={handleInputChange}
+          required
         />
         {errors.name && (
           <StyledErrorMessage>
@@ -200,7 +200,7 @@ export default function PlantForm({
           name="botanicalName"
           placeholder="Botanical Name"
           defaultValue={initialData?.botanicalName || ""}
-          onChange={handleInputChange}
+          required
         />
         {errors.botanicalName && (
           <StyledErrorMessage>
