@@ -22,20 +22,12 @@ export default function HomePage({
   onFilterValue,
   selectedFilter,
   filterCount,
+  onSearch,
 }) {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const filteredPlants = plants.filter((plant) =>
-    plant.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-  };
   return (
     <>
       <SearchFilterContainer>
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar onSearch={onSearch} />
         <FilterButton
           onClick={onToggleFilter}
           isActive={isFilterVisible}
@@ -54,9 +46,9 @@ export default function HomePage({
       </FlexboxWrapper>
       <h2>Discover Plants</h2>
 
-      {filteredPlants.length > 0 ? (
+      {plants.length > 0 ? (
         <StyledList>
-          {filteredPlants.map((plant) => (
+          {plants.map((plant) => (
             <li key={plant.id}>
               <PlantCard plant={plant} onToggleBookmark={onToggleBookmark} />
             </li>
