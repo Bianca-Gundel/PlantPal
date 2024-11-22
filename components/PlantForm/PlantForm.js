@@ -159,6 +159,17 @@ export default function PlantForm({
     return;
   }
 
+    function handleInputChange(event) {
+    const { name, value } = event.target;
+    setErrors((prevErrors) => {
+      const newErrors = { ...prevErrors };
+      if (value) {
+        delete newErrors[name];
+      }
+      return newErrors;
+    });
+  }
+
   return (
     <>
       <StyledFormWrapper ref={formRef} onSubmit={handleSubmit}>
@@ -177,7 +188,7 @@ export default function PlantForm({
           name="name"
           placeholder="Plant Name"
           defaultValue={initialData?.name || ""}
-          required
+          onChange={handleInputChange}
         />
         {errors.name && (
           <StyledErrorMessage>
@@ -200,7 +211,7 @@ export default function PlantForm({
           name="botanicalName"
           placeholder="Botanical Name"
           defaultValue={initialData?.botanicalName || ""}
-          required
+          onChange={handleInputChange}
         />
         {errors.botanicalName && (
           <StyledErrorMessage>
