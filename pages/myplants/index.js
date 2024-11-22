@@ -19,8 +19,6 @@ export default function MyPlants({
 }) {
   return (
     <>
-      <BackLink />
-      <h2>My Plants</h2>
       <SearchFilterContainer>
         <SearchBar onSearch={onSearch} />
         <FilterButton
@@ -36,6 +34,7 @@ export default function MyPlants({
           selectedFilter={selectedFilter}
         />
       )}
+      <h2>My Plants</h2>
       {bookmarkedPlants.length === 0 && (
         <p>Unfortunately, you have not yet added any plants as favourites.</p>
       )}
