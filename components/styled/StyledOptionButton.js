@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const StyledOptionButton = styled.label`
-  padding: 8px 16px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  font-size: 14px;
+  padding: 10px 10px;
+  border-radius: 10px;
   cursor: pointer;
-  background-color: ${(props) => (props.checked ? "#d1f7c4" : "transparent")};
-  color: ${(props) => (props.checked ? "#000" : "#666")};
+  background-color: ${({ checked }) => (checked ? "#68726B" : "#FFFFFF")};
+  color: ${({ checked }) => (checked ? "#FFFFFF" : "#000000")};
   display: inline-block;
   text-align: center;
 

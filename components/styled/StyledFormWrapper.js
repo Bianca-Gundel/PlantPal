@@ -29,7 +29,7 @@ export const StyledFormWrapper = styled.form`
     }
     label {
       /* FYI: genaue Anpassung in einer späteren User-Story (nach Wahl der Schriftart, Größe, etc.) */
-      margin-right: 15px;
+      margin-right: 5px;
     }
 
     input {
