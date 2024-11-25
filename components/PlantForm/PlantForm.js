@@ -182,14 +182,13 @@ export default function PlantForm({
     setErrors((prevErrors) => {
       const newErrors = { ...prevErrors };
       if (value) {
-        delete newErrors[name]; // Entferne den Fehler, wenn ein Wert ausgewählt wurde
+        delete newErrors[name];
       } else {
-        newErrors[name] = `Please select a ${name} option.`; // Fehler hinzufügen, falls keine Auswahl getroffen wurde
+        newErrors[name] = `Please select a ${name} option.`;
       }
       return newErrors;
     });
 
-    // Aktualisiere den Zustand basierend auf dem Namen
     if (name === "lightNeed") {
       setLightNeed(value);
     } else if (name === "waterNeed") {
@@ -201,14 +200,13 @@ export default function PlantForm({
     setErrors((prevErrors) => {
       const newErrors = { ...prevErrors };
       if (values.length > 0) {
-        delete newErrors[name]; // Entferne den Fehler, wenn mindestens ein Wert ausgewählt wurde
+        delete newErrors[name];
       } else {
-        newErrors[name] = `Please select at least one ${name}.`; // Fehler hinzufügen, wenn keine Auswahl getroffen wurde
+        newErrors[name] = `Please select at least one ${name}.`;
       }
       return newErrors;
     });
 
-    // Aktualisiere den Zustand basierend auf dem Namen
     if (name === "fertiliserSeason") {
       setFertiliserSeasons(values);
     }
@@ -222,9 +220,9 @@ export default function PlantForm({
             formRef={formRef}
             isEditMode={isEditMode}
             onReset={() => {
-              setLightNeed(""); // Reset für die Light Need Option
-              setWaterNeed(""); // Reset für die Water Need Option
-              setFertiliserSeasons([]); // Reset für die Fertiliser Seasons
+              setLightNeed("");
+              setWaterNeed("");
+              setFertiliserSeasons([]);
             }}
           />
 

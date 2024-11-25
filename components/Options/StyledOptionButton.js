@@ -18,4 +18,10 @@ export const StyledOptionButton = styled.label`
     filter: ${({ checked }) => (checked ? "invert(1)" : "invert(0)")};
     transition: filter 0.3s ease;
   }
+
+  input {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+  }
 `;

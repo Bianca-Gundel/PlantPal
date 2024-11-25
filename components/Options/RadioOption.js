@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { StyledOptionButton } from "./StyledOptionButton";
 import styled from "styled-components";
 import Image from "next/image";
@@ -10,32 +9,21 @@ const OptionWrapper = styled.div`
 `;
 
 export const RadioOption = ({ options, name, initialValue, onChange }) => {
-  const [selectedOption, setSelectedOption] = useState(initialValue);
-
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setSelectedOption(value);
-    if (onChange) {
-      onChange(value); // Gibt den neuen Wert an die Parent-Komponente zurück
-    }
-  };
-
   return (
     <OptionWrapper>
       {options.map((option) => (
         <StyledOptionButton
           key={option.id}
           htmlFor={option.id}
-          checked={initialValue === option.value} // Bindung an initialValue
+          checked={initialValue === option.value}
         >
           <input
             type="radio"
             id={option.id}
             name={name}
             value={option.value}
-            checked={initialValue === option.value} // Bindung an initialValue
-            onChange={() => onChange(option.value)} // Aktualisiert Parent-Zustand
-            style={{ opacity: 0, position: "absolute", pointerEvents: "none" }}
+            checked={initialValue === option.value}
+            onChange={() => onChange(option.value)}
           />
           {option.icon && (
             <Image
