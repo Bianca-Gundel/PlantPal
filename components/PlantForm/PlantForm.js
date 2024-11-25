@@ -19,7 +19,6 @@ import {
   PreviewContainer,
   StyledDeletePreviewButton,
   StyledPreviewImage,
-  StyledPreviewText,
 } from "./StyledImagePreview";
 
 const lightOptions = [
@@ -150,6 +149,10 @@ export default function PlantForm({
 
     if (!createMore) {
       router.push("/");
+    }
+
+    if (isEditMode) {
+      router.push(`/plant/${initialData.id}`);
     }
   }
 
