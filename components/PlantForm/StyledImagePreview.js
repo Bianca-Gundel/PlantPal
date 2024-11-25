@@ -32,7 +32,7 @@ export const StyledPreviewImage = styled(Image)`
 export const StyledDeletePreviewButton = styled.button`
   position: absolute;
   top: 64rem;
-  right: 5rem;
+  right: 4.5rem;
   background-color: #fff;
   border-radius: 50%;
   border: none;
