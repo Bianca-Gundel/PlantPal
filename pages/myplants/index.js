@@ -1,10 +1,11 @@
 import PlantCard from "@/components/PlantCard/PlantCard";
-import BackLink from "@/components/BackLink/BackLink";
 import { StyledList } from "@/components/styled/StyledList";
 import FilterPlants from "@/components/FilterPlants/FilterPlants";
 import FilterButton from "@/components/FilterButton.js/FilterButton";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import { SearchFilterContainer } from "@/components/SearchBar/styles";
+import { StyledErrorMessageWrapper } from "@/components/styled/StyledIndex";
+import Image from "next/image";
 
 export default function MyPlants({
   bookmarkedPlants,
@@ -16,6 +17,7 @@ export default function MyPlants({
   isFilterVisible,
   filterCount,
   onSearch,
+  searchQuery,
 }) {
   return (
     <>
@@ -36,8 +38,24 @@ export default function MyPlants({
       )}
       <h2>My Plants</h2>
       {bookmarkedPlants.length === 0 && (
-        <p>Unfortunately, you have not yet added any plants as favourites.</p>
+        <StyledErrorMessageWrapper>
+          <Image
+            src={"/icons/error-plant.svg"}
+            width={50}
+            height={50}
+            alt="Icon of a dead plant"
+            unoptimized
+          />
+          <p>
+            {searchQuery
+              ? "No plants match your search."
+              : filterCount > 0
+              ? "No plants match the selected filter criteria."
+              : "Unfortunately, you have not yet added any plants as favourites."}
+          </p>
+        </StyledErrorMessageWrapper>
       )}
+
       {/* FYI: Icon for error message follows after merge */}
       <StyledList>
         {bookmarkedPlants.map((plant) => {
