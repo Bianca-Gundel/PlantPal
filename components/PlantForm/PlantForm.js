@@ -399,7 +399,6 @@ export default function PlantForm({
         />
         {previewImage && (
           <PreviewContainer>
-            <StyledPreviewText>Preview</StyledPreviewText>
             <ImageContainer>
               <StyledPreviewImage
                 src={previewImage}
@@ -411,9 +410,7 @@ export default function PlantForm({
             <StyledDeletePreviewButton
               type="button"
               onClick={() => handleDeleteImage(uploadedImageURL)}
-            >
-              Delete
-            </StyledDeletePreviewButton>
+            ></StyledDeletePreviewButton>
           </PreviewContainer>
         )}
         {!isEditMode ? (

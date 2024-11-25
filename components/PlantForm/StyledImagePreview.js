@@ -6,6 +6,7 @@ export const PreviewContainer = styled.div`
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 export const ImageContainer = styled.div`
@@ -13,30 +14,50 @@ export const ImageContainer = styled.div`
   border-radius: 0.5rem;
   padding: 1rem;
   width: 100%;
-  max-width: 150px;
-  aspect-ratio: 1;
+  max-width: 250px;
+  aspect-ratio: 16 / 9;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
 `;
 
 export const StyledPreviewImage = styled(Image)`
   object-fit: cover;
   border-radius: 0.5rem;
-`;
-
-export const StyledPreviewText = styled.p`
-  color: green;
-  margin: 5px;
+  position: relative;
+  z-index: 1;
 `;
 
 export const StyledDeletePreviewButton = styled.button`
-  margin: 10px;
-  background-color: white;
-  padding: 10px 35px;
-  font-size: 12px;
-  border-style: none;
-  border-radius: 8px;
+  position: absolute;
+  top: 64rem;
+  right: 5rem;
+  background-color: #fff;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 2px;
+    background-color: #000;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  }
 `;

@@ -25,6 +25,9 @@ export const ImageBorder = styled.article`
   border-radius: 15px;
   overflow: hidden;
   margin: auto;
+  img {
+    object-fit: cover;
+  }
 `;
 
 export const StyledButtonContainer = styled.div`
