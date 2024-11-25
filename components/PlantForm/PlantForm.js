@@ -178,28 +178,40 @@ export default function PlantForm({
     });
   }
 
-  function handleRadioChange({ target: { name, value } }) {
+  function handleRadioChange(name, value) {
     setErrors((prevErrors) => {
       const newErrors = { ...prevErrors };
       if (value) {
-        delete newErrors[name];
+        delete newErrors[name]; // Entferne den Fehler, wenn ein Wert ausgewählt wurde
       } else {
-        newErrors[name] = `Please select a ${name} option.`;
+        newErrors[name] = `Please select a ${name} option.`; // Fehler hinzufügen, falls keine Auswahl getroffen wurde
       }
       return newErrors;
     });
+
+    // Aktualisiere den Zustand basierend auf dem Namen
+    if (name === "lightNeed") {
+      setLightNeed(value);
+    } else if (name === "waterNeed") {
+      setWaterNeed(value);
+    }
   }
 
-  function handleCheckboxChange({ target: { name, value } }) {
+  function handleCheckboxChange(name, values) {
     setErrors((prevErrors) => {
       const newErrors = { ...prevErrors };
-      if (value && value.length > 0) {
-        delete newErrors[name];
+      if (values.length > 0) {
+        delete newErrors[name]; // Entferne den Fehler, wenn mindestens ein Wert ausgewählt wurde
       } else {
-        newErrors[name] = `Please select at least one ${name}.`;
+        newErrors[name] = `Please select at least one ${name}.`; // Fehler hinzufügen, wenn keine Auswahl getroffen wurde
       }
       return newErrors;
     });
+
+    // Aktualisiere den Zustand basierend auf dem Namen
+    if (name === "fertiliserSeason") {
+      setFertiliserSeasons(values);
+    }
   }
 
   return (
@@ -285,8 +297,8 @@ export default function PlantForm({
           <RadioOption
             options={lightOptions}
             name="lightNeed"
-            initialValue={lightNeed} // Dynamisch gebunden
-            onChange={(value) => setLightNeed(value)} // Aktualisiert Zustand
+            initialValue={lightNeed}
+            onChange={(value) => handleRadioChange("lightNeed", value)}
           />
         </section>
         {errors.lightNeed && (
@@ -309,8 +321,8 @@ export default function PlantForm({
           <RadioOption
             options={waterOptions}
             name="waterNeed"
-            initialValue={waterNeed} // Dynamisch gebunden
-            onChange={(value) => setWaterNeed(value)} // Aktualisiert Zustand
+            initialValue={waterNeed}
+            onChange={(value) => handleRadioChange("waterNeed", value)}
           />
         </section>
 
@@ -334,8 +346,10 @@ export default function PlantForm({
           <CheckboxOption
             options={fertiliserOptions}
             name="fertiliserSeason"
-            initialValues={fertiliserSeasons} // Dynamisch gebunden
-            onChange={(values) => setFertiliserSeasons(values)} // Aktualisiert Zustand
+            initialValues={fertiliserSeasons}
+            onChange={(values) =>
+              handleCheckboxChange("fertiliserSeason", values)
+            }
           />
         </section>
 
