@@ -12,25 +12,61 @@ import { useRef } from "react";
 import { useRouter } from "next/router";
 import { StyledErrorMessage } from "../styled/StyledErrorMessage";
 import Image from "next/image";
-
+import { RadioOption } from "../Options/RadioOption";
+import { CheckboxOption } from "../Options/CheckboxOption";
 
 const lightOptions = [
-  { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
-  { id: "lightNeed2", value: "Partial Shade", label: "Partial Shade" },
-  { id: "lightNeed3", value: "Full Shade", label: "Full Shade" },
+  {
+    id: "lightNeed1",
+    value: "Full Sun",
+    label: "Full Sun",
+    icon: "sun-full.svg",
+  },
+  {
+    id: "lightNeed2",
+    value: "Partial Shade",
+    label: "Partial Shade",
+    icon: "sun-half.svg",
+  },
+  {
+    id: "lightNeed3",
+    value: "Full Shade",
+    label: "Full Shade",
+    icon: "sun.svg",
+  },
 ];
 
 const waterOptions = [
-  { id: "waterNeed1", value: "Low", label: "Low" },
-  { id: "waterNeed2", value: "Medium", label: "Medium" },
-  { id: "waterNeed3", value: "High", label: "High" },
+  { id: "waterNeed1", value: "Low", label: "Low", icon: "drop.svg" },
+  {
+    id: "waterNeed2",
+    value: "Medium",
+    label: "Medium",
+    icon: "drop-half.svg",
+  },
+  { id: "waterNeed3", value: "High", label: "High", icon: "drop-full.svg" },
 ];
 
 const fertiliserOptions = [
-  { id: "fertiliserSeason1", value: "Summer", label: "Summer" },
-  { id: "fertiliserSeason2", value: "Spring", label: "Spring" },
-  { id: "fertiliserSeason3", value: "Fall", label: "Fall" },
-  { id: "fertiliserSeason4", value: "Winter", label: "Winter" },
+  {
+    id: "fertiliserSeason1",
+    value: "Summer",
+    label: "Summer",
+    icon: "sun-full.svg",
+  },
+  {
+    id: "fertiliserSeason2",
+    value: "Spring",
+    label: "Spring",
+    icon: "spring.svg",
+  },
+  { id: "fertiliserSeason3", value: "Fall", label: "Fall", icon: "fall.svg" },
+  {
+    id: "fertiliserSeason4",
+    value: "Winter",
+    label: "Winter",
+    icon: "winter.svg",
+  },
 ];
 
 export default function PlantForm({
@@ -47,6 +83,12 @@ export default function PlantForm({
   const [isCreatingMore, setIsCreatingMore] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(false);
 
+  const [lightNeed, setLightNeed] = useState(initialData?.lightNeed || "");
+  const [waterNeed, setWaterNeed] = useState(initialData?.waterNeed || "");
+  const [fertiliserSeasons, setFertiliserSeasons] = useState(
+    initialData?.fertiliserSeason || []
+  );
+
   const [errors, setErrors] = useState({});
 
   function handleSubmit(event) {
@@ -57,7 +99,7 @@ export default function PlantForm({
 
     const selectedSeasons = formData.getAll("fertiliserSeason");
     data.fertiliserSeason = selectedSeasons;
-    
+
     const newErrors = {};
 
     if (!data.name) {
@@ -90,6 +132,10 @@ export default function PlantForm({
     } else {
       onCreatePlant({ imageUrl: imageUrl, ...initialData, ...data });
     }
+
+    setLightNeed("");
+    setWaterNeed("");
+    setFertiliserSeasons([]);
 
     event.target.reset();
 
@@ -132,35 +178,44 @@ export default function PlantForm({
     });
   }
 
-  function handleRadioChange(event) {
-    const { name, value } = event.target;
+  function handleRadioChange({ target: { name, value } }) {
     setErrors((prevErrors) => {
       const newErrors = { ...prevErrors };
       if (value) {
         delete newErrors[name];
+      } else {
+        newErrors[name] = `Please select a ${name} option.`;
       }
       return newErrors;
     });
   }
 
-  function handleCheckboxChange(event) {
-    const { name } = event.target;
+  function handleCheckboxChange({ target: { name, value } }) {
     setErrors((prevErrors) => {
       const newErrors = { ...prevErrors };
-      if (event.target.checked) {
+      if (value && value.length > 0) {
         delete newErrors[name];
+      } else {
+        newErrors[name] = `Please select at least one ${name}.`;
       }
       return newErrors;
     });
   }
-
-  // FYI: Hinzufügen eines Stylings für das Formular, (Hintergrund usw.) folgt noch!
 
   return (
     <>
       <StyledFormWrapper ref={formRef} onSubmit={handleSubmit}>
         <HeaderWrapper>
-          <ResetButton formRef={formRef} isEditMode={isEditMode} />
+          <ResetButton
+            formRef={formRef}
+            isEditMode={isEditMode}
+            onReset={() => {
+              setLightNeed(""); // Reset für die Light Need Option
+              setWaterNeed(""); // Reset für die Water Need Option
+              setFertiliserSeasons([]); // Reset für die Fertiliser Seasons
+            }}
+          />
+
           <StyledHeadlineH2>
             {isEditMode ? "Update Plant" : "Create New Plant"}
           </StyledHeadlineH2>
@@ -227,19 +282,12 @@ export default function PlantForm({
         </label>
 
         <section>
-          {lightOptions.map((option) => (
-            <div key={option.id}>
-              <input
-                type="radio"
-                id={option.id}
-                name="lightNeed"
-                value={option.value}
-                defaultChecked={initialData?.lightNeed === option.value}
-                onChange={handleRadioChange}
-              />
-              <label htmlFor={option.id}>{option.label}</label>
-            </div>
-          ))}
+          <RadioOption
+            options={lightOptions}
+            name="lightNeed"
+            initialValue={lightNeed} // Dynamisch gebunden
+            onChange={(value) => setLightNeed(value)} // Aktualisiert Zustand
+          />
         </section>
         {errors.lightNeed && (
           <StyledErrorMessage>
@@ -258,20 +306,14 @@ export default function PlantForm({
         </label>
 
         <section>
-          {waterOptions.map((option) => (
-            <div key={option.id}>
-              <input
-                type="radio"
-                id={option.id}
-                name="waterNeed"
-                value={option.value}
-                defaultChecked={initialData?.waterNeed === option.value}
-                onChange={handleRadioChange}
-              />
-              <label htmlFor={option.id}>{option.label}</label>
-            </div>
-          ))}
+          <RadioOption
+            options={waterOptions}
+            name="waterNeed"
+            initialValue={waterNeed} // Dynamisch gebunden
+            onChange={(value) => setWaterNeed(value)} // Aktualisiert Zustand
+          />
         </section>
+
         {errors.waterNeed && (
           <StyledErrorMessage>
             <Image
@@ -289,24 +331,14 @@ export default function PlantForm({
         </label>
 
         <section>
-          {fertiliserOptions.map((option) => (
-            <div key={option.id}>
-              <input
-                type="checkbox"
-                id={option.id}
-                name="fertiliserSeason"
-                value={option.value}
-                defaultChecked={
-                  isEditMode
-                    ? initialData?.fertiliserSeason.includes(option.value)
-                    : null
-                }
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor={option.id}>{option.label}</label>
-            </div>
-          ))}
+          <CheckboxOption
+            options={fertiliserOptions}
+            name="fertiliserSeason"
+            initialValues={fertiliserSeasons} // Dynamisch gebunden
+            onChange={(values) => setFertiliserSeasons(values)} // Aktualisiert Zustand
+          />
         </section>
+
         {errors.fertiliserSeason && (
           <StyledErrorMessage>
             <Image
@@ -333,7 +365,7 @@ export default function PlantForm({
                 id="createMore"
                 name="createMore"
                 checked={isCreatingMore}
-                onClick={(event) => setIsCreatingMore(event.target.checked)}
+                onChange={(event) => setIsCreatingMore(event.target.checked)}
               />
             </div>
           </>

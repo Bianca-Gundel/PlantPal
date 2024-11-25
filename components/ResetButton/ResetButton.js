@@ -1,10 +1,13 @@
 import Image from "next/image";
 import { StyledResetButton } from "./styled";
 
-export default function ResetButton({ formRef, isEditMode }) {
+export default function ResetButton({ formRef, isEditMode, onReset }) {
   const handleReset = () => {
     if (formRef?.current) {
       formRef.current.reset();
+    }
+    if (onReset) {
+      onReset(); // Führt zusätzliche Reset-Logik aus
     }
   };
   return !isEditMode ? (
