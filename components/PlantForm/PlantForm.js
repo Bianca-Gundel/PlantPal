@@ -12,6 +12,8 @@ import { useRef } from "react";
 import { useRouter } from "next/router";
 import { StyledErrorMessage } from "../styled/StyledErrorMessage";
 import Image from "next/image";
+import { RadioOption } from "../Options/RadioOption";
+import { CheckboxOption } from "../Options/CheckboxOption";
 import {
   ImageContainer,
   PreviewContainer,
@@ -21,22 +23,57 @@ import {
 } from "./StyledImagePreview";
 
 const lightOptions = [
-  { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
-  { id: "lightNeed2", value: "Partial Shade", label: "Partial Shade" },
-  { id: "lightNeed3", value: "Full Shade", label: "Full Shade" },
+  {
+    id: "lightNeed1",
+    value: "Full Sun",
+    label: "Full Sun",
+    icon: "sun-full.svg",
+  },
+  {
+    id: "lightNeed2",
+    value: "Partial Shade",
+    label: "Partial Shade",
+    icon: "sun-half.svg",
+  },
+  {
+    id: "lightNeed3",
+    value: "Full Shade",
+    label: "Full Shade",
+    icon: "sun.svg",
+  },
 ];
 
 const waterOptions = [
-  { id: "waterNeed1", value: "Low", label: "Low" },
-  { id: "waterNeed2", value: "Medium", label: "Medium" },
-  { id: "waterNeed3", value: "High", label: "High" },
+  { id: "waterNeed1", value: "Low", label: "Low", icon: "drop.svg" },
+  {
+    id: "waterNeed2",
+    value: "Medium",
+    label: "Medium",
+    icon: "drop-half.svg",
+  },
+  { id: "waterNeed3", value: "High", label: "High", icon: "drop-full.svg" },
 ];
 
 const fertiliserOptions = [
-  { id: "fertiliserSeason1", value: "Summer", label: "Summer" },
-  { id: "fertiliserSeason2", value: "Spring", label: "Spring" },
-  { id: "fertiliserSeason3", value: "Fall", label: "Fall" },
-  { id: "fertiliserSeason4", value: "Winter", label: "Winter" },
+  {
+    id: "fertiliserSeason1",
+    value: "Summer",
+    label: "Summer",
+    icon: "sun-full.svg",
+  },
+  {
+    id: "fertiliserSeason2",
+    value: "Spring",
+    label: "Spring",
+    icon: "spring.svg",
+  },
+  { id: "fertiliserSeason3", value: "Fall", label: "Fall", icon: "fall.svg" },
+  {
+    id: "fertiliserSeason4",
+    value: "Winter",
+    label: "Winter",
+    icon: "winter.svg",
+  },
 ];
 
 export default function PlantForm({
@@ -53,6 +90,13 @@ export default function PlantForm({
   const formRef = useRef(null);
   const [isCreatingMore, setIsCreatingMore] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(false);
+
+  const [lightNeed, setLightNeed] = useState(initialData?.lightNeed || "");
+  const [waterNeed, setWaterNeed] = useState(initialData?.waterNeed || "");
+  const [fertiliserSeasons, setFertiliserSeasons] = useState(
+    initialData?.fertiliserSeason || []
+  );
+
   const [errors, setErrors] = useState({});
   const [uploadedImageURL, setUploadedImageURL] = useState();
 
@@ -98,6 +142,10 @@ export default function PlantForm({
       onCreatePlant({ imageUrl: imageUrl, ...initialData, ...data });
     }
 
+    setLightNeed("");
+    setWaterNeed("");
+    setFertiliserSeasons([]);
+
     event.target.reset();
 
     if (!createMore) {
@@ -139,27 +187,39 @@ export default function PlantForm({
     });
   }
 
-  function handleRadioChange(event) {
-    const { name, value } = event.target;
+  function handleRadioChange(name, value) {
     setErrors((prevErrors) => {
       const newErrors = { ...prevErrors };
       if (value) {
         delete newErrors[name];
+      } else {
+        newErrors[name] = `Please select a ${name} option.`;
       }
       return newErrors;
     });
+
+    if (name === "lightNeed") {
+      setLightNeed(value);
+    } else if (name === "waterNeed") {
+      setWaterNeed(value);
+    }
   }
 
-  function handleCheckboxChange(event) {
-    const { name } = event.target;
+  function handleCheckboxChange(name, values) {
     setErrors((prevErrors) => {
       const newErrors = { ...prevErrors };
-      if (event.target.checked) {
+      if (values.length > 0) {
         delete newErrors[name];
+      } else {
+        newErrors[name] = `Please select at least one ${name}.`;
       }
       return newErrors;
     });
+    if (name === "fertiliserSeason") {
+      setFertiliserSeasons(values);
+    }
   }
+
   async function handleDeleteImage(imageUrl) {
     try {
       const response = await fetch("/api/upload/delete", {
@@ -182,13 +242,20 @@ export default function PlantForm({
     }
   }
 
-  // FYI: Hinzufügen eines Stylings für das Formular, (Hintergrund usw.) folgt noch!
-
   return (
     <>
       <StyledFormWrapper ref={formRef} onSubmit={handleSubmit}>
         <HeaderWrapper>
-          <ResetButton formRef={formRef} isEditMode={isEditMode} />
+          <ResetButton
+            formRef={formRef}
+            isEditMode={isEditMode}
+            onReset={() => {
+              setLightNeed("");
+              setWaterNeed("");
+              setFertiliserSeasons([]);
+            }}
+          />
+
           <StyledHeadlineH2>
             {isEditMode ? "Update Plant" : "Create New Plant"}
           </StyledHeadlineH2>
@@ -255,19 +322,12 @@ export default function PlantForm({
         </label>
 
         <section>
-          {lightOptions.map((option) => (
-            <div key={option.id}>
-              <input
-                type="radio"
-                id={option.id}
-                name="lightNeed"
-                value={option.value}
-                defaultChecked={initialData?.lightNeed === option.value}
-                onChange={handleRadioChange}
-              />
-              <label htmlFor={option.id}>{option.label}</label>
-            </div>
-          ))}
+          <RadioOption
+            options={lightOptions}
+            name="lightNeed"
+            initialValue={lightNeed}
+            onChange={(value) => handleRadioChange("lightNeed", value)}
+          />
         </section>
         {errors.lightNeed && (
           <StyledErrorMessage>
@@ -286,20 +346,14 @@ export default function PlantForm({
         </label>
 
         <section>
-          {waterOptions.map((option) => (
-            <div key={option.id}>
-              <input
-                type="radio"
-                id={option.id}
-                name="waterNeed"
-                value={option.value}
-                defaultChecked={initialData?.waterNeed === option.value}
-                onChange={handleRadioChange}
-              />
-              <label htmlFor={option.id}>{option.label}</label>
-            </div>
-          ))}
+          <RadioOption
+            options={waterOptions}
+            name="waterNeed"
+            initialValue={waterNeed}
+            onChange={(value) => handleRadioChange("waterNeed", value)}
+          />
         </section>
+
         {errors.waterNeed && (
           <StyledErrorMessage>
             <Image
@@ -317,24 +371,16 @@ export default function PlantForm({
         </label>
 
         <section>
-          {fertiliserOptions.map((option) => (
-            <div key={option.id}>
-              <input
-                type="checkbox"
-                id={option.id}
-                name="fertiliserSeason"
-                value={option.value}
-                defaultChecked={
-                  isEditMode
-                    ? initialData?.fertiliserSeason.includes(option.value)
-                    : null
-                }
-                onChange={handleCheckboxChange}
-              />
-              <label htmlFor={option.id}>{option.label}</label>
-            </div>
-          ))}
+          <CheckboxOption
+            options={fertiliserOptions}
+            name="fertiliserSeason"
+            initialValues={fertiliserSeasons}
+            onChange={(values) =>
+              handleCheckboxChange("fertiliserSeason", values)
+            }
+          />
         </section>
+
         {errors.fertiliserSeason && (
           <StyledErrorMessage>
             <Image
@@ -379,7 +425,7 @@ export default function PlantForm({
                 id="createMore"
                 name="createMore"
                 checked={isCreatingMore}
-                onClick={(event) => setIsCreatingMore(event.target.checked)}
+                onChange={(event) => setIsCreatingMore(event.target.checked)}
               />
             </div>
           </>
