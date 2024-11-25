@@ -8,7 +8,6 @@ import {
   StyledEditButton,
   StyledPlantDescription,
 } from "@/components/styled/StyledDetailsPage";
-import BackLink from "@/components/BackLink/BackLink";
 import { useState } from "react";
 import { StyledButton } from "@/components/styled/StyledButton";
 import PlantForm from "@/components/PlantForm/PlantForm";
@@ -79,8 +78,6 @@ export default function PlantDetails({
 
   return (
     <>
-      <BackLink />
-
       <StyledEditButton onClick={toggleFormVisibility}>
         <Image
           src={"/icons/pencil-solid.svg"}
