@@ -158,6 +158,7 @@ export default function App({ Component, pageProps }) {
           isFilterVisible={isFilterVisible}
           isFormVisible={isFormVisible}
           imageUrl={imageUrl}
+          searchQuery={searchQuery}
           onSearch={handleSearch}
           onToggleFilter={handleToggleFilter}
           onToggleForm={handleToggleForm}

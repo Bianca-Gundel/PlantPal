@@ -5,11 +5,9 @@ import {
   FlexboxWrapper,
 } from "@/components/styled/StyledIndex";
 import Image from "next/image";
-import { StyledButton } from "@/components/styled/StyledButton";
 import FilterPlants from "@/components/FilterPlants/FilterPlants";
 import { StyledList } from "@/components/styled/StyledList";
 import SearchBar from "@/components/SearchBar/SearchBar";
-import { useState } from "react";
 import FilterButton from "@/components/FilterButton.js/FilterButton";
 import { SearchFilterContainer } from "@/components/SearchBar/styles";
 
@@ -23,6 +21,7 @@ export default function HomePage({
   selectedFilter,
   filterCount,
   onSearch,
+  searchQuery,
 }) {
   return (
     <>
