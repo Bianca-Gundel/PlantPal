@@ -1,7 +1,6 @@
 import PlantCard from "@/components/PlantCard/PlantCard";
 import {
   StyledErrorMessageWrapper,
-  ArrowIcon,
   FlexboxWrapper,
 } from "@/components/styled/StyledIndex";
 import Image from "next/image";
@@ -64,7 +63,7 @@ export default function HomePage({
           />
           <p>
             {searchQuery
-              ? "No plants match your search query."
+              ? "No plants match your search."
               : filterCount > 0
               ? "No plants match the selected filter criteria."
               : "Unfortunately, you have not yet added any plants."}

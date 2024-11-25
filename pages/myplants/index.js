@@ -48,7 +48,7 @@ export default function MyPlants({
           />
           <p>
             {searchQuery
-              ? "No plants match your search query."
+              ? "No plants match your search."
               : filterCount > 0
               ? "No plants match the selected filter criteria."
               : "Unfortunately, you have not yet added any plants as favourites."}
