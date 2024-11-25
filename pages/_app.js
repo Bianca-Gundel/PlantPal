@@ -15,6 +15,7 @@ export default function App({ Component, pageProps }) {
   });
 
   const [filterCount, setFilterCount] = useState("0");
+  const [searchQuery, setSearchQuery] = useState("");
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [filters, setFilters] = useState({
@@ -33,11 +34,13 @@ export default function App({ Component, pageProps }) {
         !filters.fertiliserSeason.length ||
         filters.fertiliserSeason.every((season) =>
           plant.fertiliserSeason.includes(season)
-        ))
+        )) &&
+      (!searchQuery ||
+        plant.name.toLowerCase().includes(searchQuery.toLowerCase()))
     );
   });
 
-  const bookmarkedPlants = plants.filter((plant) => plant.isBookmarked);
+  const bookmarkedPlants = filteredPlants.filter((plant) => plant.isBookmarked);
 
   function handleUploadImage(imageUrl) {
     setImageUrl(imageUrl);
@@ -66,6 +69,10 @@ export default function App({ Component, pageProps }) {
     toast.success("Plant successfully deleted! 🥀");
   }
 
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
   function handleFilterValue(event) {
     if (event.name === "fertiliserSeason") {
       setFilters((prevFilters) => {
@@ -92,7 +99,14 @@ export default function App({ Component, pageProps }) {
   function handleResetFilter() {
     setFilters({ lightNeed: null, waterNeed: null, fertiliserSeason: [] });
     setIsFilterVisible(false);
+    setSearchQuery("");
   }
+
+  router.events?.on("routeChangeStart", (url) => {
+    if (url === "/myplants" || url === "/") {
+      handleResetFilter();
+    }
+  });
 
   // FYI: For better usability, we deviate from our user story and leave only one form expanded at a time
 
@@ -144,6 +158,8 @@ export default function App({ Component, pageProps }) {
           isFilterVisible={isFilterVisible}
           isFormVisible={isFormVisible}
           imageUrl={imageUrl}
+          searchQuery={searchQuery}
+          onSearch={handleSearch}
           onToggleFilter={handleToggleFilter}
           onToggleForm={handleToggleForm}
           onFilterValue={handleFilterValue}

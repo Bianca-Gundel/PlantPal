@@ -1,15 +1,12 @@
 import PlantCard from "@/components/PlantCard/PlantCard";
 import {
   StyledErrorMessageWrapper,
-  ArrowIcon,
   FlexboxWrapper,
 } from "@/components/styled/StyledIndex";
 import Image from "next/image";
-import { StyledButton } from "@/components/styled/StyledButton";
 import FilterPlants from "@/components/FilterPlants/FilterPlants";
 import { StyledList } from "@/components/styled/StyledList";
 import SearchBar from "@/components/SearchBar/SearchBar";
-import { useState } from "react";
 import FilterButton from "@/components/FilterButton.js/FilterButton";
 import { SearchFilterContainer } from "@/components/SearchBar/styles";
 
@@ -22,20 +19,13 @@ export default function HomePage({
   onFilterValue,
   selectedFilter,
   filterCount,
+  onSearch,
+  searchQuery,
 }) {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const filteredPlants = plants.filter((plant) =>
-    plant.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-  };
   return (
     <>
       <SearchFilterContainer>
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar onSearch={onSearch} />
         <FilterButton
           onClick={onToggleFilter}
           isActive={isFilterVisible}
@@ -54,9 +44,9 @@ export default function HomePage({
       </FlexboxWrapper>
       <h2>Discover Plants</h2>
 
-      {filteredPlants.length > 0 ? (
+      {plants.length > 0 ? (
         <StyledList>
-          {filteredPlants.map((plant) => (
+          {plants.map((plant) => (
             <li key={plant.id}>
               <PlantCard plant={plant} onToggleBookmark={onToggleBookmark} />
             </li>
@@ -73,7 +63,7 @@ export default function HomePage({
           />
           <p>
             {searchQuery
-              ? "No plants match your search query."
+              ? "No plants match your search."
               : filterCount > 0
               ? "No plants match the selected filter criteria."
               : "Unfortunately, you have not yet added any plants."}

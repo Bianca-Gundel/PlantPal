@@ -14,6 +14,13 @@ import { StyledErrorMessage } from "../styled/StyledErrorMessage";
 import Image from "next/image";
 import { RadioOption } from "../Options/RadioOption";
 import { CheckboxOption } from "../Options/CheckboxOption";
+import {
+  ImageContainer,
+  PreviewContainer,
+  StyledDeletePreviewButton,
+  StyledPreviewImage,
+  StyledPreviewText,
+} from "./StyledImagePreview";
 
 const lightOptions = [
   {
@@ -79,6 +86,7 @@ export default function PlantForm({
   imageUrl,
 }) {
   const router = useRouter();
+  const [previewImage, setPreviewImage] = useState(null);
   const formRef = useRef(null);
   const [isCreatingMore, setIsCreatingMore] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(false);
@@ -90,6 +98,7 @@ export default function PlantForm({
   );
 
   const [errors, setErrors] = useState({});
+  const [uploadedImageURL, setUploadedImageURL] = useState();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -147,12 +156,13 @@ export default function PlantForm({
   async function handleCreateUpload(event) {
     setIsImageLoading(true);
 
-    event.preventDefault();
+    const image = event.target.files[0];
+    const previewUrl = URL.createObjectURL(image);
+    setPreviewImage(previewUrl);
 
     const formData = new FormData();
-    const image = event.target.files[0];
-
     formData.append("image", image);
+
     const response = await fetch("/api/upload", {
       method: "POST",
       body: formData,
@@ -161,10 +171,9 @@ export default function PlantForm({
     const { url } = await response.json();
 
     onUploadImage(url);
+    setUploadedImageURL(url);
 
     setIsImageLoading(false);
-
-    return;
   }
 
   function handleInputChange(event) {
@@ -206,9 +215,30 @@ export default function PlantForm({
       }
       return newErrors;
     });
-
     if (name === "fertiliserSeason") {
       setFertiliserSeasons(values);
+    }
+  }
+
+  async function handleDeleteImage(imageUrl) {
+    try {
+      const response = await fetch("/api/upload/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ imageUrl }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Fehler beim Löschen des Bildes.");
+      }
+
+      setPreviewImage(null);
+      setUploadedImageURL(null);
+      onUploadImage(null);
+    } catch (error) {
+      console.error("Fehler beim Löschen des Bildes:", error);
     }
   }
 
@@ -362,12 +392,30 @@ export default function PlantForm({
             {errors.fertiliserSeason}
           </StyledErrorMessage>
         )}
-
         <UploadImage
           name="image"
           onChange={handleCreateUpload}
           title="Image Upload:"
         />
+        {previewImage && (
+          <PreviewContainer>
+            <StyledPreviewText>Preview</StyledPreviewText>
+            <ImageContainer>
+              <StyledPreviewImage
+                src={previewImage}
+                alt="Preview of uploaded plant"
+                fill
+                unoptimized
+              />
+            </ImageContainer>
+            <StyledDeletePreviewButton
+              type="button"
+              onClick={() => handleDeleteImage(uploadedImageURL)}
+            >
+              Delete
+            </StyledDeletePreviewButton>
+          </PreviewContainer>
+        )}
         {!isEditMode ? (
           <>
             <div>
