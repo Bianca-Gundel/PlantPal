@@ -2,24 +2,61 @@ import { StyledButton } from "../styled/StyledButton";
 import React from "react";
 import { StyledHeadlineH3, StyledHeadlineH2 } from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
+import { StyledCheckboxSection, StyledCheckboxWrapper } from "./styles";
+import Image from "next/image";
 
 const lightOptions = [
-  { id: "lightNeed1", value: "Full Sun", label: "Full Sun" },
-  { id: "lightNeed2", value: "Partial Shade", label: "Partial Shade" },
-  { id: "lightNeed3", value: "Full Shade", label: "Full Shade" },
+  {
+    id: "lightNeed1",
+    value: "Full Sun",
+    label: "Full Sun",
+    icon: "sun-full.svg",
+  },
+  {
+    id: "lightNeed2",
+    value: "Partial Shade",
+    label: "Partial Shade",
+    icon: "sun-half.svg",
+  },
+  {
+    id: "lightNeed3",
+    value: "Full Shade",
+    label: "Full Shade",
+    icon: "sun.svg",
+  },
 ];
 
 const waterOptions = [
-  { id: "waterNeed1", value: "Low", label: "Low" },
-  { id: "waterNeed2", value: "Medium", label: "Medium" },
-  { id: "waterNeed3", value: "High", label: "High" },
+  { id: "waterNeed1", value: "Low", label: "Low", icon: "drop.svg" },
+  {
+    id: "waterNeed2",
+    value: "Medium",
+    label: "Medium",
+    icon: "drop-half.svg",
+  },
+  { id: "waterNeed3", value: "High", label: "High", icon: "drop-full.svg" },
 ];
 
 const fertiliserOptions = [
-  { id: "fertiliserSeason1", value: "Summer", label: "Summer" },
-  { id: "fertiliserSeason2", value: "Spring", label: "Spring" },
-  { id: "fertiliserSeason3", value: "Fall", label: "Fall" },
-  { id: "fertiliserSeason4", value: "Winter", label: "Winter" },
+  {
+    id: "fertiliserSeason1",
+    value: "Summer",
+    label: "Summer",
+    icon: "sun-full.svg",
+  },
+  {
+    id: "fertiliserSeason2",
+    value: "Spring",
+    label: "Spring",
+    icon: "spring.svg",
+  },
+  { id: "fertiliserSeason3", value: "Fall", label: "Fall", icon: "fall.svg" },
+  {
+    id: "fertiliserSeason4",
+    value: "Winter",
+    label: "Winter",
+    icon: "winter.svg",
+  },
 ];
 
 export default function FilterPlants({
@@ -48,9 +85,9 @@ export default function FilterPlants({
       <label>
         <StyledHeadlineH3>Light Needs:</StyledHeadlineH3>
       </label>
-      <section>
+      <StyledCheckboxSection>
         {lightOptions.map((option) => (
-          <div key={option.id}>
+          <StyledCheckboxWrapper key={option.id}>
             <input
               type="checkbox"
               id={option.id}
@@ -59,17 +96,27 @@ export default function FilterPlants({
               checked={selectedFilter.lightNeed === option.value}
               onChange={handleCheckbox}
             />
-            <label htmlFor={option.id}>{option.label}</label>
-          </div>
+            <label htmlFor={option.id}>
+              {option.icon && (
+                <Image
+                  src={`/icons/${option.icon}`}
+                  width={15}
+                  height={15}
+                  alt={option.label}
+                />
+              )}
+              {option.label}
+            </label>
+          </StyledCheckboxWrapper>
         ))}
-      </section>
+      </StyledCheckboxSection>
 
       <label>
         <StyledHeadlineH3>Water Needs:</StyledHeadlineH3>
       </label>
-      <section>
+      <StyledCheckboxSection>
         {waterOptions.map((option) => (
-          <div key={option.id}>
+          <StyledCheckboxWrapper key={option.id}>
             <input
               type="checkbox"
               id={option.id}
@@ -78,18 +125,26 @@ export default function FilterPlants({
               checked={selectedFilter.waterNeed === option.value}
               onChange={handleCheckbox}
             />
-            <label htmlFor={option.id}>{option.label}</label>
-          </div>
+            <label htmlFor={option.id}>
+              <Image
+                src={`/icons/${option.icon}`}
+                width={15}
+                height={15}
+                alt={option.label}
+              />
+              {option.label}
+            </label>
+          </StyledCheckboxWrapper>
         ))}
-      </section>
+      </StyledCheckboxSection>
 
       <label>
         <StyledHeadlineH3>Fertiliser Season:</StyledHeadlineH3>
       </label>
 
-      <section>
+      <StyledCheckboxSection>
         {fertiliserOptions.map((option) => (
-          <div key={option.id}>
+          <StyledCheckboxWrapper key={option.id}>
             <input
               type="checkbox"
               id={option.id}
@@ -98,10 +153,18 @@ export default function FilterPlants({
               checked={selectedFilter.fertiliserSeason.includes(option.value)}
               onChange={(event) => onFilterValue(event.target)}
             />
-            <label htmlFor={option.id}>{option.label}</label>
-          </div>
+            <label htmlFor={option.id}>
+              <Image
+                src={`/icons/${option.icon}`}
+                width={15}
+                height={15}
+                alt={option.label}
+              />
+              {option.label}
+            </label>
+          </StyledCheckboxWrapper>
         ))}
-      </section>
+      </StyledCheckboxSection>
 
       {/* FYI: div is needed for design - we will fix this later in another US */}
       <div>
