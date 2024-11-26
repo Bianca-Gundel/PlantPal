@@ -16,6 +16,7 @@ export default createGlobalStyle`
 
   body {
     margin: 0;
+    margin-top: 25px;
     font-family: ${roboto.style.fontFamily}, sans-serif;
     display: flex;
     flex-direction: column;
@@ -25,5 +26,9 @@ export default createGlobalStyle`
     text-align: center;
     padding: 0 10px;
     margin-bottom: 60px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0; 
   }
 `;

@@ -43,6 +43,7 @@ export const CardPlantName = styled.h3`
   font-size: 24px;
   padding-left: 20px;
   margin-bottom: 0;
+  margin-top: 15px;
   color: white;
   text-align: left;
 `;
@@ -51,7 +52,7 @@ export const CardBotanicalPlantName = styled.h4`
   font-weight: 300;
   font-size: 16px;
   padding-left: 20px;
-  margin-top: 5px;
+  margin-top: 2px;
   color: white;
   text-align: left;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);

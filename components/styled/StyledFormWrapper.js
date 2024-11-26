@@ -3,7 +3,7 @@ import { styled, css } from "styled-components";
 export const StyledFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
-  background-color: #e0e0e0;
+  /* background-color: #e0e0e0; */
   border-radius: 20px;
   padding-left: 10px;
   padding-right: 10px;
@@ -12,14 +12,14 @@ export const StyledFormWrapper = styled.form`
     input[type="text"] {
       width: 100%;
       padding: 15px;
-      border-style: none;
+      border: solid 1px #000;
       border-radius: 10px;
     }
     textarea {
       width: 100%;
       padding: 15px;
       resize: vertical;
-      border-style: none;
+      border: solid 1px #000;
       border-radius: 10px;
       font-family: Arial, Helvetica, sans-serif;
     }

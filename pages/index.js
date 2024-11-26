@@ -9,6 +9,10 @@ import { StyledList } from "@/components/styled/StyledList";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import FilterButton from "@/components/FilterButton.js/FilterButton";
 import { SearchFilterContainer } from "@/components/SearchBar/styles";
+import {
+  StyledHeadlineH1,
+  StyledHeadlineH2,
+} from "@/components/styled/StyledHeadline";
 
 export default function HomePage({
   plants,
@@ -24,6 +28,7 @@ export default function HomePage({
 }) {
   return (
     <>
+      <StyledHeadlineH1>Bloom Buddy</StyledHeadlineH1>
       <SearchFilterContainer>
         <SearchBar onSearch={onSearch} />
         <FilterButton
@@ -42,7 +47,7 @@ export default function HomePage({
           />
         )}
       </FlexboxWrapper>
-      <h2>Discover Plants</h2>
+      <StyledHeadlineH2>Discover Plants</StyledHeadlineH2>
 
       {plants.length > 0 ? (
         <StyledList>

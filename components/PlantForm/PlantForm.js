@@ -189,9 +189,7 @@ export default function PlantForm({
       <StyledFormWrapper ref={formRef} onSubmit={handleSubmit}>
         <HeaderWrapper>
           <ResetButton formRef={formRef} isEditMode={isEditMode} />
-          <StyledHeadlineH2>
-            {isEditMode ? "Update Plant" : "Create New Plant"}
-          </StyledHeadlineH2>
+          <h2>{isEditMode ? "Update Plant" : "Create New Plant"}</h2>
         </HeaderWrapper>
         <label htmlFor="name">
           <StyledHeadlineH3>Plant Name: *</StyledHeadlineH3>

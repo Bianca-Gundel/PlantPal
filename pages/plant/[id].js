@@ -15,6 +15,11 @@ import { StyledButton } from "@/components/styled/StyledButton";
 import PlantForm from "@/components/PlantForm/PlantForm";
 import { StyledList } from "@/components/styled/StyledList";
 import BookmarkButton from "@/components/BookmarkButton/BookmarkButton";
+import {
+  StyledHeadlineH2,
+  StyledHeadlineH3,
+  StyledHeadlineWrapper,
+} from "@/components/styled/StyledHeadline";
 
 export default function PlantDetails({
   plants,
@@ -89,8 +94,8 @@ export default function PlantDetails({
       <StyledEditButton onClick={toggleFormVisibility}>
         <Image
           src={"/icons/pencil-solid.svg"}
-          width={25}
-          height={25}
+          width={22}
+          height={22}
           alt="Icon of a dead plant"
           unoptimized
         />
@@ -108,9 +113,11 @@ export default function PlantDetails({
           />
         </>
       )}
+      <StyledHeadlineWrapper>
+        <StyledHeadlineH3>{plantData.name}</StyledHeadlineH3>
+      </StyledHeadlineWrapper>
 
-      <h2>{plantData.name}</h2>
-      <h3>{plantData.botanicalName}</h3>
+      <StyledHeadlineH2>{plantData.botanicalName}</StyledHeadlineH2>
 
       <ImageBorder>
         <BookmarkButton

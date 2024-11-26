@@ -62,6 +62,6 @@ export const StyledEditButton = styled.button`
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: 40px;
+  right: 21px;
   top: 70px;
 `;
