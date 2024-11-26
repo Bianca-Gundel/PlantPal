@@ -1,12 +1,17 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import {
-  IconsContainer,
+  IconsWrapper,
   IconContainer,
   ImageBorder,
   StyledButtonContainer,
   StyledEditButton,
   StyledPlantDescription,
+  StyledIconText,
+  IconWrapper1,
+  IconWrapper2,
+  IconWrapper3,
+  InnerIconWrapper,
 } from "@/components/styled/StyledDetailsPage";
 import { useState } from "react";
 import { StyledButton } from "@/components/styled/StyledButton";
@@ -36,8 +41,14 @@ export default function PlantDetails({
 
   if (!plantData) return <div>No data available</div>;
 
-  const Icon = ({ src, alt }) => (
-    <Image unoptimized alt={alt} src={src} width={30} height={30} />
+  const Icon = ({ src, alt, iconWidth, iconHeight }) => (
+    <Image
+      unoptimized
+      alt={alt}
+      src={src}
+      width={iconWidth}
+      height={iconHeight}
+    />
   );
 
   const waterIconSrc =
@@ -122,27 +133,53 @@ export default function PlantDetails({
       </ImageBorder>
       <StyledPlantDescription>{plantData.description}</StyledPlantDescription>
 
-      <IconsContainer>
-        <IconContainer>
-          <Icon src={waterIconSrc} alt="Icon of a water drop" />
-          <p>{plantData.waterNeed}</p>
-        </IconContainer>
+      <IconsWrapper>
+        <InnerIconWrapper>
+          <IconContainer>
+            <Icon
+              src={waterIconSrc}
+              alt="Icon of a water drop"
+              iconWidth={25}
+              iconHeight={25}
+            />
+          </IconContainer>
+          <StyledIconText>
+            <p>{plantData.waterNeed}</p>
+          </StyledIconText>
+        </InnerIconWrapper>
 
-        <IconContainer>
-          <Icon src={lightIconSrc} alt="Icon of a sun" />
-          <p>{plantData.lightNeed}</p>
-        </IconContainer>
+        <InnerIconWrapper>
+          <IconContainer>
+            <Icon
+              src={lightIconSrc}
+              alt="Icon of a sun"
+              iconWidth={25}
+              iconHeight={25}
+            />
+          </IconContainer>
+          <StyledIconText>
+            <p>{plantData.lightNeed}</p>
+          </StyledIconText>
+        </InnerIconWrapper>
 
-        <IconContainer>
-          <Icon src={"/icons/fertiliser.svg"} alt="Icon of a fertiliser" />
-          <StyledList>
-            {plantData.fertiliserSeason.map((season) => {
-              return <li key={season}>{season}</li>;
-            })}
-          </StyledList>
-        </IconContainer>
-      </IconsContainer>
-      {/* Styling folgt nach Merge*/}
+        <InnerIconWrapper>
+          <IconContainer>
+            <Icon
+              src={"/icons/fertiliser.svg"}
+              alt="Icon of a fertiliser"
+              iconWidth={25}
+              iconHeight={25}
+            />
+          </IconContainer>
+          <StyledIconText>
+            <StyledList>
+              {plantData.fertiliserSeason.map((season) => {
+                return <li key={season}>{season}</li>;
+              })}
+            </StyledList>
+          </StyledIconText>
+        </InnerIconWrapper>
+      </IconsWrapper>
       <StyledButtonContainer>
         {isDeleteOption && (
           <>

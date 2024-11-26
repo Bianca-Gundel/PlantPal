@@ -6,15 +6,35 @@ export const StyledPlantDescription = styled.p`
   hyphens: auto;
 `;
 
-export const IconsContainer = styled.article`
+export const IconsWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  width: 100%;
+
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+export const InnerIconWrapper = styled.div`
+  width: 25%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
 `;
 
 export const IconContainer = styled.div`
   display: flex;
+  height: 30%;
+  align-self: center;
+`;
+
+export const StyledIconText = styled.div`
+  display: flex;
+  height: 70%;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: column;
-  align-items: center;
 `;
 
 export const ImageBorder = styled.article`
@@ -31,16 +51,6 @@ export const StyledButtonContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
-  ${css`
-    p {
-      width: 100%;
-    }
-
-    button {
-      margin: 10px;
-    }
-  `}
 `;
 
 export const StyledEditButton = styled.button`
