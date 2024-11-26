@@ -1,22 +1,22 @@
 import styled, { css } from "styled-components";
 
 export const StyledPlantDescription = styled.p`
+  width: 90%;
+  text-align: center;
+  margin: 20px auto;
   word-break: break-word;
-  overflow-wrap: break-word;
   hyphens: auto;
 `;
 
 export const IconsWrapper = styled.div`
   display: flex;
   width: 100%;
-
   justify-content: space-evenly;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 export const InnerIconWrapper = styled.div`
-  width: 25%;
-  height: 100px;
+  width: auto;
   display: flex;
   align-items: center;
   justify-content: flex-start;

@@ -8,6 +8,7 @@ export const Card = styled.article`
   width: 90vw;
   border-radius: 15px;
   overflow: hidden;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
 `;
 
 export const ImageWrapper = styled.div`
@@ -38,6 +39,8 @@ export const CardText = styled.div`
 `;
 
 export const CardPlantName = styled.h3`
+  font-weight: 500;
+  font-size: 24px;
   padding-left: 20px;
   margin-bottom: 0;
   color: white;
@@ -45,12 +48,13 @@ export const CardPlantName = styled.h3`
 `;
 
 export const CardBotanicalPlantName = styled.h4`
+  font-weight: 300;
+  font-size: 16px;
   padding-left: 20px;
   margin-top: 5px;
-  font-size: 14px;
   color: white;
-  font-weight: 300;
   text-align: left;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 `;
 
 export const DetailsLink = styled(Link)`
@@ -58,4 +62,6 @@ export const DetailsLink = styled(Link)`
   padding: 10px 0;
   text-decoration: none;
   color: white;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 `;

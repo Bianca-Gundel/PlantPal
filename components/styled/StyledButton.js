@@ -6,12 +6,10 @@ export const StyledButton = styled.button`
   align-items: center;
   justify-content: center;
   margin: 10px;
-
-  background-color: white;
+  background-color: blueviolet;
   cursor: pointer;
   padding: 10px 35px;
   font-size: 18px;
-
   border-style: none;
   border-radius: 8px;
 

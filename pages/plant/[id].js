@@ -8,9 +8,6 @@ import {
   StyledEditButton,
   StyledPlantDescription,
   StyledIconText,
-  IconWrapper1,
-  IconWrapper2,
-  IconWrapper3,
   InnerIconWrapper,
 } from "@/components/styled/StyledDetailsPage";
 import { useState } from "react";
