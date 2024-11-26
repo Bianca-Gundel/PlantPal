@@ -11,7 +11,7 @@ export const StyledUploadLabel = styled.label`
   align-items: center;
   justify-content: center;
   background-color: white;
-  border: none;
+  border: 1px solid #000;
   border-radius: 0.5rem;
   padding: 1rem;
   cursor: pointer;

@@ -8,6 +8,7 @@ import {
   CardBotanicalPlantName,
   DetailsLink,
 } from "./styles";
+import { PlantCardH3, PlantCardH4 } from "../styled/StyledHeadline";
 
 export default function PlantCard({ plant, onToggleBookmark }) {
   return (
@@ -30,8 +31,8 @@ export default function PlantCard({ plant, onToggleBookmark }) {
           isBookmarked={plant.isBookmarked}
         />
         <div>
-          <CardPlantName>{plant.name}</CardPlantName>
-          <CardBotanicalPlantName>{plant.botanicalName}</CardBotanicalPlantName>
+          <PlantCardH3>{plant.name}</PlantCardH3>
+          <PlantCardH4>{plant.botanicalName}</PlantCardH4>
         </div>
         <DetailsLink href={`plant/${plant.id}`}>Details</DetailsLink>
       </CardText>

@@ -38,16 +38,6 @@ export const CardText = styled.div`
   height: 100%;
 `;
 
-export const CardPlantName = styled.h3`
-  font-weight: 500;
-  font-size: 24px;
-  padding-left: 20px;
-  margin-bottom: 0;
-  margin-top: 15px;
-  color: white;
-  text-align: left;
-`;
-
 export const CardBotanicalPlantName = styled.h4`
   font-weight: 300;
   font-size: 16px;

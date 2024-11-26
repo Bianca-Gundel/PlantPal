@@ -31,8 +31,8 @@ export const StyledPreviewImage = styled(Image)`
 
 export const StyledDeletePreviewButton = styled.button`
   position: absolute;
-  top: 64rem;
-  right: 4.5rem;
+  top: 0.5rem;
+  right: 0.5rem;
   background-color: #fff;
   border-radius: 50%;
   border: none;
@@ -42,7 +42,7 @@ export const StyledDeletePreviewButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  z-index: 10;
 
   &:before,
   &:after {

@@ -1,6 +1,11 @@
 import { StyledButton } from "../styled/StyledButton";
 import React from "react";
-import { StyledHeadlineH3, StyledHeadlineH2 } from "../styled/StyledHeadline";
+import {
+  StyledHeadlineH2,
+  BaseH3,
+  BaseH5,
+  BaseH2,
+} from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
 import { StyledCheckboxSection, StyledCheckboxWrapper } from "./styles";
 import Image from "next/image";
@@ -81,9 +86,9 @@ export default function FilterPlants({
 
   return (
     <StyledFormWrapper>
-      <StyledHeadlineH2>Filter</StyledHeadlineH2>
+      <BaseH2>Filter</BaseH2>
       <label>
-        <StyledHeadlineH3>Light Needs:</StyledHeadlineH3>
+        <BaseH5>Light Needs:</BaseH5>
       </label>
       <StyledCheckboxSection>
         {lightOptions.map((option) => (
@@ -112,7 +117,7 @@ export default function FilterPlants({
       </StyledCheckboxSection>
 
       <label>
-        <StyledHeadlineH3>Water Needs:</StyledHeadlineH3>
+        <BaseH5>Water Needs:</BaseH5>
       </label>
       <StyledCheckboxSection>
         {waterOptions.map((option) => (
@@ -139,7 +144,7 @@ export default function FilterPlants({
       </StyledCheckboxSection>
 
       <label>
-        <StyledHeadlineH3>Fertiliser Season:</StyledHeadlineH3>
+        <BaseH5>Fertiliser Season:</BaseH5>
       </label>
 
       <StyledCheckboxSection>

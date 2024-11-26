@@ -6,6 +6,7 @@ import SearchBar from "@/components/SearchBar/SearchBar";
 import { SearchFilterContainer } from "@/components/SearchBar/styles";
 import { StyledErrorMessageWrapper } from "@/components/styled/StyledIndex";
 import Image from "next/image";
+import { BaseH2 } from "@/components/styled/StyledHeadline";
 
 export default function MyPlants({
   bookmarkedPlants,
@@ -36,7 +37,7 @@ export default function MyPlants({
           selectedFilter={selectedFilter}
         />
       )}
-      <h2>My Plants</h2>
+      <BaseH2>My Plants</BaseH2>
       {bookmarkedPlants.length === 0 && (
         <StyledErrorMessageWrapper>
           <Image
@@ -47,16 +48,21 @@ export default function MyPlants({
             unoptimized
           />
           <p>
-            {searchQuery
-              ? "No plants match your search."
-              : filterCount > 0
-              ? "No plants match the selected filter criteria."
-              : "Unfortunately, you have not yet added any plants as favourites."}
+            {searchQuery ? (
+              "No plants match your search."
+            ) : filterCount > 0 ? (
+              "No plants match the selected filter criteria."
+            ) : (
+              <>
+                No favorite plants yet.
+                <br />
+                How about adding one?
+              </>
+            )}
           </p>
         </StyledErrorMessageWrapper>
       )}
 
-      {/* FYI: Icon for error message follows after merge */}
       <StyledList>
         {bookmarkedPlants.map((plant) => {
           return (

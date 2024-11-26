@@ -16,8 +16,9 @@ import PlantForm from "@/components/PlantForm/PlantForm";
 import { StyledList } from "@/components/styled/StyledList";
 import BookmarkButton from "@/components/BookmarkButton/BookmarkButton";
 import {
+  DetailsPageH3,
+  DetailsPageH4,
   StyledHeadlineH2,
-  StyledHeadlineH3,
   StyledHeadlineWrapper,
 } from "@/components/styled/StyledHeadline";
 
@@ -114,10 +115,10 @@ export default function PlantDetails({
         </>
       )}
       <StyledHeadlineWrapper>
-        <StyledHeadlineH3>{plantData.name}</StyledHeadlineH3>
+        <DetailsPageH3>{plantData.name}</DetailsPageH3>
       </StyledHeadlineWrapper>
 
-      <StyledHeadlineH2>{plantData.botanicalName}</StyledHeadlineH2>
+      <DetailsPageH4>{plantData.botanicalName}</DetailsPageH4>
 
       <ImageBorder>
         <BookmarkButton
