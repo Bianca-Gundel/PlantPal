@@ -8,6 +8,7 @@ export const StyledHeadlineH2 = styled.h2`
 export const StyledHeadlineH3 = styled.h3`
   font-weight: bold;
   font-size: medium;
+  display: flex;
 `;
 
 export const HeaderWrapper = styled.div`

@@ -19,7 +19,6 @@ import {
   PreviewContainer,
   StyledDeletePreviewButton,
   StyledPreviewImage,
-  StyledPreviewText,
 } from "./StyledImagePreview";
 
 const lightOptions = [
@@ -150,6 +149,10 @@ export default function PlantForm({
 
     if (!createMore) {
       router.push("/");
+    }
+
+    if (isEditMode) {
+      router.push(`/plant/${initialData.id}`);
     }
   }
 
@@ -399,7 +402,6 @@ export default function PlantForm({
         />
         {previewImage && (
           <PreviewContainer>
-            <StyledPreviewText>Preview</StyledPreviewText>
             <ImageContainer>
               <StyledPreviewImage
                 src={previewImage}
@@ -411,9 +413,7 @@ export default function PlantForm({
             <StyledDeletePreviewButton
               type="button"
               onClick={() => handleDeleteImage(uploadedImageURL)}
-            >
-              Delete
-            </StyledDeletePreviewButton>
+            ></StyledDeletePreviewButton>
           </PreviewContainer>
         )}
         {!isEditMode ? (
