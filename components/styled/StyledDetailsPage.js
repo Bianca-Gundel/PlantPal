@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const StyledPlantDescription = styled.p`
   width: 90%;
@@ -58,6 +58,7 @@ export const StyledButtonContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-bottom: 20px;
 `;
 
 export const StyledEditButton = styled.button`

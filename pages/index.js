@@ -1,15 +1,13 @@
 import PlantCard from "@/components/PlantCard/PlantCard";
-import {
-  StyledErrorMessageWrapper,
-  FlexboxWrapper,
-} from "@/components/styled/StyledIndex";
+import { StyledErrorMessageWrapper } from "@/components/styled/StyledIndex";
 import Image from "next/image";
 import FilterPlants from "@/components/FilterPlants/FilterPlants";
 import { StyledList } from "@/components/styled/StyledList";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import FilterButton from "@/components/FilterButton.js/FilterButton";
 import { SearchFilterContainer } from "@/components/SearchBar/styles";
-import { BaseH1, BaseH2 } from "@/components/styled/StyledHeadline";
+import { BaseH2 } from "@/components/styled/StyledHeadline";
+import { StyledLogoWrapper } from "@/components/styled/StyledLogo";
 
 export default function HomePage({
   plants,
@@ -25,13 +23,15 @@ export default function HomePage({
 }) {
   return (
     <>
-      <Image
-        src={"/logo-bloom-buddy.svg"}
-        width={240}
-        height={70}
-        alt="Bloom Buddy Logo"
-        unoptimized
-      />
+      <StyledLogoWrapper>
+        <Image
+          src={"/logo-bloom-buddy.svg"}
+          width={240}
+          height={70}
+          alt="Bloom Buddy Logo"
+          unoptimized
+        />
+      </StyledLogoWrapper>
       <SearchFilterContainer>
         <SearchBar onSearch={onSearch} />
         <FilterButton
@@ -41,7 +41,7 @@ export default function HomePage({
         />
       </SearchFilterContainer>
 
-      <FlexboxWrapper>
+      <div>
         {isFilterVisible && (
           <FilterPlants
             onFilterValue={onFilterValue}
@@ -49,7 +49,7 @@ export default function HomePage({
             selectedFilter={selectedFilter}
           />
         )}
-      </FlexboxWrapper>
+      </div>
       <BaseH2>Discover Plants</BaseH2>
 
       {plants.length > 0 ? (

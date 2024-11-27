@@ -11,14 +11,12 @@ export const BaseH2 = styled.h2`
   word-break: break-word;
   hyphens: auto;
   margin-top: 10px;
-  // Überschriften auf Page
 `;
 
 export const BaseH3 = styled.h3`
   font-weight: 700;
   font-size: 24px;
   color: white;
-  // Headline Pflanzen
 `;
 
 export const DetailsPageH3 = styled(BaseH3)`
@@ -39,7 +37,6 @@ export const BaseH4 = styled.h4`
   font-weight: 300;
   font-size: 16px;
   color: white;
-  // Subline Pflanzen
 `;
 
 export const PlantCardH4 = styled(BaseH4)`
@@ -62,7 +59,6 @@ export const BaseH5 = styled.h5`
   font-size: 16px;
   margin-bottom: 10px;
   margin-top: 15px;
-  // Formular
 `;
 
 export const FilterFormH5 = styled(BaseH5)`

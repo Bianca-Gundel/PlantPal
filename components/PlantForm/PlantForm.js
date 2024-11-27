@@ -1,14 +1,5 @@
-import {
-  CreateButtonWrapper,
-  CreateWrapper,
-  StyledButton,
-} from "../styled/StyledButton";
-import {
-  BaseH2,
-  BaseH3,
-  BaseH5,
-  HeaderWrapper,
-} from "../styled/StyledHeadline";
+import { CreateWrapper, StyledButton } from "../styled/StyledButton";
+import { BaseH2, BaseH5, HeaderWrapper } from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
 import UploadImage from "../UploadImage/UploadImage";
 import { useState } from "react";

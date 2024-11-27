@@ -1,12 +1,6 @@
 import { StyledButton } from "../styled/StyledButton";
 import React from "react";
-import {
-  StyledHeadlineH2,
-  BaseH3,
-  BaseH5,
-  BaseH2,
-  FilterFormH5,
-} from "../styled/StyledHeadline";
+import { BaseH2, FilterFormH5 } from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
 import {
   ResetButtonWrapper,

@@ -17,10 +17,8 @@ import PlantForm from "@/components/PlantForm/PlantForm";
 import { StyledList } from "@/components/styled/StyledList";
 import BookmarkButton from "@/components/BookmarkButton/BookmarkButton";
 import {
-  BaseH1,
   DetailsPageH3,
   DetailsPageH4,
-  StyledHeadlineH2,
   StyledHeadlineWrapper,
 } from "@/components/styled/StyledHeadline";
 
@@ -28,7 +26,6 @@ export default function PlantDetails({
   plants,
   onDeletePlant,
   onCreatePlant,
-  onIsImageLoading,
   onUploadImage,
   onEditPlant,
   onToggleBookmark,

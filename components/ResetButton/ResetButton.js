@@ -7,7 +7,7 @@ export default function ResetButton({ formRef, isEditMode, onReset }) {
       formRef.current.reset();
     }
     if (onReset) {
-      onReset(); // Führt zusätzliche Reset-Logik aus
+      onReset();
     }
   };
   return !isEditMode ? (

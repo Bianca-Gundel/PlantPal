@@ -1,13 +1,6 @@
 import Image from "next/image";
 import BookmarkButton from "../BookmarkButton/BookmarkButton";
-import {
-  Card,
-  ImageWrapper,
-  CardText,
-  CardPlantName,
-  CardBotanicalPlantName,
-  DetailsLink,
-} from "./styles";
+import { Card, ImageWrapper, CardText, DetailsLink } from "./styles";
 import { PlantCardH3, PlantCardH4 } from "../styled/StyledHeadline";
 
 export default function PlantCard({ plant, onToggleBookmark }) {
