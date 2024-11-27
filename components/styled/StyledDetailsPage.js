@@ -17,7 +17,7 @@ export const IconsWrapper = styled.div`
 `;
 
 export const InnerIconWrapper = styled.div`
-  width: auto;
+  width: 30%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -49,6 +49,7 @@ export const ImageBorder = styled.article`
   width: 90vw;
   border-radius: 15px;
   overflow: hidden;
+
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
   margin: auto;
 `;
@@ -70,4 +71,5 @@ export const StyledEditButton = styled.button`
   position: absolute;
   right: 18px;
   top: 30px;
+  background-color: white;
 `;

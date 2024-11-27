@@ -24,8 +24,8 @@ export default function MyPlants({
     <>
       <Image
         src={"/logo-bloom-buddy.svg"}
-        width={180}
-        height={50}
+        width={240}
+        height={70}
         alt="Bloom Buddy Logo"
         unoptimized
       />

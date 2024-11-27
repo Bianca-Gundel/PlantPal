@@ -49,7 +49,7 @@ export const CardBotanicalPlantName = styled.h4`
 `;
 
 export const DetailsLink = styled(Link)`
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(109, 120, 135, 0.6);
   padding: 10px 0;
   text-decoration: none;
   color: white;
