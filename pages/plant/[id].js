@@ -9,6 +9,7 @@ import {
   StyledPlantDescription,
   StyledIconText,
   InnerIconWrapper,
+  PlantImage,
 } from "@/components/styled/StyledDetailsPage";
 import { useState } from "react";
 import { StyledButton } from "@/components/styled/StyledButton";
@@ -16,6 +17,7 @@ import PlantForm from "@/components/PlantForm/PlantForm";
 import { StyledList } from "@/components/styled/StyledList";
 import BookmarkButton from "@/components/BookmarkButton/BookmarkButton";
 import {
+  BaseH1,
   DetailsPageH3,
   DetailsPageH4,
   StyledHeadlineH2,
@@ -127,7 +129,7 @@ export default function PlantDetails({
           isBookmarked={plantData.isBookmarked}
         />
 
-        <Image
+        <PlantImage
           alt={`Image of ${plantData.name}`}
           fill
           src={

@@ -11,9 +11,10 @@ export const StyledCheckboxWrapper = styled.div`
     color: #000000;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 5px;
     text-align: center;
     transition: all 0.3s ease;
+    margin-right: 5px;
   }
 
   input {

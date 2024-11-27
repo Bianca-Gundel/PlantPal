@@ -6,7 +6,7 @@ import SearchBar from "@/components/SearchBar/SearchBar";
 import { SearchFilterContainer } from "@/components/SearchBar/styles";
 import { StyledErrorMessageWrapper } from "@/components/styled/StyledIndex";
 import Image from "next/image";
-import { BaseH2 } from "@/components/styled/StyledHeadline";
+import { BaseH1, BaseH2 } from "@/components/styled/StyledHeadline";
 
 export default function MyPlants({
   bookmarkedPlants,
@@ -22,6 +22,7 @@ export default function MyPlants({
 }) {
   return (
     <>
+      <BaseH1>Bloom Buddy</BaseH1>
       <SearchFilterContainer>
         <SearchBar onSearch={onSearch} />
         <FilterButton

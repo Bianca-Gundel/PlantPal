@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styled, { css } from "styled-components";
 
 export const StyledPlantDescription = styled.p`
@@ -37,6 +38,10 @@ export const StyledIconText = styled.div`
   flex-direction: column;
 `;
 
+export const PlantImage = styled(Image)`
+  object-fit: cover;
+`;
+
 export const ImageBorder = styled.article`
   position: relative;
   margin-top: 20px;
@@ -44,10 +49,8 @@ export const ImageBorder = styled.article`
   width: 90vw;
   border-radius: 15px;
   overflow: hidden;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
   margin: auto;
-  img {
-    object-fit: cover;
-  }
 `;
 
 export const StyledButtonContainer = styled.div`
@@ -65,6 +68,6 @@ export const StyledEditButton = styled.button`
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: 21px;
-  top: 70px;
+  right: 18px;
+  top: 30px;
 `;

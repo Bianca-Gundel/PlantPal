@@ -5,8 +5,8 @@ export const StyledFormWrapper = styled.form`
   flex-direction: column;
   /* background-color: #e0e0e0; */
   border-radius: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+  /* padding-left: 10px;
+  padding-right: 10px; */
 
   ${css`
     input[type="text"] {
@@ -31,13 +31,13 @@ export const StyledFormWrapper = styled.form`
       flex-direction: row;
       justify-content: start;
     }
-    label {
-      margin-right: 15px;
-    }
+    /*   label {
+      margin-right: 2px;
+    } */
 
-    input {
+    /* input {
       margin: 0 5px 0 0;
-    }
+    } */
 
     div {
       margin-top: 10px;

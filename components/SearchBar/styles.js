@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const SearchFilterContainer = styled.div`
   display: flex;
-  align-items: center;
   gap: 8px;
   width: 100%;
   margin: 1rem 0;

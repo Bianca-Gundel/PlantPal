@@ -10,9 +10,10 @@ export const StyledOptionButton = styled.label`
   color: ${({ checked }) => (checked ? "#FFFFFF" : "#000000")};
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
   text-align: center;
   transition: all 0.3s ease;
+  margin-right: 1px;
 
   img {
     filter: ${({ checked }) => (checked ? "invert(1)" : "invert(0)")};

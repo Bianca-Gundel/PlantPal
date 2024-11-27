@@ -7,6 +7,6 @@ export const StyledResetButton = styled.button`
   cursor: pointer;
   position: absolute;
   left: 1rem;
-  top: 55%;
+  top: 33%;
   transform: translateY(-50%);
 `;
