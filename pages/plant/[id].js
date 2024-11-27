@@ -1,19 +1,28 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import {
-  IconsContainer,
+  IconsWrapper,
   IconContainer,
   ImageBorder,
   StyledButtonContainer,
   StyledEditButton,
   StyledPlantDescription,
+  StyledIconText,
+  InnerIconWrapper,
+  PlantImage,
 } from "@/components/styled/StyledDetailsPage";
-import BackLink from "@/components/BackLink/BackLink";
 import { useState } from "react";
 import { StyledButton } from "@/components/styled/StyledButton";
 import PlantForm from "@/components/PlantForm/PlantForm";
 import { StyledList } from "@/components/styled/StyledList";
 import BookmarkButton from "@/components/BookmarkButton/BookmarkButton";
+import {
+  BaseH1,
+  DetailsPageH3,
+  DetailsPageH4,
+  StyledHeadlineH2,
+  StyledHeadlineWrapper,
+} from "@/components/styled/StyledHeadline";
 
 export default function PlantDetails({
   plants,
@@ -37,8 +46,14 @@ export default function PlantDetails({
 
   if (!plantData) return <div>No data available</div>;
 
-  const Icon = ({ src, alt }) => (
-    <Image unoptimized alt={alt} src={src} width={30} height={30} />
+  const Icon = ({ src, alt, iconWidth, iconHeight }) => (
+    <Image
+      unoptimized
+      alt={alt}
+      src={src}
+      width={iconWidth}
+      height={iconHeight}
+    />
   );
 
   const waterIconSrc =
@@ -79,13 +94,11 @@ export default function PlantDetails({
 
   return (
     <>
-      <BackLink />
-
       <StyledEditButton onClick={toggleFormVisibility}>
         <Image
           src={"/icons/pencil-solid.svg"}
-          width={25}
-          height={25}
+          width={22}
+          height={22}
           alt="Icon of a dead plant"
           unoptimized
         />
@@ -103,9 +116,11 @@ export default function PlantDetails({
           />
         </>
       )}
+      <StyledHeadlineWrapper>
+        <DetailsPageH3>{plantData.name}</DetailsPageH3>
+      </StyledHeadlineWrapper>
 
-      <h2>{plantData.name}</h2>
-      <h3>{plantData.botanicalName}</h3>
+      <DetailsPageH4>{plantData.botanicalName}</DetailsPageH4>
 
       <ImageBorder>
         <BookmarkButton
@@ -114,7 +129,7 @@ export default function PlantDetails({
           isBookmarked={plantData.isBookmarked}
         />
 
-        <Image
+        <PlantImage
           alt={`Image of ${plantData.name}`}
           fill
           src={
@@ -125,27 +140,53 @@ export default function PlantDetails({
       </ImageBorder>
       <StyledPlantDescription>{plantData.description}</StyledPlantDescription>
 
-      <IconsContainer>
-        <IconContainer>
-          <Icon src={waterIconSrc} alt="Icon of a water drop" />
-          <p>{plantData.waterNeed}</p>
-        </IconContainer>
+      <IconsWrapper>
+        <InnerIconWrapper>
+          <IconContainer>
+            <Icon
+              src={waterIconSrc}
+              alt="Icon of a water drop"
+              iconWidth={25}
+              iconHeight={25}
+            />
+          </IconContainer>
+          <StyledIconText>
+            <p>{plantData.waterNeed}</p>
+          </StyledIconText>
+        </InnerIconWrapper>
 
-        <IconContainer>
-          <Icon src={lightIconSrc} alt="Icon of a sun" />
-          <p>{plantData.lightNeed}</p>
-        </IconContainer>
+        <InnerIconWrapper>
+          <IconContainer>
+            <Icon
+              src={lightIconSrc}
+              alt="Icon of a sun"
+              iconWidth={25}
+              iconHeight={25}
+            />
+          </IconContainer>
+          <StyledIconText>
+            <p>{plantData.lightNeed}</p>
+          </StyledIconText>
+        </InnerIconWrapper>
 
-        <IconContainer>
-          <Icon src={"/icons/fertiliser.svg"} alt="Icon of a fertiliser" />
-          <StyledList>
-            {plantData.fertiliserSeason.map((season) => {
-              return <li key={season}>{season}</li>;
-            })}
-          </StyledList>
-        </IconContainer>
-      </IconsContainer>
-      {/* Styling folgt nach Merge*/}
+        <InnerIconWrapper>
+          <IconContainer>
+            <Icon
+              src={"/icons/fertiliser.svg"}
+              alt="Icon of a fertiliser"
+              iconWidth={25}
+              iconHeight={25}
+            />
+          </IconContainer>
+          <StyledIconText>
+            <StyledList>
+              {plantData.fertiliserSeason.map((season) => {
+                return <li key={season}>{season}</li>;
+              })}
+            </StyledList>
+          </StyledIconText>
+        </InnerIconWrapper>
+      </IconsWrapper>
       <StyledButtonContainer>
         {isDeleteOption && (
           <>

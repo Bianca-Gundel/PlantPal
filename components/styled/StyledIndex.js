@@ -5,21 +5,12 @@ export const StyledErrorMessageWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 60vh;
-`;
-
-export const ArrowIcon = styled.span`
-  display: inline-flex;
-  transition: transform 0.3s ease-in-out;
-
-  ${(props) =>
-    props.$isRotated &&
-    css`
-      transform: rotate(180deg);
-    `}
+  height: 55vh;
+  width: 90vw;
 `;
 
 export const FlexboxWrapper = styled.div`
-  display: flex;
+  /*   display: flex;
   justify-content: center;
+  width: 90%; */
 `;

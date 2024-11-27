@@ -3,23 +3,21 @@ import { styled, css } from "styled-components";
 export const StyledFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
-  background-color: #e0e0e0;
   border-radius: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-bottom: 10px;
 
   ${css`
     input[type="text"] {
       width: 100%;
       padding: 15px;
-      border-style: none;
+      border: solid 1px #000;
       border-radius: 10px;
     }
     textarea {
       width: 100%;
       padding: 15px;
       resize: vertical;
-      border-style: none;
+      border: solid 1px #000;
       border-radius: 10px;
       font-family: Arial, Helvetica, sans-serif;
     }
@@ -31,13 +29,13 @@ export const StyledFormWrapper = styled.form`
       flex-direction: row;
       justify-content: start;
     }
-    label {
-      margin-right: 15px;
-    }
+    /*   label {
+      margin-right: 2px;
+    } */
 
-    input {
+    /* input {
       margin: 0 5px 0 0;
-    }
+    } */
 
     div {
       margin-top: 10px;

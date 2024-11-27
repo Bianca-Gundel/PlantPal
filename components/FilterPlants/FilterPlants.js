@@ -1,8 +1,18 @@
 import { StyledButton } from "../styled/StyledButton";
 import React from "react";
-import { StyledHeadlineH3, StyledHeadlineH2 } from "../styled/StyledHeadline";
+import {
+  StyledHeadlineH2,
+  BaseH3,
+  BaseH5,
+  BaseH2,
+  FilterFormH5,
+} from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
-import { StyledCheckboxSection, StyledCheckboxWrapper } from "./styles";
+import {
+  ResetButtonWrapper,
+  StyledCheckboxSection,
+  StyledCheckboxWrapper,
+} from "./styles";
 import Image from "next/image";
 
 const lightOptions = [
@@ -81,9 +91,9 @@ export default function FilterPlants({
 
   return (
     <StyledFormWrapper>
-      <StyledHeadlineH2>Filter</StyledHeadlineH2>
+      <BaseH2>Filter</BaseH2>
       <label>
-        <StyledHeadlineH3>Light Needs:</StyledHeadlineH3>
+        <FilterFormH5>Light Needs:</FilterFormH5>
       </label>
       <StyledCheckboxSection>
         {lightOptions.map((option) => (
@@ -112,7 +122,7 @@ export default function FilterPlants({
       </StyledCheckboxSection>
 
       <label>
-        <StyledHeadlineH3>Water Needs:</StyledHeadlineH3>
+        <FilterFormH5>Water Needs:</FilterFormH5>
       </label>
       <StyledCheckboxSection>
         {waterOptions.map((option) => (
@@ -139,7 +149,7 @@ export default function FilterPlants({
       </StyledCheckboxSection>
 
       <label>
-        <StyledHeadlineH3>Fertiliser Season:</StyledHeadlineH3>
+        <FilterFormH5>Fertiliser Season:</FilterFormH5>
       </label>
 
       <StyledCheckboxSection>
@@ -166,8 +176,7 @@ export default function FilterPlants({
         ))}
       </StyledCheckboxSection>
 
-      {/* FYI: div is needed for design - we will fix this later in another US */}
-      <div>
+      <ResetButtonWrapper>
         <StyledButton
           type="button"
           $variant="resetButton"
@@ -175,7 +184,7 @@ export default function FilterPlants({
         >
           Reset
         </StyledButton>
-      </div>
+      </ResetButtonWrapper>
     </StyledFormWrapper>
   );
 }

@@ -10,6 +10,7 @@ export const StyledNav = styled.nav`
   left: 0;
   width: 100%;
   height: 50px;
-  background-color: beige;
+  box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
   z-index: 10;
 `;

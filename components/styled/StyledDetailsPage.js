@@ -1,20 +1,45 @@
+import Image from "next/image";
 import styled, { css } from "styled-components";
 
 export const StyledPlantDescription = styled.p`
+  width: 90%;
+  text-align: center;
+  margin: 20px auto;
   word-break: break-word;
-  overflow-wrap: break-word;
   hyphens: auto;
 `;
 
-export const IconsContainer = styled.article`
+export const IconsWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: flex-start;
+`;
+
+export const InnerIconWrapper = styled.div`
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
 `;
 
 export const IconContainer = styled.div`
   display: flex;
+  height: 30%;
+  align-self: center;
+`;
+
+export const StyledIconText = styled.div`
+  display: flex;
+  height: 70%;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: column;
-  align-items: center;
+`;
+
+export const PlantImage = styled(Image)`
+  object-fit: cover;
 `;
 
 export const ImageBorder = styled.article`
@@ -24,26 +49,14 @@ export const ImageBorder = styled.article`
   width: 90vw;
   border-radius: 15px;
   overflow: hidden;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
   margin: auto;
-  img {
-    object-fit: cover;
-  }
 `;
 
 export const StyledButtonContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
-  ${css`
-    p {
-      width: 100%;
-    }
-
-    button {
-      margin: 10px;
-    }
-  `}
 `;
 
 export const StyledEditButton = styled.button`
@@ -55,6 +68,6 @@ export const StyledEditButton = styled.button`
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: 40px;
-  top: 70px;
+  right: 18px;
+  top: 30px;
 `;

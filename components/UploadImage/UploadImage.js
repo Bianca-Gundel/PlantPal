@@ -1,10 +1,10 @@
-import { StyledHeadlineH3 } from "../styled/StyledHeadline";
+import { BaseH5 } from "../styled/StyledHeadline";
 import { HiddenInput, StyledUploadLabel, UploadContainer } from "./styles";
 
 export default function UploadImage({ name, onChange, title }) {
   return (
     <UploadContainer>
-      <StyledHeadlineH3>{title}</StyledHeadlineH3>
+      <BaseH5>{title}</BaseH5>
       <StyledUploadLabel htmlFor={name}>Click to upload</StyledUploadLabel>
       <HiddenInput
         id={name}

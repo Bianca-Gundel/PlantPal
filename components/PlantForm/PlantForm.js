@@ -1,8 +1,13 @@
-import { StyledButton } from "../styled/StyledButton";
 import {
+  CreateButtonWrapper,
+  CreateWrapper,
+  StyledButton,
+} from "../styled/StyledButton";
+import {
+  BaseH2,
+  BaseH3,
+  BaseH5,
   HeaderWrapper,
-  StyledHeadlineH2,
-  StyledHeadlineH3,
 } from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
 import UploadImage from "../UploadImage/UploadImage";
@@ -259,12 +264,10 @@ export default function PlantForm({
             }}
           />
 
-          <StyledHeadlineH2>
-            {isEditMode ? "Update Plant" : "Create New Plant"}
-          </StyledHeadlineH2>
+          <BaseH2>{isEditMode ? "Update Plant" : "Create New Plant"}</BaseH2>
         </HeaderWrapper>
         <label htmlFor="name">
-          <StyledHeadlineH3>Plant Name: *</StyledHeadlineH3>
+          <BaseH5>Plant Name: *</BaseH5>
         </label>
         <input
           type="text"
@@ -287,7 +290,7 @@ export default function PlantForm({
         )}
 
         <label htmlFor="botanicalName">
-          <StyledHeadlineH3>Botanical Name: *</StyledHeadlineH3>
+          <BaseH5>Botanical Name: *</BaseH5>
         </label>
         <input
           type="text"
@@ -310,7 +313,7 @@ export default function PlantForm({
         )}
 
         <label htmlFor="description">
-          <StyledHeadlineH3>Description:</StyledHeadlineH3>
+          <BaseH5>Description:</BaseH5>
         </label>
         <textarea
           id="description"
@@ -321,7 +324,7 @@ export default function PlantForm({
         ></textarea>
 
         <label htmlFor="lightNeed">
-          <StyledHeadlineH3>Light Need: *</StyledHeadlineH3>
+          <BaseH5>Light Need: *</BaseH5>
         </label>
 
         <section>
@@ -345,7 +348,7 @@ export default function PlantForm({
         )}
 
         <label htmlFor="waterNeed">
-          <StyledHeadlineH3>Water Need: *</StyledHeadlineH3>
+          <BaseH5>Water Need: *</BaseH5>
         </label>
 
         <section>
@@ -370,7 +373,7 @@ export default function PlantForm({
         )}
 
         <label htmlFor="fertiliserSeason">
-          <StyledHeadlineH3>Fertiliser Season: *</StyledHeadlineH3>
+          <BaseH5>Fertiliser Season: *</BaseH5>
         </label>
 
         <section>
@@ -409,16 +412,16 @@ export default function PlantForm({
                 fill
                 unoptimized
               />
+              <StyledDeletePreviewButton
+                type="button"
+                onClick={() => handleDeleteImage(uploadedImageURL)}
+              ></StyledDeletePreviewButton>
             </ImageContainer>
-            <StyledDeletePreviewButton
-              type="button"
-              onClick={() => handleDeleteImage(uploadedImageURL)}
-            ></StyledDeletePreviewButton>
           </PreviewContainer>
         )}
         {!isEditMode ? (
           <>
-            <div>
+            <CreateWrapper>
               <label htmlFor="createMore">Create more?</label>
               <input
                 type="checkbox"
@@ -427,11 +430,11 @@ export default function PlantForm({
                 checked={isCreatingMore}
                 onChange={(event) => setIsCreatingMore(event.target.checked)}
               />
-            </div>
+            </CreateWrapper>
           </>
         ) : null}
 
-        <div>
+        <CreateWrapper>
           <StyledButton
             type="submit"
             $variant={isEditMode ? "update" : "create"}
@@ -445,7 +448,7 @@ export default function PlantForm({
               Cancel
             </StyledButton>
           )}
-        </div>
+        </CreateWrapper>
       </StyledFormWrapper>
     </>
   );
