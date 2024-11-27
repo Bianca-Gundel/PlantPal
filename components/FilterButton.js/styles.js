@@ -16,8 +16,8 @@ export const FilterCount = styled.span`
   position: absolute;
   top: -8px;
   right: -8px;
-  background: green;
-  color: white;
+  background: rgba(164, 211, 110, 1);
+  color: black;
   border-radius: 50%;
   width: 20px;
   height: 20px;

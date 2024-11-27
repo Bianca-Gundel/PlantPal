@@ -1,4 +1,8 @@
-import { StyledButton } from "../styled/StyledButton";
+import {
+  CreateButtonWrapper,
+  CreateWrapper,
+  StyledButton,
+} from "../styled/StyledButton";
 import {
   BaseH2,
   BaseH3,
@@ -417,7 +421,7 @@ export default function PlantForm({
         )}
         {!isEditMode ? (
           <>
-            <div>
+            <CreateWrapper>
               <label htmlFor="createMore">Create more?</label>
               <input
                 type="checkbox"
@@ -426,11 +430,11 @@ export default function PlantForm({
                 checked={isCreatingMore}
                 onChange={(event) => setIsCreatingMore(event.target.checked)}
               />
-            </div>
+            </CreateWrapper>
           </>
         ) : null}
 
-        <div>
+        <CreateWrapper>
           <StyledButton
             type="submit"
             $variant={isEditMode ? "update" : "create"}
@@ -444,7 +448,7 @@ export default function PlantForm({
               Cancel
             </StyledButton>
           )}
-        </div>
+        </CreateWrapper>
       </StyledFormWrapper>
     </>
   );

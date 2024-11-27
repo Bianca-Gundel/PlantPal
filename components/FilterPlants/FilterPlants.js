@@ -5,9 +5,14 @@ import {
   BaseH3,
   BaseH5,
   BaseH2,
+  FilterFormH5,
 } from "../styled/StyledHeadline";
 import { StyledFormWrapper } from "../styled/StyledFormWrapper";
-import { StyledCheckboxSection, StyledCheckboxWrapper } from "./styles";
+import {
+  ResetButtonWrapper,
+  StyledCheckboxSection,
+  StyledCheckboxWrapper,
+} from "./styles";
 import Image from "next/image";
 
 const lightOptions = [
@@ -88,7 +93,7 @@ export default function FilterPlants({
     <StyledFormWrapper>
       <BaseH2>Filter</BaseH2>
       <label>
-        <BaseH5>Light Needs:</BaseH5>
+        <FilterFormH5>Light Needs:</FilterFormH5>
       </label>
       <StyledCheckboxSection>
         {lightOptions.map((option) => (
@@ -117,7 +122,7 @@ export default function FilterPlants({
       </StyledCheckboxSection>
 
       <label>
-        <BaseH5>Water Needs:</BaseH5>
+        <FilterFormH5>Water Needs:</FilterFormH5>
       </label>
       <StyledCheckboxSection>
         {waterOptions.map((option) => (
@@ -144,7 +149,7 @@ export default function FilterPlants({
       </StyledCheckboxSection>
 
       <label>
-        <BaseH5>Fertiliser Season:</BaseH5>
+        <FilterFormH5>Fertiliser Season:</FilterFormH5>
       </label>
 
       <StyledCheckboxSection>
@@ -171,8 +176,7 @@ export default function FilterPlants({
         ))}
       </StyledCheckboxSection>
 
-      {/* FYI: div is needed for design - we will fix this later in another US */}
-      <div>
+      <ResetButtonWrapper>
         <StyledButton
           type="button"
           $variant="resetButton"
@@ -180,7 +184,7 @@ export default function FilterPlants({
         >
           Reset
         </StyledButton>
-      </div>
+      </ResetButtonWrapper>
     </StyledFormWrapper>
   );
 }

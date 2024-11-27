@@ -37,4 +37,10 @@ export const StyledCheckboxSection = styled.section`
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
+  margin-bottom: 10px;
+`;
+
+export const ResetButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `;
