@@ -22,7 +22,13 @@ export default function MyPlants({
 }) {
   return (
     <>
-      <BaseH1>Bloom Buddy</BaseH1>
+      <Image
+        src={"/logo-bloom-buddy.svg"}
+        width={180}
+        height={50}
+        alt="Bloom Buddy Logo"
+        unoptimized
+      />
       <SearchFilterContainer>
         <SearchBar onSearch={onSearch} />
         <FilterButton
