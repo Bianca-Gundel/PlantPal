@@ -14,8 +14,8 @@ export default function ResetButton({ formRef, isEditMode, onReset }) {
     <StyledResetButton type="button" onClick={handleReset}>
       <Image
         src={"/icons/eraser-icon.svg"}
-        width={25}
-        height={25}
+        width={22}
+        height={22}
         alt="Icon of a eraser to reset the form"
         unoptimized
       />

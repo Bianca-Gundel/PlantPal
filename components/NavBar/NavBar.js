@@ -26,7 +26,7 @@ export default function NavBar() {
 
       <Link href="/myplants">
         <Image
-          src="/icons/bookmark-full.svg"
+          src="/icons/navbar-bookmark.svg"
           alt="Icon of a rose"
           width={22}
           height={22}

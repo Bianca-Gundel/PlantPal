@@ -26,8 +26,8 @@ export default function HomePage({
       <StyledLogoWrapper>
         <Image
           src={"/logo-bloom-buddy.svg"}
-          width={240}
-          height={70}
+          width={250}
+          height={80}
           alt="Bloom Buddy Logo"
           unoptimized
         />
