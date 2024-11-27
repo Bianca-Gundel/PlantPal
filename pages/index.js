@@ -10,6 +10,7 @@ import SearchBar from "@/components/SearchBar/SearchBar";
 import FilterButton from "@/components/FilterButton.js/FilterButton";
 import { SearchFilterContainer } from "@/components/SearchBar/styles";
 import { BaseH1, BaseH2 } from "@/components/styled/StyledHeadline";
+//TEST
 
 export default function HomePage({
   plants,
