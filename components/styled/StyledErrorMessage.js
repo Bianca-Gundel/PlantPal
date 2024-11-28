@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledErrorMessage = styled.div`
   display: flex;
   align-items: center;
-  color: red;
+  color: #ff7a67;
   font-size: 12px;
 
   img {

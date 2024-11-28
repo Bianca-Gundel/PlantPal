@@ -108,8 +108,6 @@ export default function App({ Component, pageProps }) {
     }
   });
 
-  // FYI: For better usability, we deviate from our user story and leave only one form expanded at a time
-
   function handleToggleFilter() {
     setIsFilterVisible(!isFilterVisible);
     if (isFormVisible) {

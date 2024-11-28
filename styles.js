@@ -23,7 +23,7 @@ export default createGlobalStyle`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #ffffff;
+    background-color: #e2e6d7;
     text-align: center;
     padding: 0 20px;
   }

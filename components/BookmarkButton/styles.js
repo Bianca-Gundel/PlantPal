@@ -8,6 +8,9 @@ export const StyledToggleBookmark = styled.button`
   align-items: center;
   border-style: none;
   border-radius: 0 0 5px 5px;
+  background-color: rgba(109, 120, 135, 0.6);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 `;
 
 export const StyledToggleWrapper = styled.div`
@@ -16,4 +19,8 @@ export const StyledToggleWrapper = styled.div`
   right: 20px;
   position: absolute;
   z-index: 2;
+
+  img {
+    filter: invert(100%);
+  }
 `;

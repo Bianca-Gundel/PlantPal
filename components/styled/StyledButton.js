@@ -11,12 +11,12 @@ export const StyledButton = styled.button`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  /*   margin: 10px; */
-  background-color: white;
+  background-color: #ff8c7d;
+  color: white;
   cursor: pointer;
   padding: 10px 35px;
   font-size: 18px;
-  border: 1px solid;
+  border: none;
   border-radius: 8px;
 
   ${({ $variant }) =>
@@ -44,9 +44,9 @@ export const StyledButton = styled.button`
       `;
     } else if ($variant === "delete") {
       return css`
-        background-color: firebrick;
+        background-color: #6d7887;
         color: white;
-        border: 1px solid firebrick;
+        border: 1px solid #6d7887;
         margin-right: 10px;
       `;
     }

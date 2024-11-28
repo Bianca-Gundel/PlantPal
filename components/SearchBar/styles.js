@@ -10,14 +10,19 @@ export const SearchFilterContainer = styled.div`
 export const StyledSearchWrapper = styled.div`
   position: relative;
   flex: 1;
+
+  ::placeholder {
+    color: #6d7887;
+  }
 `;
 
 export const StyledSearchBar = styled.input`
   width: 100%;
   padding: 0.8rem;
   padding-left: 2.5rem;
-  border: solid 1px #000;
-  border-radius: 8px;
+  border: none;
+  background-color: white;
+  border-radius: 25px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
 `;

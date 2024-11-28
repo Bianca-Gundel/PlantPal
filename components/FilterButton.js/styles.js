@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 export const StyledFilterButton = styled.button`
-  background: none;
+  background-color: white;
+  color: #6d7887;
+  border-radius: 50px;
+  width: 46px;
+  height: 46px;
   border: none;
   cursor: pointer;
   padding: 8px;
@@ -14,10 +18,10 @@ export const StyledFilterButton = styled.button`
 
 export const FilterCount = styled.span`
   position: absolute;
-  top: -8px;
-  right: -8px;
-  background: rgba(164, 211, 110, 1);
-  color: black;
+  top: 26px;
+  right: -5px;
+  background: #ff8c7d;
+  color: white;
   border-radius: 50%;
   width: 20px;
   height: 20px;
